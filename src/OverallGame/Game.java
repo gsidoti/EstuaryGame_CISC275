@@ -6,10 +6,10 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
 
-public class Game extends Canvas implements Runnable{
+;public class Game extends Canvas implements Runnable{
 
 
-	private static final long serialVersionUID = -7182677228034972627L;
+	private static final long serialVersionUID = -7182677228034972627L
 
 	public static final int WIDTH = 640, HEIGHT = WIDTH/12 * 9;
 	
