@@ -44,7 +44,7 @@ public class MenuView{
 		g.fillRect((WIDTH/100)*50-250,(HEIGHT/100)*2,500,70);
 		g.setColor(Color.black);
 		g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
-		g.drawString("Health",(WIDTH/100)*50-30,(HEIGHT/100)*2+50);
+		g.drawString("Score",(WIDTH/100)*50-30,(HEIGHT/100)*2+50);
 	}
 	
 	

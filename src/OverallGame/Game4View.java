@@ -18,10 +18,14 @@ public class Game4View {
 	
 	
 	public void render(Graphics g){
-		g.setColor(Color.green);
+		g.setColor(Color.white);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		g.setColor(Color.blue);
 		g.fillRect(px,py,100,100);
+		g.setColor(Color.green);
+		g.fillRect(1300, 75, 50, 150);
+		g.setColor(Color.red);
+		g.fillRect(1355, 75, 50, 150);
 	}
 	
 	
