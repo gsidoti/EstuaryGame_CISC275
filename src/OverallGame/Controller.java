@@ -67,13 +67,11 @@ public class Controller extends Canvas{
 			lastTime = now;
 			while(delta >= 1){
 				tick();
-				updates++;
-				delta--;
-			}
-			if(running)
 				render();
-			frames++;
-					
+				updates++;
+				frames++;
+				delta--;
+			}					
 			if(System.currentTimeMillis() - timer > 1000){
 				timer += 1000;
 				System.out.println("FPS: " + frames + " TICKS: " + updates);

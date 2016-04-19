@@ -13,15 +13,38 @@ public class MenuView{
 	}
 	
 	public void render(Graphics g){
-		g.setColor(Color.black);
+		g.setColor(Color.pink);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
+		//first button
 		g.setColor(Color.red);
-		g.fillRect((WIDTH/10)*2,(HEIGHT/10)*2,200,200);
+		g.fillRect((WIDTH/100)*20,(HEIGHT/100)*20,200,200);
 		g.setColor(Color.black);
 		g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
-		g.drawString("START!",(WIDTH/10)*2+30,(HEIGHT/10)*2+80);
-		//g.fillRect(15, 15, 200, 200);
-		//g.drawString("Game 1", 16, 16);
+		g.drawString("START!",(WIDTH/100)*20+30,(HEIGHT/100)*20+80);
+		//second button
+		g.setColor(Color.red);
+		g.fillRect((WIDTH/100)*60,(HEIGHT/100)*20,200,200);
+		g.setColor(Color.black);
+		g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
+		g.drawString("START!",(WIDTH/100)*60+30,(HEIGHT/100)*20+80);
+		
+		g.setColor(Color.red);
+		g.fillRect((WIDTH/100)*20,(HEIGHT/100)*60,200,200);
+		g.setColor(Color.black);
+		g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
+		g.drawString("START!",(WIDTH/100)*20+30,(HEIGHT/100)*60+80);
+		
+		g.setColor(Color.red);
+		g.fillRect((WIDTH/100)*60,(HEIGHT/100)*60,200,200);
+		g.setColor(Color.black);
+		g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
+		g.drawString("START!",(WIDTH/100)*60+30,(HEIGHT/100)*60+80);
+		
+		g.setColor(Color.green);
+		g.fillRect((WIDTH/100)*50-250,(HEIGHT/100)*2,500,70);
+		g.setColor(Color.black);
+		g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
+		g.drawString("Health",(WIDTH/100)*50-30,(HEIGHT/100)*2+50);
 	}
 	
 	

@@ -20,7 +20,7 @@ public class Menu extends MouseAdapter {
 		int mx = e.getX();
 		int my = e.getY();
 		
-		if(mouseOver(mx,my,(WIDTH/10)*2,(HEIGHT/10)*2,200,200)){
+		if(mouseOver(mx,my,(WIDTH/100)*60,(HEIGHT/100)*60,200,200)){
 			System.out.println("click");
 			gameState = STATE.Game4;
 		}
