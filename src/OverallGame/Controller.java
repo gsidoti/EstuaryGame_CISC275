@@ -2,23 +2,19 @@ package OverallGame;
 
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
 
 
 public class Controller extends Canvas implements Runnable{
 
-<<<<<<< HEAD:src/OverallGame/Game.java
 	//this is a test
 	private static final long serialVersionUID = -7182677228034972627L;
 
 	public static final int WIDTH = 640, HEIGHT = WIDTH/12 * 9;
-=======
-	private static final long serialVersionUID = -7182677228034972627L
 	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	public static final int WIDTH	=	(int)(screenSize.getWidth());
-	public static final int HEIGHT	=	WIDTH/12*9;
->>>>>>> ae0cbdc5b45120404a55b876ed6adc80d5e35d83:src/OverallGame/Controller.java
 	
 	private Thread thread;
 	private boolean running;
