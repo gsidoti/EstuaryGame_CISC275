@@ -1,35 +1,49 @@
 package OverallGame;
 
 import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.*;
 import java.awt.Graphics;
-import java.awt.Toolkit;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
 
 
-public class Controller extends Canvas implements Runnable{
+public class Controller extends Canvas{
 
-	//this is a test
-	private static final long serialVersionUID = -7182677228034972627L;
-
-	public static final int WIDTH = 640, HEIGHT = WIDTH/12 * 9;
+	private static final long serialVersionUID = 1L;
 	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	
-	private Thread thread;
-	private boolean running;
+	public static final int WIDTH =	(int)(screenSize.getWidth());
+	public static final int HEIGHT = WIDTH/16*9;
 
-	public Controller(){
-		new Window(WIDTH, HEIGHT, "Estuary Game", this);
+	private Thread thread;
+	private boolean running = false;
+	
+	private Menu menu;
+	private Game4 game4;
+	
+	public static STATE gameState = STATE.Menu;
+
+	private Controller(){
+		Window w = new Window(WIDTH, HEIGHT, "Estuary Game");
+		w.frame.add(this);
+		w.frame.setVisible(true);
+		menu = new Menu(WIDTH,HEIGHT);
+		//game1 = new Game1();
+		//game2 = new Game2();
+		//game3 = new Game3();
+		game4 = new Game4(WIDTH,HEIGHT);
+		this.addMouseListener(menu);
+		this.start();
+		this.run();
 	}
 	
-	public synchronized void start(){
-		thread = new Thread(this);
+	private synchronized void start(){
+		thread = new Thread(String.valueOf(this));
 		thread.start();
 		running = true;	
 	}
 	
-	public synchronized void stop(){
+	private synchronized void stop(){
 		try{
 			thread.join();
 			running = false;
@@ -38,8 +52,8 @@ public class Controller extends Canvas implements Runnable{
 		}
 	}
 	
-	@Override
-	public void run() {
+	private void run() {
+		this.requestFocus();
 		long lastTime = System.nanoTime();
 		double amountOfTicks = 60.0;
 		double ns = 1000000000 / amountOfTicks;
@@ -53,13 +67,11 @@ public class Controller extends Canvas implements Runnable{
 			lastTime = now;
 			while(delta >= 1){
 				tick();
-				updates++;
-				delta--;
-			}
-			if(running)
 				render();
-			frames++;
-					
+				updates++;
+				frames++;
+				delta--;
+			}					
 			if(System.currentTimeMillis() - timer > 1000){
 				timer += 1000;
 				System.out.println("FPS: " + frames + " TICKS: " + updates);
@@ -69,25 +81,78 @@ public class Controller extends Canvas implements Runnable{
 		}
 		stop();
 	}
+
+	private void updateML(){
+		for(MouseListener l:this.getMouseListeners()){
+			this.removeMouseListener(l);
+		}
+		switch(gameState){
+		case Menu:
+			gameState = menu.tick();
+			break;
+		case Game1:
+			break;
+		case Game2:
+			break;
+		case Game3:
+			break;
+		case Game4:
+			this.addMouseListener(game4);
+			break;
+		}
+	}
+	
+	private void tick(){
+		//System.out.println("Tick");
+		switch(gameState){
+		case Menu:
+			if (gameState != menu.tick()){
+				gameState = menu.tick();
+				this.removeMouseListener(menu);
+				this.addMouseListener(game4);
+			}
+			gameState = menu.tick();
+			break;
+		case Game1:
+			break;
+		case Game2:
+			break;
+		case Game3:
+			break;
+		case Game4:
+				gameState = game4.tick();
+			break;
+		}
+	}
+	
 	
 	private void render(){
+		//System.out.println("Render");
 		BufferStrategy bs = this.getBufferStrategy();
 		if(bs == null){
 			this.createBufferStrategy(3);
 			return;
 		}
-		
-		Graphics g = bs.getDrawGraphics();
-		g.setColor(Color.gray);
-		g.fillRect(0, 0, WIDTH, HEIGHT);
+		Graphics g = bs.getDrawGraphics();	
+		switch(gameState){
+		case Menu:
+			menu.menuView.render(g);
+			break;
+		case Game1:
+			break;
+		case Game2:
+			break;
+		case Game3:
+			break;
+		case Game4:
+			game4.view.render(g);
+			//System.out.println("Game4");
+			break;
+		}
 		g.dispose();
 		bs.show();
 	}
 	
-	
-	private void tick(){
-		
-	}
 
 	public static void main(String[] args) {
 		new Controller(); 
