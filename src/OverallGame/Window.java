@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-
+//change
 public class Window extends Canvas{
 
 	private static final long serialVersionUID = -5596174652453925475L;
