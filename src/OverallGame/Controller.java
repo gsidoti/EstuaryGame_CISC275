@@ -1,13 +1,11 @@
 package OverallGame;
 
 import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.*;
 import java.awt.Graphics;
-import java.awt.event.MouseAdapter;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
-import java.io.*;
 
 
 public class Controller extends Canvas{
@@ -21,7 +19,6 @@ public class Controller extends Canvas{
 	private boolean running = false;
 	
 	private Menu menu;
-	private MenuView menuView;
 	private Game4 game4;
 	
 	public static STATE gameState = STATE.Menu;
@@ -30,11 +27,11 @@ public class Controller extends Canvas{
 		Window w = new Window(WIDTH, HEIGHT, "Estuary Game");
 		w.frame.add(this);
 		w.frame.setVisible(true);
-		menu = new Menu(w.frame);
+		menu = new Menu(WIDTH,HEIGHT);
 		//game1 = new Game1();
 		//game2 = new Game2();
 		//game3 = new Game3();
-		game4 = new Game4();
+		game4 = new Game4(WIDTH,HEIGHT);
 		this.addMouseListener(menu);
 		this.start();
 		this.run();
@@ -86,10 +83,11 @@ public class Controller extends Canvas{
 		}
 		stop();
 	}
-	
 
-	private void tick(){
-		//System.out.println("Tick");
+	private void updateML(){
+		for(MouseListener l:this.getMouseListeners()){
+			this.removeMouseListener(l);
+		}
 		switch(gameState){
 		case Menu:
 			gameState = menu.tick();
@@ -101,9 +99,34 @@ public class Controller extends Canvas{
 		case Game3:
 			break;
 		case Game4:
+			this.addMouseListener(game4);
 			break;
 		}
 	}
+	
+	private void tick(){
+		//System.out.println("Tick");
+		switch(gameState){
+		case Menu:
+			if (gameState != menu.tick()){
+				gameState = menu.tick();
+				this.removeMouseListener(menu);
+				this.addMouseListener(game4);
+			}
+			gameState = menu.tick();
+			break;
+		case Game1:
+			break;
+		case Game2:
+			break;
+		case Game3:
+			break;
+		case Game4:
+				gameState = game4.tick();
+			break;
+		}
+	}
+	
 	
 	private void render(){
 		//System.out.println("Render");
@@ -113,8 +136,6 @@ public class Controller extends Canvas{
 			return;
 		}
 		Graphics g = bs.getDrawGraphics();	
-		g.setColor(Color.black);
-		g.fillRect(0, 0, WIDTH, HEIGHT);
 		switch(gameState){
 		case Menu:
 			menu.menuView.render(g);
@@ -126,7 +147,8 @@ public class Controller extends Canvas{
 		case Game3:
 			break;
 		case Game4:
-			System.out.println("Game4");
+			game4.view.render(g);
+			//System.out.println("Game4");
 			break;
 		}
 		g.dispose();
