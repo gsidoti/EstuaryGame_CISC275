@@ -3,26 +3,46 @@ package OverallGame;
 public class G4Player {
 	int x;
 	int y;
-	int vx;
-	int vy;
+	int vyUp;
+	int vyDown;
 	
-	public G4Player(int x, int y, int vx, int vy){
+	public G4Player(int x, int y, int vyUp, int vyDown){
 		this.x = x;
 		this.y = y;
-		this.vx = vx;
-		this.vy = vy;
+		this.vyUp = vyUp;
+		this.vyDown = vyDown;
 	}
-	
-	public void moveUp(){
-		y-=2;
-	}
-	public void moveDown(){
-		y+=2;
-	}
-	public int getx(){
+
+	public int getX() {
 		return x;
 	}
-	public int gety(){
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
 		return y;
 	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public int getVyUp() {
+		return vyUp;
+	}
+
+	public void setVyUp(int vyUp) {
+		this.vyUp = vyUp;
+	}
+
+	public int getVyDown() {
+		return vyDown;
+	}
+
+	public void setVyDown(int vyDown) {
+		this.vyDown = vyDown;
+	}
+	
 }

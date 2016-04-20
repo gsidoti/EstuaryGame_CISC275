@@ -4,14 +4,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class Game4 extends MouseAdapter {
+	boolean running = false;
 	G4Player player;
-	STATE gameState = STATE.Game4;
 	Game4View view;
 	boolean mousedown = false;
-	
 	public Game4(int w, int h){
-		player = new G4Player(w/2,h/2,0,0);
-		view = new Game4View(w,h);
+		player = new G4Player((int)((Window.WIDTH/2)*Window.scaleW),(int)((Window.HEIGHT/2)*Window.scaleH),2,5);
+		view = new Game4View(player);
 	}
 	
 	public void mousePressed(MouseEvent e){
@@ -24,21 +23,15 @@ public class Game4 extends MouseAdapter {
 
 	private void updatePlayer(){
 		if(mousedown)
-			player.moveUp();
+			player.setY(player.getY() - player.getVyUp());
 		else
-			player.moveDown();
-			
+			player.setY(player.getY() + player.getVyDown());
 	}
 	
-	public void updateView(){
-		view.py = player.gety();
-		view.px = player.getx();
-	}
-	
-	public STATE tick() {
+
+	public void tick() {
 		updatePlayer();
-		updateView();
-		return gameState;
+		view.update(player);
 	}
 
 }

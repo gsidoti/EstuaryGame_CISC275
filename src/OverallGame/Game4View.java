@@ -3,30 +3,27 @@ package OverallGame;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import javax.swing.JFrame;
-
-public class Game4View {
-	int WIDTH, HEIGHT;
-	JFrame frame;
-	int px;
-	int py;
+public class Game4View{
+	G4Player player;
 	
-	public Game4View(int w, int h){
-		this.WIDTH = w;
-		this.HEIGHT = h;
+	public Game4View(G4Player player){
+		this.player = player;
 	}
 	
-	
+	public void update(G4Player player){
+		this.player = player;
+	}
 	public void render(Graphics g){
 		g.setColor(Color.white);
-		g.fillRect(0, 0, WIDTH, HEIGHT);
+		g.fillRect(0, 0, (int)(Window.WIDTH*Window.scaleW), (int)(Window.HEIGHT*Window.scaleH));
 		g.setColor(Color.blue);
-		g.fillRect(px,py,100,100);
+		g.fillRect(player.x,player.y,100,100);
 		g.setColor(Color.green);
 		g.fillRect(1300, 75, 50, 150);
 		g.setColor(Color.red);
 		g.fillRect(1355, 75, 50, 150);
 	}
+	
 	
 	
 }

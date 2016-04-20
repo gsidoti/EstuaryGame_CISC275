@@ -1,41 +1,42 @@
 package OverallGame;
 
 import java.awt.Canvas;
-import java.awt.Dimension;
-import java.awt.*;
 import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
+
 
 
 public class Controller extends Canvas{
 
 	private static final long serialVersionUID = 1L;
-	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	public static final int WIDTH =	(int)(screenSize.getWidth());
-	public static final int HEIGHT = WIDTH/16*9;
 
 	private Thread thread;
 	private boolean running = false;
 	
 	private Menu menu;
 	private Game4 game4;
+	private Window window;
 	
 	public static STATE gameState = STATE.Menu;
 
 	private Controller(){
-		Window w = new Window(WIDTH, HEIGHT, "Estuary Game");
-		w.frame.add(this);
-		w.frame.setVisible(true);
-		menu = new Menu(WIDTH,HEIGHT);
+		window = new Window("Estuary Game",this);
+		menu = new Menu(window);
 		//game1 = new Game1();
 		//game2 = new Game2();
 		//game3 = new Game3();
 		game4 = new Game4(WIDTH,HEIGHT);
-		this.addMouseListener(menu);
+		//this.addMouseListener(new MouseAdapter(){
+		//	@Override
+		//	public void mouseClicked
+		//}
 		this.start();
 		this.run();
 	}
+	
+
 	
 	private synchronized void start(){
 		thread = new Thread(String.valueOf(this));
@@ -81,37 +82,24 @@ public class Controller extends Canvas{
 		}
 		stop();
 	}
-
-	private void updateML(){
+	private void clearML(){
 		for(MouseListener l:this.getMouseListeners()){
 			this.removeMouseListener(l);
-		}
-		switch(gameState){
-		case Menu:
-			gameState = menu.tick();
-			break;
-		case Game1:
-			break;
-		case Game2:
-			break;
-		case Game3:
-			break;
-		case Game4:
-			this.addMouseListener(game4);
-			break;
+			 System.out.println("removing ml");
 		}
 	}
 	
 	private void tick(){
-		//System.out.println("Tick");
 		switch(gameState){
 		case Menu:
-			if (gameState != menu.tick()){
-				gameState = menu.tick();
-				this.removeMouseListener(menu);
-				this.addMouseListener(game4);
+			if(menu.running == false){
+				clearML();
+				this.addMouseListener(menu);
+				System.out.println("setting menu to running");
+				menu.running = true;
+			}else{
+				menu.tick();
 			}
-			gameState = menu.tick();
 			break;
 		case Game1:
 			break;
@@ -120,7 +108,14 @@ public class Controller extends Canvas{
 		case Game3:
 			break;
 		case Game4:
-				gameState = game4.tick();
+			if(game4.running == false){
+				clearML();
+				this.addMouseListener(game4);
+				System.out.println("setting game4 to running");
+				game4.running = true;
+			}else{
+				game4.tick();
+			}
 			break;
 		}
 	}
@@ -146,7 +141,6 @@ public class Controller extends Canvas{
 			break;
 		case Game4:
 			game4.view.render(g);
-			//System.out.println("Game4");
 			break;
 		}
 		g.dispose();
@@ -158,4 +152,8 @@ public class Controller extends Canvas{
 		new Controller(); 
 	}
 
+}
+
+class scale{
+	
 }
