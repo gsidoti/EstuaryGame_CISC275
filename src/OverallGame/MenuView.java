@@ -1,7 +1,11 @@
 package OverallGame;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
@@ -11,20 +15,20 @@ public class MenuView{
 	double wS;
 	double hS;
 	JFrame frame;
+	Image background;
 	
 	public MenuView(Window W){
 		this.frame = W.frame;
 		this.w = Window.WIDTH;
 		this.h= Window.HEIGHT;
-		this.wS = Window.scaleW;
-		this.hS = Window.scaleH;
+		this.wS = Window.SCALE;
+		this.hS = Window.SCALE;
 	}
 	
 	public void render(Graphics g){
 		g.setColor(Color.pink);
 		g.fillRect(0, 0,(int)(w*wS), (int)(h*hS));
 		//first button
-		
 		
 		
 		g.setColor(Color.red);
