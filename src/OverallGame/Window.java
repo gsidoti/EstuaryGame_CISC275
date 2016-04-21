@@ -31,6 +31,7 @@ public class Window extends Canvas{
 		double d = scaledDimension.getHeight()/720.0;
 		scaleW = screenDimension.getWidth()/1280;
 		scaleH = screenDimension.getHeight()/720;
+		frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
 		//unnecessary apple full-screen functions
 		//com.apple.eawt.FullScreenUtilities.setWindowCanFullScreen(frame,true);
 		//com.apple.eawt.Application.getApplication().requestToggleFullScreen(frame);
