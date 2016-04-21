@@ -33,6 +33,6 @@ public class Window extends Canvas{
 		frame.add(c);
 		frame.setResizable(false);
 		frame.setVisible(true);
-		//System.out.println(screenDimension);
+		System.out.println(screenDimension);
 	}
 }
