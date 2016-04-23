@@ -1,17 +1,15 @@
 package OverallGame;
 
-public abstract class gameObject {
-		int x;
-		int y;
-		int velx;
-		int vely;
-		String name;
+public class gameObject {
+		protected int x;
+		protected int y;
+		protected int velx;
+		protected int vely;
+		protected String name;
 		
-		public gameObject(int x, int y, int velx, int vely){
+		public gameObject(String name, int x, int y, int velx, int vely){
 			this.x = x;
 			this.y = y;
-			this.velx = velx;
-			this.vely = vely;
 		}
 
 		public int getX() {

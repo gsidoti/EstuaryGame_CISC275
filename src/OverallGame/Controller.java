@@ -6,6 +6,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
 
+import Game4.Game4;
+import Menu.Menu;
+
 
 
 public class Controller extends Canvas{
@@ -140,7 +143,7 @@ public class Controller extends Canvas{
 		case Game3:
 			break;
 		case Game4:
-			game4.view.render(g);
+			game4.view.render(g,game4.getObjects());
 			break;
 		}
 		g.dispose();

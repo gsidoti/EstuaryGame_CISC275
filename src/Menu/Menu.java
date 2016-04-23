@@ -1,13 +1,17 @@
-package OverallGame;
+package Menu;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import OverallGame.Controller;
+import OverallGame.STATE;
+import OverallGame.Window;
+
 public class Menu extends MouseAdapter {
-	MenuView menuView;
-	boolean running = false;
+	public MenuView menuView;
+	public boolean running = false;
 	boolean mlActive;
-	//STATE gameState = STATE.Menu;
+	int score = 0;
 	
 	public Menu(Window W){
 		menuView = new MenuView(W);

@@ -1,4 +1,4 @@
-package OverallGame;
+package Menu;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -8,6 +8,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+
+import OverallGame.Window;
 
 public class MenuView{
 	int w;

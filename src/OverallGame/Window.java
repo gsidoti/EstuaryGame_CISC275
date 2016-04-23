@@ -1,21 +1,17 @@
 package OverallGame;
 
-import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import java.awt.Insets;
 
 import javax.swing.JFrame;
 
-import com.sun.glass.ui.Window.Level;
-
-public class Window extends Canvas{
+public class Window{
 
 	//private static final long serialVersionUID = 1L;
-	JFrame frame;
+	public JFrame frame;
 	public static final int WIDTH = 1280;
 	public static final int HEIGHT = 720;
-	public static double scaleW,scaleH;
 	public static double SCALE;
 	
 
@@ -29,9 +25,7 @@ public class Window extends Canvas{
 		Dimension scaledDimension = getScaledDimension(screenDimension,new Dimension(WIDTH,HEIGHT));//= new Dimension((int)(screenDimension.getHeight()*1.777778),screenDimension.height);
 		SCALE = scaledDimension.getWidth()/1280.0;
 		double d = scaledDimension.getHeight()/720.0;
-		scaleW = screenDimension.getWidth()/1280;
-		scaleH = screenDimension.getHeight()/720;
-		frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+
 		//unnecessary apple full-screen functions
 		//com.apple.eawt.FullScreenUtilities.setWindowCanFullScreen(frame,true);
 		//com.apple.eawt.Application.getApplication().requestToggleFullScreen(frame);
@@ -63,38 +57,11 @@ public class Window extends Canvas{
 		
 		if(aRatio<vRatio){
 			fixedW = actual.getWidth();
-			fixedH = (actual.getWidth()/16)*9;
+			fixedH = (actual.getWidth()/16.0)*9.0;
 		}else if(aRatio>vRatio){
 			fixedH = actual.getHeight();
-			fixedW = actual.getHeight()*1.7777778;
+			fixedW = actual.getHeight()*(16.0/9.0);
 		}
 		return(new Dimension((int)fixedW,(int)fixedH));
-		
-/*
-	    int original_width = imgSize.width;
-	    int original_height = imgSize.height;
-	    int bound_width = boundary.width;
-	    int bound_height = boundary.height;
-	    double new_width = original_width;
-	    double new_height = original_height;
-
-	    // first check if we need to scale width
-	    if (original_width > bound_width) {
-	        //scale width to fit
-	        new_width = bound_width;
-	        //scale height to maintain aspect ratio
-	        new_height = (new_width * original_height) / original_width;
-	    }
-
-	    // then check if we need to scale even with the new height
-	    if (new_height > bound_height) {
-	        //scale height to fit instead
-	        new_height = bound_height;
-	        //scale width to maintain aspect ratio
-	        new_width = (new_height * original_width) / original_height;
-	    }
-
-	    return new Dimension((int)new_width,(int) new_height);
-	    */
 	}
 }
