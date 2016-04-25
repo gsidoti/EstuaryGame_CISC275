@@ -8,6 +8,7 @@ import java.awt.image.BufferStrategy;
 
 import Game4.Game4;
 import Menu.Menu;
+import game1.GameOne;
 
 
 
@@ -20,6 +21,7 @@ public class Controller extends Canvas{
 	
 	private Menu menu;
 	private Game4 game4;
+	private GameOne game1;
 	private Window window;
 	
 	public static STATE gameState = STATE.Menu;
@@ -27,7 +29,7 @@ public class Controller extends Canvas{
 	private Controller(){
 		window = new Window("Estuary Game",this);
 		menu = new Menu(window);
-		//game1 = new Game1();
+		game1 = new GameOne();
 		//game2 = new Game2();
 		//game3 = new Game3();
 		game4 = new Game4(WIDTH,HEIGHT);
@@ -105,6 +107,11 @@ public class Controller extends Canvas{
 			}
 			break;
 		case Game1:
+			if(game1.running == false) {
+				clearML();
+				System.out.println("setting game1 to running");
+				game1.running = true;
+			}
 			break;
 		case Game2:
 			break;
