@@ -19,13 +19,14 @@ public class Boat
     private int x;
     private int y;
     private int velocity; // pixels per tick
+    private boolean isInfested;
     
     /**
      * Constructor for objects of class Player
      */
     public Boat(int y0, double vel)
     {
-        // initialise instance variables
+        // initialize instance variables
         x = 0;
         y = (int)Math.round(Math.floor(y0*Math.random()));
         velocity=1+(int)Math.round(Math.floor(vel*Math.random()));

@@ -30,7 +30,7 @@ public class Player
      */
     public Player(int x0,int y0, double vel)
     {
-        // initialise instance variables
+        // initialize instance variables
         x = x0;
         y = y0;
         velocity=vel;
