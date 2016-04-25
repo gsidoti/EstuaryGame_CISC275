@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
@@ -30,14 +31,14 @@ public class MenuView{
 	public void render(Graphics g){
 		g.setColor(Color.pink);
 		g.fillRect(0, 0,(int)(w*wS), (int)(h*hS));
+		
+		
 		//first button
-		
-		
 		g.setColor(Color.red);
 		g.fillRect(((int)(w*wS)/100)*20,((int)(h*hS)/100)*20,this.scaleW(200),this.scaleH(200));
 		g.setColor(Color.black);
 		g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
-		//g.drawString("Game1",((int)(w*wS)/100)*20+30,((int)(h*hS)/100)*20+80);
+		g.drawString("Game1",((int)(w*wS)/100)*20+30,((int)(h*hS)/100)*20+80);
 		//second button
 		g.setColor(Color.red);
 		g.fillRect(((int)(w*wS)/100)*60,((int)(h*hS)/100)*20,this.scaleW(200),this.scaleH(200));

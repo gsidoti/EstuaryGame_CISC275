@@ -3,6 +3,9 @@ package Menu;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
 import OverallGame.Controller;
 import OverallGame.STATE;
 import OverallGame.Window;
@@ -11,7 +14,8 @@ public class Menu extends MouseAdapter {
 	public MenuView menuView;
 	public boolean running = false;
 	boolean mlActive;
-	int score = 0;
+	public static int HSCORE = 0;
+	public static int ESCORE = 0;
 	
 	public Menu(Window W){
 		menuView = new MenuView(W);
@@ -45,8 +49,7 @@ public class Menu extends MouseAdapter {
     }
 
 	public void tick() {
+		
 	}
-	
-	
 
 }

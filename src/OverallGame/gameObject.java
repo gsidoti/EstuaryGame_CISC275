@@ -1,8 +1,8 @@
 package OverallGame;
 
 public class gameObject {
-		protected int x;
-		protected int y;
+		public int x;
+		public int y;
 		protected int velx;
 		protected int vely;
 		protected String name;
@@ -10,6 +10,8 @@ public class gameObject {
 		public gameObject(String name, int x, int y, int velx, int vely){
 			this.x = x;
 			this.y = y;
+			this.vely = vely;
+			this.velx = velx;
 		}
 
 		public int getX() {
