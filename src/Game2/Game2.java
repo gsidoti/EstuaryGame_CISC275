@@ -22,10 +22,10 @@ public class Game2 extends JFrame implements Runnable {
     private Thread gameThread;
     private SimpleMouseInput mouse;
     private KeyboardInput keyboard;
-    private Player player;
-    private boat[] boat = new boat[100];
-    private boolean[] boatactive=new boolean[100];
-    private int maxboat;
+    //private Player player;
+    private Boat[] Boat = new Boat[100];
+    private boolean[] Boatactive=new boolean[100];
+    private int maxBoat;
     private int maxvel;
     
     private long Score;
@@ -37,17 +37,17 @@ public class Game2 extends JFrame implements Runnable {
         frameRate = new FrameRate();
         Score=0;
         Lives=10;
-        maxboat=4;
+        maxBoat=4;
         maxvel=1;
         for(i=0;i<100;i++)
         {
-            boat[i]=new boat(480,1);
-            boatactive[i]=false;
+            Boat[i]=new Boat(480,1);
+            Boatactive[i]=false;
         }
     }
 
     protected void createAndShowGUI() {
-        player = new Player(320,240,25.0);
+  //      player = new Player(320,240,25.0);
         Canvas canvas = new Canvas();
         canvas.setSize( 640, 480 );
         canvas.setBackground( Color.BLUE );
@@ -68,7 +68,7 @@ public class Game2 extends JFrame implements Runnable {
         canvas.createBufferStrategy( 2 );
         bs = canvas.getBufferStrategy();
         canvas.requestFocus();
-        player = new Player(320,240,5.0);
+        //player = new Player(320,240,5.0);
         gameThread = new Thread( this );
         gameThread.start();
     }
@@ -85,46 +85,46 @@ public class Game2 extends JFrame implements Runnable {
         int i;
         
         processInput();
-        player.Move();
-        for(i=0;i<maxboat;i++)
+//        player.Move();
+        for(i=0;i<maxBoat;i++)
         {
-            if(boatactive[i])
+            if(Boatactive[i])
             {
-                boat[i].Move();
+                Boat[i].Move();
             }
         }
        
         renderFrame();
         
-        for(i=0;i<maxboat;i++)
+        for(i=0;i<maxBoat;i++)
         {
-            if(boatactive[i])
+            if(Boatactive[i])
             {
-                if(boat[i].MadeIt(640))
+                if(Boat[i].MadeIt(640))
                 {
-                    boatactive[i]=false;
+                    Boatactive[i]=false;
                     Lives--;
                     if(Lives<=0)System.exit( 0 );
                 }
                 else
                 {
-                    if(boat[i].IsCaught(player.getx(),player.gety()))
+//                    if(Boat[i].IsCaught(player.getx(),player.gety()))
                     {
-                        boatactive[i]=false;
+                        Boatactive[i]=false;
                         Score++;
                         maxvel=1+(int)Score/10;
-                        if((Score%10)==1)maxboat=(maxboat<99)?maxboat+1:100;
+                        if((Score%10)==1)maxBoat=(maxBoat<99)?maxBoat+1:100;
                     }
                 }
             }
         }
 
-        for(i=0;i<maxboat;i++)
+        for(i=0;i<maxBoat;i++)
         {
-            if(!boatactive[i])
+            if(!Boatactive[i])
             {
-                boat[i]=new boat(480,maxvel);
-                boatactive[i]=true;
+                Boat[i]=new Boat(480,maxvel);
+                Boatactive[i]=true;
                 break;
             }
         }
@@ -166,7 +166,7 @@ public class Game2 extends JFrame implements Runnable {
         // start drawing lines
         if( mouse.buttonDownOnce( MouseEvent.BUTTON1 ) ) {
             //player.SetDest(mouse.getPosition().x,mouse.getPosition().y);
-        	// Need to add methods that check for collision with dirty boat and sets to clean
+        	// Need to add methods that check for collision with dirty Boat and sets to clean
         }
     }
 
@@ -181,11 +181,11 @@ public class Game2 extends JFrame implements Runnable {
         g.drawString( String.format( "Score %s", Score ), 30, 60 );
         g.drawString( String.format( "Lives %s", Lives ), 30, 75 );
         g.drawString( mouse.getPosition().toString(), 30, 90 );
-        for(i=0;i<maxboat;i++)
+        for(i=0;i<maxBoat;i++)
         {
-            if(boatactive[i])
+            if(Boatactive[i])
             {
-                boat[i].Draw(g);
+                Boat[i].Draw(g);
             }
         }
            // player.Draw(g);

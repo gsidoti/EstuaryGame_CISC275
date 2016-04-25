@@ -8,7 +8,7 @@ import java.awt.image.BufferStrategy;
 
 import Game4.Game4;
 import Menu.Menu;
-import game1.GameOne;
+import Game1.GameOne;
 
 
 
