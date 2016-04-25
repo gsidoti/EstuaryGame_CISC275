@@ -1,16 +1,17 @@
-package Game4;
+package Game3;
 
 import java.awt.event.MouseAdapter;
-
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import Game4.G4Player;
+import Game4.Game4View;
 import OverallGame.Controller;
 import OverallGame.STATE;
 import OverallGame.Window;
 import OverallGame.gameObject;
 
-public class Game4 extends MouseAdapter {
+public class Game3 extends MouseAdapter {
 	public boolean running = false;
 	ArrayList<gameObject> objects = new ArrayList<gameObject>();
 	
