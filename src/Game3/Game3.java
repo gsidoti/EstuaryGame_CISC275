@@ -5,9 +5,6 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Random;
 
-import Game2.Boat;
-import Game4.G4Player;
-import Game4.Game4View;
 import OverallGame.Controller;
 import OverallGame.STATE;
 import OverallGame.Window;
@@ -19,15 +16,18 @@ public class Game3 extends MouseAdapter {
 	ArrayList<gameObject> objects = new ArrayList<gameObject>();
 	
 	public Game3View view;
-	int tick = 0;
-
+	long timer1;
+	long timer2;
+	boolean init = false;
+	boolean init2 = false;
+	int tick;
+	public static int animals = 0;
 	public int actNumCrab = 0;
 	public int clickNumCrab = 0;
 	
 	public Game3(){
-		randSpawn(true, 2,2);
-		randSpawn(false,2,2);
 		view = new Game3View();
+		objects.add(new Animal("Count", 0, 0, 0, 0, null));
 	}
 	
 	public void mousePressed(MouseEvent e){
@@ -36,21 +36,24 @@ public class Game3 extends MouseAdapter {
 
 
 	private void updateAnimal(){
+		Animal a;
 		for(gameObject o:objects){
-			o.setX(o.getX()+o.getVelx());
-			o.setY(o.getY()+o.getVely());
-			checkOffScreen(o);
+			a = (Animal)(o);
+			a.setX(a.getX()+a.getVelx());
+			a.setY(a.getY()+a.getVely());
+			if(a.name == "Count")
+				a.setX(clickNumCrab);
+			if(a.onScreen &&( a.getX()<0 || a.getX()>Window.WIDTH*Window.SCALE || a.getY()<0 || a.getY() > Window.HEIGHT*Window.SCALE)){
+				if(a.name == "HorseShoe"){
+					actNumCrab++;
+				}
+				animals++;
+				a.onScreen = false;
+			}
 		}
 	}
 	
-	public void checkOffScreen(gameObject o){
-		Animal a = (Animal)(o);
-		if(a.getX()<0 || a.getX()>Window.WIDTH*Window.SCALE || a.getY()<0 || a.getY() > Window.HEIGHT*Window.SCALE){
-			actNumCrab++;
-			a.onScreen = false;
-		}
-	}
-	
+
 	public void randSpawn(boolean Enemy, int speed, int Amount){
 		Random rand = new Random();
 		for(int i = 0;i < Amount;i++){
@@ -74,7 +77,7 @@ public class Game3 extends MouseAdapter {
 	public void spawnLeft(boolean Enemy, int speed){
 		Random rand = new Random();
 		int x = 0;
-		int y = (int)((rand.nextInt(Window.HEIGHT-200+1)+200)*Window.SCALE);
+		int y = (int)((rand.nextInt(240)+240)*Window.SCALE);
 		int velx;
 		int vely;
 		Direction dir;
@@ -94,13 +97,14 @@ public class Game3 extends MouseAdapter {
 			vely = 0;
 			dir = Direction.E;
 		}
+		System.out.println("SpawnLeft Created X: "+x+" Y: "+y);
 		objects.add(new Animal(name,x,y,velx,vely,dir));
 	}
 	
 	public void spawnRight(boolean Enemy, int speed){
 		Random rand = new Random();
 		int x = (int)(Window.WIDTH*Window.SCALE);
-		int y = (int)((rand.nextInt(Window.HEIGHT-200+1)+200)*Window.SCALE);
+		int y = (int)((rand.nextInt(240)+240)*Window.SCALE);
 		int velx;
 		int vely;
 		Direction dir;
@@ -120,12 +124,13 @@ public class Game3 extends MouseAdapter {
 			vely = 0;
 			dir = Direction.W;
 		}
+		System.out.println("SpawnRight Created X: "+x+" Y: "+y);
 		objects.add(new Animal(name,x,y,velx,vely,dir));
 	}
 	
 	public void spawnTop(boolean Enemy, int speed){
 		Random rand = new Random();
-		int x = (int)((rand.nextInt(Window.WIDTH-200+1)+200)*Window.SCALE);
+		int x = (int)((rand.nextInt(425)+425)*Window.SCALE);
 		int y = 0;
 		int velx;
 		int vely;
@@ -146,12 +151,13 @@ public class Game3 extends MouseAdapter {
 			velx = 0;
 			dir = Direction.S;
 		}
+		System.out.println("SpawnTop Created X: "+x+" Y: "+y);
 		objects.add(new Animal(name,x,y,velx,vely,dir));
 	}
 	
 	public void spawnBottom(boolean Enemy, int speed){
 		Random rand = new Random();
-		int x = (int)((rand.nextInt(Window.HEIGHT-200+1)+200)*Window.SCALE);
+		int x = (int)((rand.nextInt(425)+425)*Window.SCALE);
 		int y = (int)(Window.HEIGHT*Window.SCALE);
 		int velx;
 		int vely;
@@ -172,16 +178,45 @@ public class Game3 extends MouseAdapter {
 			velx = 0;
 			dir = Direction.N;
 		}
+		System.out.println("SpawnBottom Created X: "+x+" Y: "+y);
 		objects.add(new Animal(name,x,y,velx,vely,dir));
+	}
+	
+	private void checkEndGame(){
+		if(init == false){
+			timer1 = System.currentTimeMillis();
+			init = true;
+		}
+		if(System.currentTimeMillis() < timer1+15000.0){
+			//System.out.println("if case");
+			tick = (tick+1)%31;
+			if(tick==30){
+				randSpawn(rand.nextBoolean(),rand.nextInt(2)+1,rand.nextInt(2));		
+			}
+		}else if(init2){
+			if(System.currentTimeMillis() > timer2+5000.0){
+				//System.out.println("else case");
+				init = false;
+				running = false;
+				actNumCrab = 0;
+				clickNumCrab = 0;
+				objects.removeAll(objects);
+				Controller.gameState = STATE.Menu;
+			}
+		}else if(objects.size() == animals+1){
+			if(init2 == false){
+				timer2 = System.currentTimeMillis();
+				//System.out.println("end game");
+				objects.add(new Animal("EndGame",actNumCrab,clickNumCrab,0,0, null));
+				init2 = true;
+			}
+		}
 	}
 
 	
 
 	public void tick() {
-		tick = (tick+1)%51;
-		if(tick==50){
-			randSpawn(rand.nextBoolean(),rand.nextInt(2)+1,rand.nextInt(2));		
-		}
+		checkEndGame();
 		updateAnimal();
 	}
 
