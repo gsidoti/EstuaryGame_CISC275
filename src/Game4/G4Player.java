@@ -14,19 +14,9 @@ public class G4Player extends gameObject{
 	
 	void moveDown(){
 		y += vely;
-	//	System.out.println("down "+ y+" "+ vely);
 	}
 	
 	void moveUp(){
 		y -= vely;
-	//	System.out.println("up "+y+" "+ vely);
-	}
-	
-	void moveLeft(){
-		x -= velx;
-	}
-	
-	void moveRight(){
-		x += velx;
 	}
 }

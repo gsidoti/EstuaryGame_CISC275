@@ -20,6 +20,7 @@ public class Game3 extends MouseAdapter {
 	long timer2;
 	boolean init = false;
 	boolean init2 = false;
+	boolean start = false;
 	int tick;
 	public static int animals = 0;
 	public int actNumCrab = 0;
@@ -27,7 +28,6 @@ public class Game3 extends MouseAdapter {
 	
 	public Game3(){
 		view = new Game3View();
-		objects.add(new Animal("Count", 0, 0, 0, 0, null));
 	}
 	
 	public void mousePressed(MouseEvent e){
@@ -197,7 +197,9 @@ public class Game3 extends MouseAdapter {
 			if(System.currentTimeMillis() > timer2+5000.0){
 				//System.out.println("else case");
 				init = false;
+				init2 = false;
 				running = false;
+				start = false;
 				actNumCrab = 0;
 				clickNumCrab = 0;
 				objects.removeAll(objects);
@@ -216,6 +218,10 @@ public class Game3 extends MouseAdapter {
 	
 
 	public void tick() {
+		if(!start){
+			objects.add(new Animal("Count", 0, 0, 0, 0, null));
+			start = true;
+		}
 		checkEndGame();
 		updateAnimal();
 	}
