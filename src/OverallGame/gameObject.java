@@ -5,9 +5,10 @@ public class gameObject {
 		public int y;
 		protected int velx;
 		protected int vely;
-		protected String name;
+		public String name;
 		
 		public gameObject(String name, int x, int y, int velx, int vely){
+			this.name = name;
 			this.x = x;
 			this.y = y;
 			this.vely = vely;

@@ -37,6 +37,8 @@ public class Game2 extends MouseAdapter {
     //private KeyboardInput keyboard;
     //private Player player;
     private int maxvel;
+    private int counter = 0;
+    private int lastBoat = 0;
     private int mx, my;
 	public boolean running = false;
 	ArrayList<gameObject> objects = new ArrayList<gameObject>();
@@ -50,8 +52,9 @@ public class Game2 extends MouseAdapter {
         
         Lives=10;
         maxvel=1;
+        Random rand = new Random();
         for(i=0;i<100;i++)
-        	objects.add(new Boat(("Boat"+i), (int)(Window.WIDTH * Window.SCALE), (int)(Math.random()%Window.HEIGHT), 0, 0));
+        	objects.add(new Boat(("Boat"+i), (int)(Window.WIDTH * Window.SCALE), (rand.nextInt((int)(Window.HEIGHT*Window.SCALE))), 2, 0, rand.nextBoolean()));
         view = new Game2View();
     }
     
@@ -67,16 +70,18 @@ public class Game2 extends MouseAdapter {
 	
 	private void updateBoat(int index) {
 		Boat b = (Boat)objects.get(index);
-		b.Move();
-		if (b.IsCaught(mx, my)) {
+		if (b.getActive())
+			b.Move();
+		if (mouseOver(mx,my,b.getX(),b.getY(),25,50)) {
 				b.setInfested(false);
+				
 			}
 		}
 	
 	private void updateLives(){
 		for (int i = 0; i < objects.size(); i++) {
 			Boat b = (Boat) objects.get(i);
-			if (b.MadeIt(0)) {
+			if (b.MadeIt(0)&&b.getInfested()) {
 				b.setActive(false);
 				Lives--;
 			}
@@ -84,13 +89,30 @@ public class Game2 extends MouseAdapter {
 	}
 	
 	public void tick() {
-		for (int i = 0; i < objects.size(); i++)
+		counter++;
+		if (counter%10 == 0) {
+			Boat temp = (Boat)objects.get(lastBoat);
+			temp.setActive(true);
+			objects.set(lastBoat, temp);
+			if (lastBoat < 99)
+				lastBoat++;
+		}
+		for (int i = 0; i < objects.size(); i++) {
 			updateBoat(i);
-		updateLives();
-		System.out.println("Boats: " + objects.size() + " Lives: " + Lives);
+			updateLives();
+			System.out.println("Boats: " + objects.size() + " Lives: " + Lives);
+		}
 	}
 	
 	public ArrayList<gameObject> getObjects(){
 		return this.objects;
 	}
+	
+    private boolean mouseOver(int mx, int my, int x, int y, int width, int height) {
+        if (mx > x && mx < x + width) {
+            if (my > y && my < y + height) {
+                return true;
+            } else return false;
+        } else return false;
+    }
 }

@@ -23,13 +23,14 @@ public class Boat extends gameObject
     /**
      * Constructor for objects of class Player
      */
-    public Boat(String name, int x, int y, int velx, int vely) {
+    public Boat(String name, int x, int y, int velx, int vely, boolean infested) {
 		super(name, x, y, velx, vely);
+		this.isInfested = infested;
 	}
 
     public boolean MadeIt(int to)
     {
-        if(x>=to)
+        if(x<=to)
         {
             return true;
         }
