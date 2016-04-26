@@ -22,11 +22,12 @@ public class G4Player extends gameObject{
 	//	System.out.println("up "+y+" "+ vely);
 	}
 	
-	void moveLeft(){
+	/*void moveLeft(){
 		x -= velx;
 	}
 	
 	void moveRight(){
 		x += velx;
 	}
+	*/
 }

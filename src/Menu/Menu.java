@@ -1,11 +1,10 @@
 package Menu;
 
 import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
+import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-
 import OverallGame.Controller;
 import OverallGame.STATE;
 import OverallGame.Window;
