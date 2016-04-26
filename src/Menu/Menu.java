@@ -53,12 +53,6 @@ public class Menu extends MouseAdapter {
 			running = false;
 			System.out.println("game4");
 		}
-		
-		if(mouseOver(mx,my,(640/100)*60,(360/100)*60,200,200)){
-			System.out.println("click");
-			Controller.gameState = STATE.Game2;
-			exitMenu();
-		}
 	}
 	//not being used
     private boolean mouseOver(int mx, int my, int x, int y, int width, int height) {

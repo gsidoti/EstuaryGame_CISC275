@@ -70,32 +70,26 @@ public class Game2 extends MouseAdapter {
 	
 	private void updateBoat(int index) {
 		Boat b = (Boat)objects.get(index);
-<<<<<<< HEAD
 		if (b.getActive())
 			b.Move();
 		if (mouseOver(mx,my,b.getX(),b.getY(),25,50)) {
-=======
-		b.Move();
-		if (b.IsCaught(mx, my)) {
->>>>>>> 7502ace195a9548918687edd27828dd8f3c63231
-				b.setInfested(false);
-				
-			}
+				 b.setInfested(false);
 		}
+	}
 	
 	private void updateLives(){
 		for (int i = 0; i < objects.size(); i++) {
 			Boat b = (Boat) objects.get(i);
-<<<<<<< HEAD
-			if (b.MadeIt(0)&&b.getInfested()) {
-=======
-			if (b.MadeIt(0)) {
->>>>>>> 7502ace195a9548918687edd27828dd8f3c63231
+			if (b.MadeIt(0)&&b.getInfested()&&b.getActive()) {
 				b.setActive(false);
 				Lives--;
+				if (Lives <= 0) {
+					resetGame();
+				}
 			}
 		}
 	}
+
 	
 	public void tick() {
 		counter++;
@@ -123,5 +117,17 @@ public class Game2 extends MouseAdapter {
                 return true;
             } else return false;
         } else return false;
+    }
+    
+    private void resetGame() {
+    	Random rand = new Random();
+    	Lives = 10;
+    	lastBoat = 0;
+    	counter = 0;
+    	for(int i=0;i<100;i++)
+        	objects.set(i, new Boat(("Boat"+i), (int)(Window.WIDTH * Window.SCALE), 
+        			(rand.nextInt((int)(Window.HEIGHT*Window.SCALE))), 2, 0, rand.nextBoolean()));
+    	running = false;
+    	Controller.gameState = STATE.Menu;
     }
 }
