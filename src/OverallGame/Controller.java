@@ -2,11 +2,11 @@ package OverallGame;
 
 import java.awt.Canvas;
 import java.awt.Graphics;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
 
 import Game2.Game2;
+import Game3.Game3;
 import Game4.Game4;
 import Menu.Menu;
 //import Game1.GameOne;
@@ -20,9 +20,10 @@ public class Controller extends Canvas{
 	private boolean running = false;
 
 	private Menu menu;
-	private Game4 game4;
 	private Game1 game1;
 	private Game2 game2;
+	private Game3 game3;
+	private Game4 game4;
 	private Window window;
 
 	public static STATE gameState = STATE.Menu;
@@ -32,8 +33,8 @@ public class Controller extends Canvas{
 		menu = new Menu(window);
 		game1 = new Game1();
 		game2 = new Game2();
-		//game3 = new Game3();
-		game4 = new Game4(WIDTH,HEIGHT);
+		game3 = new Game3();
+		game4 = new Game4();
 		this.start();
 		this.run();
 	}
@@ -158,6 +159,7 @@ public class Controller extends Canvas{
 			game2.view.render(g, game2.getObjects());
 			break;
 		case Game3:
+			game3.view.render(g, game3.getObjects());
 			break;
 		case Game4:
 			game4.view.render(g,game4.getObjects());

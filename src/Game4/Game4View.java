@@ -24,11 +24,12 @@ public class Game4View extends gameView{
 		//draw safe zone
 		g.setColor(Color.white);
 		g.fillRect(0,(int)(((Window.HEIGHT/2)-50)*Window.SCALE),(int) (Window.WIDTH*Window.SCALE),(int)(100*Window.SCALE) );
-		g.setColor(new Color(0f, .5f, 0f, .5f));//this would be the green zone
+		//this would be the green zone
+		g.setColor(new Color(0f, .5f, 0f, .5f));
 		g.fillRect(0,(int)(((Window.HEIGHT/2)-50)*Window.SCALE),(int) (Window.WIDTH*Window.SCALE),(int)(100*Window.SCALE) );
 		//draw water tester
 		g.setColor(Color.red);
-		g.fillRect(player.x,player.y,30,100);
+		g.fillRect(player.x-10,player.y-25,(int)(20*Window.SCALE),(int)(50*Window.SCALE));
 		
 
 		g.setColor(Color.green);

@@ -22,7 +22,7 @@ public class Game3 extends MouseAdapter {
 	public int actNumCrab = 0;
 	public int clickNumCrab = 0;
 	
-	public Game3(int w, int h){
+	public Game3(){
 		
 		view = new Game3View();
 	}
