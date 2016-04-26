@@ -25,6 +25,7 @@ public class Game4 extends MouseAdapter {
 		view = new Game4View();
 	}
 	
+	
 	public void mousePressed(MouseEvent e){
 		mousedown = true;
 	}
