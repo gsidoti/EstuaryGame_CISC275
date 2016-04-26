@@ -6,6 +6,7 @@ import java.awt.image.*;
 import java.util.*;
 import util.*;
 import javax.swing.*;
+import OverallGame.gameObject;
 
 /**
  * Write a description of class Trash here.
@@ -13,24 +14,19 @@ import javax.swing.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Boat
+public class Boat extends gameObject
 {
     // instance variables - replace the example below with your own
-    private int x;
-    private int y;
-    private int velocity; // pixels per tick
+	private boolean mousedown;
     private boolean isInfested;
+    private boolean isActive = false;
     
     /**
      * Constructor for objects of class Player
      */
-    public Boat(int y0, double vel)
-    {
-        // initialize instance variables
-        x = 0;
-        y = (int)Math.round(Math.floor(y0*Math.random()));
-        velocity=1+(int)Math.round(Math.floor(vel*Math.random()));
-    }
+    public Boat(String name, int x, int y, int velx, int vely) {
+		super(name, x, y, velx, vely);
+	}
 
     public boolean MadeIt(int to)
     {
@@ -46,29 +42,29 @@ public class Boat
     
     public boolean IsCaught(int px,int py)
     {
-        if((Math.abs(px-x)+Math.abs(py-y))<10)return true;
+        if((Math.abs(px-getX())+Math.abs(py-getY()))<10)return true;
         return false;
     }
     
-    public void Move()
-    {
-        x+=velocity;
-        return;
+    public boolean getInfested() {
+    	return isInfested;
     }
     
-    public void Draw(Graphics g)
-    {
-        Color temp=g.getColor();
-        int tx;
-        int ty;
-        
-        tx=x;
-        ty=y;
-        g.setColor(Color.RED);
-        g.drawLine(tx-3,ty-3,tx+4,ty+4);
-        g.drawLine(tx+4,ty-3,tx-3,ty+4);
-        g.setColor(temp);
-        return;
+    public void setInfested(boolean value) {
+    	isInfested = value;
     }
+    
+    public boolean getActive() {
+    	return isActive;
+    }
+    
+    public void setActive(boolean value) {
+    	isActive = value;
+    }
+    
+    void Move(){
+		this.setX(this.getX()-this.getVelx());
+	//	System.out.println("left "+ x + " " + velx);
+	}
 }
 
