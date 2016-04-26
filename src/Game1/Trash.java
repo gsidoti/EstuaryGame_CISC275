@@ -7,28 +7,29 @@ import java.util.*;
 import util.*;
 import javax.swing.*;
 
+import OverallGame.gameObject;
+
 /**
  * Write a description of class Trash here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Trash
+public class Trash extends gameObject
 {
     // instance variables - replace the example below with your own
-    private int x;
-    private int y;
-    private int velocity; // pixels per tick
+ // pixels per tick
     
     /**
      * Constructor for objects of class Player
      */
-    public Trash(int y0, double vel)
+    public Trash(String name,int x, int y, int velx, int vely)
     {
+    	super(name,x,y,velx,vely);
         // initialise instance variables
-        x = 0;
-        y = (int)Math.round(Math.floor(y0*Math.random()));
-        velocity=1+(int)Math.round(Math.floor(vel*Math.random()));
+        this.x = 0;
+        this.y = (int)Math.round(Math.floor(y*Math.random()));
+        this.velx=1+(int)Math.round(Math.floor(velx*Math.random()));
     }
 
     public boolean MadeIt(int to)
@@ -51,7 +52,7 @@ public class Trash
     
     public void Move()
     {
-        x+=velocity;
+        x+=velx;
         return;
     }
     

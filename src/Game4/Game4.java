@@ -1,7 +1,6 @@
 package Game4;
 
 import java.awt.event.MouseAdapter;
-
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
@@ -9,7 +8,6 @@ import OverallGame.Controller;
 import OverallGame.STATE;
 import OverallGame.Window;
 import OverallGame.gameObject;
-//change
 
 public class Game4 extends MouseAdapter {
 	public boolean running = false;
@@ -26,6 +24,7 @@ public class Game4 extends MouseAdapter {
 		objects.add(new gameObject("redScore",0,redScore,0,-1));
 		view = new Game4View();
 	}
+	
 	
 	public void mousePressed(MouseEvent e){
 		mousedown = true;
