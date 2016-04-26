@@ -10,7 +10,7 @@ import Game2.Game2;
 import Game4.Game4;
 import Menu.Menu;
 //import Game1.GameOne;
-import Game2.Game2;
+import Game1.Game1;
 
 public class Controller extends Canvas{
 
@@ -18,37 +18,34 @@ public class Controller extends Canvas{
 
 	private Thread thread;
 	private boolean running = false;
-	
+
 	private Menu menu;
 	private Game4 game4;
-//	private GameOne game1;
+	private Game1 game1;
 	private Game2 game2;
-	//private GameOne game1;
-//	private GameOne game1;
 	private Window window;
-	
+
 	public static STATE gameState = STATE.Menu;
 
 	private Controller(){
 		window = new Window("Estuary Game",this);
 		menu = new Menu(window);
-		//game1 = new GameOne();
-//		game1 = new GameOne();
+		game1 = new Game1();
 		game2 = new Game2();
 		//game3 = new Game3();
 		game4 = new Game4(WIDTH,HEIGHT);
 		this.start();
 		this.run();
 	}
-	
 
-	
+
+
 	private synchronized void start(){
 		thread = new Thread(String.valueOf(this));
 		thread.start();
 		running = true;	
 	}
-	
+
 	private synchronized void stop(){
 		try{
 			thread.join();
@@ -57,7 +54,7 @@ public class Controller extends Canvas{
 			e.printStackTrace();	
 		}
 	}
-	
+
 	private void run() {
 		this.requestFocus();
 		long lastTime = System.nanoTime();
@@ -90,10 +87,10 @@ public class Controller extends Canvas{
 	private void clearML(){
 		for(MouseListener l:this.getMouseListeners()){
 			this.removeMouseListener(l);
-			 System.out.println("removing ml");
+			System.out.println("removing ml");
 		}
 	}
-	
+
 	private void tick(){
 		switch(gameState){
 		case Menu:
@@ -106,23 +103,26 @@ public class Controller extends Canvas{
 				menu.tick();
 			}
 			break;
-//		case Game1:
-//			if(game1.running == false) {
-	//			clearML();
-//				System.out.println("setting game1 to running");
-	//			game1.running = true;
-//			}
-//			break;
+		case Game1:
+			if(game1.running == false) {
+				clearML();
+				this.addMouseListener(game1);
+				System.out.println("setting game1 to running");
+				game1.running = true;
+			}else{
+				game1.tick();
+			}
+			break;
 		case Game2:
 			if(game2.running == false){
-			clearML();
-			this.addMouseListener(game2);
-			System.out.println("setting game2 to running");
-			game2.running = true;
-		}else{
-			game2.tick();
-		}
-		break;
+				clearML();
+				this.addMouseListener(game2);
+				System.out.println("setting game2 to running");
+				game2.running = true;
+			}else{
+				game2.tick();
+			}
+			break;
 		case Game3:
 			break;
 		case Game4:
@@ -137,8 +137,8 @@ public class Controller extends Canvas{
 			break;
 		}
 	}
-	
-	
+
+
 	private void render(){
 		//System.out.println("Render");
 		BufferStrategy bs = this.getBufferStrategy();
@@ -152,6 +152,7 @@ public class Controller extends Canvas{
 			menu.menuView.render(g);
 			break;
 		case Game1:
+			game1.view.render(g, game1.getObjects());
 			break;
 		case Game2:
 			game2.view.render(g, game2.getObjects());
@@ -165,7 +166,7 @@ public class Controller extends Canvas{
 		g.dispose();
 		bs.show();
 	}
-	
+
 
 	public static void main(String[] args) {
 		new Controller(); 
@@ -174,5 +175,5 @@ public class Controller extends Canvas{
 }
 
 class scale{
-	
+
 }

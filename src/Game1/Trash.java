@@ -17,6 +17,7 @@ import OverallGame.gameObject;
  */
 public class Trash extends gameObject
 {
+	boolean isActive = false;
     // instance variables - replace the example below with your own
  // pixels per tick
     
@@ -26,7 +27,7 @@ public class Trash extends gameObject
     public Trash(String name,int x, int y, int velx, int vely)
     {
     	super(name,x,y,velx,vely);
-        // initialise instance variables
+        // initialize instance variables
         this.x = 0;
         this.y = (int)Math.round(Math.floor(y*Math.random()));
         this.velx=1+(int)Math.round(Math.floor(velx*Math.random()));
@@ -56,18 +57,26 @@ public class Trash extends gameObject
         return;
     }
     
-    public void Draw(Graphics g)
-    {
-        Color temp=g.getColor();
-        int tx;
-        int ty;
-        
-        tx=x;
-        ty=y;
-        g.setColor(Color.RED);
-        g.drawLine(tx-3,ty-3,tx+4,ty+4);
-        g.drawLine(tx+4,ty-3,tx-3,ty+4);
-        g.setColor(temp);
-        return;
+    public boolean getActive() {
+    	return isActive;
     }
+    
+    public void setActive(boolean value) {
+    	isActive = value;
+    }
+//    
+//    public void Draw(Graphics g)
+//    {
+//        Color temp=g.getColor();
+//        int tx;
+//        int ty;
+//        
+//        tx=x;
+//        ty=y;
+//        g.setColor(Color.RED);
+//        g.drawLine(tx-3,ty-3,tx+4,ty+4);
+//        g.drawLine(tx+4,ty-3,tx-3,ty+4);
+//        g.setColor(temp);
+//        return;
+//    }
 }

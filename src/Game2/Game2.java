@@ -1,15 +1,9 @@
 package Game2;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.*;
 import java.util.*;
-import util.*;
-import javax.swing.*;
 
 import Game2.Boat;
 import Game2.Game2View;
-import Game4.G4Player;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -31,7 +25,6 @@ public class Game2 extends MouseAdapter {
 
     //private FrameRate frameRate;
     //private BufferStrategy bs;
-    //public boolean running;
     //private Thread gameThread;
     //private SimpleMouseInput mouse;
     //private KeyboardInput keyboard;
