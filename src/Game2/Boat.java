@@ -17,7 +17,6 @@ import OverallGame.gameObject;
 public class Boat extends gameObject
 {
     // instance variables - replace the example below with your own
-	private boolean mousedown;
     private boolean isInfested;
     private boolean isActive = false;
     
