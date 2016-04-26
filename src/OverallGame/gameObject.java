@@ -8,6 +8,7 @@ public class gameObject {
 		protected String name;
 		
 		public gameObject(String name, int x, int y, int velx, int vely){
+			this.name = name;
 			this.x = x;
 			this.y = y;
 			this.vely = vely;
