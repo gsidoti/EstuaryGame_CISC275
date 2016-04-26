@@ -13,7 +13,7 @@ public class G4Player extends gameObject{
 	}
 	
 	void moveDown(){
-		this.setY(this.getY()+this.getVely());
+		y += vely;
 	//	System.out.println("down "+ y+" "+ vely);
 	}
 	
@@ -22,4 +22,11 @@ public class G4Player extends gameObject{
 	//	System.out.println("up "+y+" "+ vely);
 	}
 	
+	void moveLeft(){
+		x -= velx;
+	}
+	
+	void moveRight(){
+		x += velx;
+	}
 }
