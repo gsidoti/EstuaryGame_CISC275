@@ -6,10 +6,15 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
 
+import Game2.Game2;
 import Game4.Game4;
 import Menu.Menu;
 //import Game1.GameOne;
 import Game2.Game2;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7502ace195a9548918687edd27828dd8f3c63231
 
 
 
@@ -22,8 +27,14 @@ public class Controller extends Canvas{
 	
 	private Menu menu;
 	private Game4 game4;
+<<<<<<< HEAD
 //	private GameOne game1;
 	private Game2 game2;
+=======
+	private Game2 game2;
+	//private GameOne game1;
+//	private GameOne game1;
+>>>>>>> 7502ace195a9548918687edd27828dd8f3c63231
 	private Window window;
 	
 	public static STATE gameState = STATE.Menu;
@@ -31,14 +42,16 @@ public class Controller extends Canvas{
 	private Controller(){
 		window = new Window("Estuary Game",this);
 		menu = new Menu(window);
+<<<<<<< HEAD
+=======
+
+		//game1 = new GameOne();
+
+>>>>>>> 7502ace195a9548918687edd27828dd8f3c63231
 //		game1 = new GameOne();
 		game2 = new Game2();
 		//game3 = new Game3();
 		game4 = new Game4(WIDTH,HEIGHT);
-		//this.addMouseListener(new MouseAdapter(){
-		//	@Override
-		//	public void mouseClicked
-		//}
 		this.start();
 		this.run();
 	}
@@ -108,6 +121,7 @@ public class Controller extends Canvas{
 				menu.tick();
 			}
 			break;
+<<<<<<< HEAD
 //		case Game1:
 //			if(game1.running == false) {
 	//			clearML();
@@ -124,6 +138,19 @@ public class Controller extends Canvas{
 		}else{
 			game2.tick();
 		}
+=======
+		case Game1:
+			break;
+		case Game2:
+			if(game2.running == false){
+				clearML();
+				this.addMouseListener(game2);
+				System.out.println("setting game4 to running");
+				game2.running = true;
+			}else{
+				game2.tick();
+			}
+>>>>>>> 7502ace195a9548918687edd27828dd8f3c63231
 		break;
 		case Game3:
 			break;

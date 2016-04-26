@@ -26,6 +26,7 @@ public class Game2View extends gameView{
 		g.setColor(new Color(0f, .5f, 0f, .5f));//this would be the green zone
 		g.fillRect(0,(int)(((Window.HEIGHT/2)-50)*Window.SCALE),(int) (Window.WIDTH*Window.SCALE),(int)(100*Window.SCALE) );
 		//draw boats
+<<<<<<< HEAD
 		g.setColor(Color.green);
 		for (int i = 0; i < objects.size(); i++){
 			Boat temp = (Boat)(objects.get(i));
@@ -38,6 +39,12 @@ public class Game2View extends gameView{
 				g.fillRect(objects.get(i).getX(),objects.get(i).getY(),25,50);
 			}
 		}
+=======
+		g.setColor(Color.red);
+		for (int i = 1; i < objects.size(); i++)
+			g.fillRect(objects.get(i).getX(),objects.get(i).getY(),25,50);
+		
+>>>>>>> 7502ace195a9548918687edd27828dd8f3c63231
 
 		g.setColor(Color.green);
 		//g.drawRect((int)((Window.WIDTH-150)*Window.SCALE),(int)(50*Window.SCALE),(int) (50*Window.SCALE),(int) (150*Window.SCALE));

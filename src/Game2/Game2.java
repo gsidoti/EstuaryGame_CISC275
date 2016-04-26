@@ -70,9 +70,14 @@ public class Game2 extends MouseAdapter {
 	
 	private void updateBoat(int index) {
 		Boat b = (Boat)objects.get(index);
+<<<<<<< HEAD
 		if (b.getActive())
 			b.Move();
 		if (mouseOver(mx,my,b.getX(),b.getY(),25,50)) {
+=======
+		b.Move();
+		if (b.IsCaught(mx, my)) {
+>>>>>>> 7502ace195a9548918687edd27828dd8f3c63231
 				b.setInfested(false);
 				
 			}
@@ -81,7 +86,11 @@ public class Game2 extends MouseAdapter {
 	private void updateLives(){
 		for (int i = 0; i < objects.size(); i++) {
 			Boat b = (Boat) objects.get(i);
+<<<<<<< HEAD
 			if (b.MadeIt(0)&&b.getInfested()) {
+=======
+			if (b.MadeIt(0)) {
+>>>>>>> 7502ace195a9548918687edd27828dd8f3c63231
 				b.setActive(false);
 				Lives--;
 			}

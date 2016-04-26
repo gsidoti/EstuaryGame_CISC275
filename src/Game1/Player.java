@@ -7,13 +7,15 @@ import java.util.*;
 import util.*;
 import javax.swing.*;
 
+import OverallGame.gameObject;
+
 /**
  * Write a description of class Player here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Player
+public class Player extends gameObject
 {
     // instance variables - replace the example below with your own
     private double x;

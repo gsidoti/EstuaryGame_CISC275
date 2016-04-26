@@ -7,6 +7,8 @@ import java.util.*;
 import util.*;
 import javax.swing.*;
 
+import OverallGame.gameObject;
+
 /**
  * Write a description of class GameOne here.
  * 
@@ -30,6 +32,8 @@ public class GameOne extends JFrame implements Runnable {
     
     private long Score;
     private long Lives;
+    
+	ArrayList<gameObject> objects = new ArrayList<gameObject>();
    
     public GameOne() {
         int i;
@@ -41,7 +45,9 @@ public class GameOne extends JFrame implements Runnable {
         maxvel=1;
         for(i=0;i<100;i++)
         {
-            trash[i]=new Trash(480,1);
+        	objects.add(e)
+            //trash[i]=new Trash(480,1);
+            objects.add(new Trash("Trash",480,0,1,0));
             trashactive[i]=false;
         }
     }
