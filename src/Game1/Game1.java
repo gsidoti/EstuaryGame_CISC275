@@ -75,7 +75,8 @@ public class Game1 extends MouseAdapter {
 	private void updatePlayer(){
 		Player p = (Player) (objects.get(0));
 		if(mousedown)
-			player.Move();
+			p.SetDest(mx, my);
+			p.Move();
 	}
 	
 	private void updateTrash(int index) {
@@ -83,7 +84,7 @@ public class Game1 extends MouseAdapter {
 		Player p = (Player)objects.get(0);
 		if (temp.getActive())
 			temp.Move();
-		if (mouseOver(player.getX(),player.getY(),temp.getX(),temp.getY(),20,20)) {
+		if (mouseOver(p.getX(),p.getY(),temp.getX(),temp.getY(),20,20)) {
 				 temp.setActive(false);
 		}
 	}
