@@ -3,7 +3,9 @@ package Game3;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Random;
 
+import Game2.Boat;
 import Game4.G4Player;
 import Game4.Game4View;
 import OverallGame.Controller;
@@ -15,70 +17,164 @@ public class Game3 extends MouseAdapter {
 	public boolean running = false;
 	ArrayList<gameObject> objects = new ArrayList<gameObject>();
 	
-	public Game4View view;
-	boolean mousedown = false;
-	public int greenScore = 1500;
-	public int redScore = 1500;
+	public Game3View view;
+
+	public int actNumCrab = 0;
+	public int clickNumCrab = 0;
 	
-	public Game4(int w, int h){
-		objects.add( new G4Player("Player",(int)((Window.WIDTH/2)*Window.SCALE),(int)((Window.HEIGHT/2)*Window.SCALE),2,5));
-		objects.add(new gameObject("greenScore",0,greenScore,0,-1));
-		objects.add(new gameObject("redScore",0,redScore,0,-1));
-		view = new Game4View();
+	public Game3(int w, int h){
+		
+		view = new Game3View();
 	}
 	
 	public void mousePressed(MouseEvent e){
-		mousedown = true;
-	}
-	public void mouseReleased(MouseEvent e){
-		mousedown = false;
+		clickNumCrab++;
 	}
 
 
-	private void updatePlayer(){
-		G4Player p = (G4Player) (objects.get(0));
-		if(mousedown){
-			if(p.getY()>100.0*Window.SCALE)
-				p.moveUp();
-		}else{
-			if(objects.get(0).getY()<(Window.HEIGHT-100)*Window.SCALE)
-				p.moveDown();
+	private void updateAnimal(){
+		for(gameObject o:objects){
+			o.setX(o.getX()+o.getVelx());
+			o.setY(o.getY()+o.getVely());
+			checkOffScreen(o);
 		}
 	}
 	
-	private void updateScore(){
-		gameObject player = objects.get(0);
-		gameObject g = objects.get(1);
-		gameObject r = objects.get(2);
-		if(player.getY()>Window.HEIGHT/2-100 && player.getY()<Window.HEIGHT/2+100){
-			g.setY(greenScore--);
-			if(greenScore <= 0){
-				Menu.Menu.ESCORE += 100;
-				greenScore = 1500;
-				redScore = 1500;
-				g.setY(greenScore);
-				r.setY(redScore);
-				running = false;
-				Controller.gameState = STATE.Menu;
-			}
-		}else{
-			r.setY(redScore--);
-			if(redScore <= 0){
-				greenScore = 1500;
-				redScore = 1500;
-				g.setY(greenScore);
-				r.setY(redScore);
-				running = false;
-				Controller.gameState = STATE.Menu;
-			}
+	public void checkOffScreen(gameObject o){
+		Animal a = (Animal)(o);
+		if(a.getX()<0 || a.getX()>Window.WIDTH*Window.SCALE || a.getY()<0 || a.getY() > Window.HEIGHT*Window.SCALE){
+			actNumCrab++;
+			a.onScreen = false;
 		}
 	}
+	
+	public void randSpawn(boolean Enemy, int speed){
+		Random rand = new Random();
+		switch (rand.nextInt(4)){
+			case 0:
+				spawnLeft(Enemy,speed);
+				break;
+			case 1:
+				spawnRight(Enemy,speed);
+				break;
+			case 2:
+				spawnTop(Enemy,speed);
+				break;
+			case 3:
+				spawnBottom(Enemy,speed);
+				break;
+		}
+	}
+	
+	public void spawnLeft(boolean Enemy, int speed){
+		Random rand = new Random();
+		int x = 0;
+		int y = rand.nextInt(Window.HEIGHT-200+1)+200;
+		int velx;
+		int vely;
+		Direction dir;
+		String name = "HorseShoe";
+		if(Enemy){
+			name = "Enemy";
+		}
+		velx = 1*speed;
+		int r = rand.nextInt(3);
+		if( r== 0){
+			dir = Direction.NE;
+			vely = -1*speed;
+		}else if(r == 1){
+			dir = Direction.SE;
+			vely = 1*speed;
+		}else{
+			vely = 0;
+			dir = Direction.E;
+		}
+		objects.add(new Animal(name,x,y,velx,vely,dir));
+	}
+	
+	public void spawnRight(boolean Enemy, int speed){
+		Random rand = new Random();
+		int x = (int)(Window.WIDTH*Window.SCALE);
+		int y = rand.nextInt(Window.HEIGHT-200+1)+200;
+		int velx;
+		int vely;
+		Direction dir;
+		String name = "HorseShoe";
+		if(Enemy){
+			name = "Enemy";
+		}
+		velx = -1*speed;
+		int r = rand.nextInt(3);
+		if( r== 0){
+			dir = Direction.NW;
+			vely = -1*speed;
+		}else if(r == 1){
+			dir = Direction.SW;
+			vely = 1*speed;
+		}else{
+			vely = 0;
+			dir = Direction.W;
+		}
+		objects.add(new Animal(name,x,y,velx,vely,dir));
+	}
+	
+	public void spawnTop(boolean Enemy, int speed){
+		Random rand = new Random();
+		int x = rand.nextInt(Window.WIDTH-200+1)+200;
+		int y = 0;
+		int velx;
+		int vely;
+		Direction dir;
+		String name = "HorseShoe";
+		if(Enemy){
+			name = "Enemy";
+		}
+		vely = 1*speed;
+		int r = rand.nextInt(3);
+		if( r== 0){
+			dir = Direction.SW;
+			velx = -1*speed;
+		}else if(r == 1){
+			dir = Direction.SE;
+			velx = 1*speed;
+		}else{
+			velx = 0;
+			dir = Direction.S;
+		}
+		objects.add(new Animal(name,x,y,velx,vely,dir));
+	}
+	
+	public void spawnBottom(boolean Enemy, int speed){
+		Random rand = new Random();
+		int x = rand.nextInt(Window.HEIGHT-200+1)+200;
+		int y = (int)(Window.HEIGHT*Window.SCALE);
+		int velx;
+		int vely;
+		Direction dir;
+		String name = "HorseShoe";
+		if(Enemy){
+			name = "Enemy";
+		}
+		vely = -1*speed;
+		int r = rand.nextInt(3);
+		if( r== 0){
+			dir = Direction.NW;
+			velx = -1*speed;
+		}else if(r == 1){
+			dir = Direction.NE;
+			velx = 1*speed;
+		}else{
+			velx = 0;
+			dir = Direction.N;
+		}
+		objects.add(new Animal(name,x,y,velx,vely,dir));
+	}
+
 	
 
 	public void tick() {
-		updatePlayer();
-		updateScore();
-		System.out.println("Green: "+greenScore+" Red: "+redScore);
+		updateAnimal();
+		//System.out.println();
 	}
 
 	public ArrayList<gameObject> getObjects(){

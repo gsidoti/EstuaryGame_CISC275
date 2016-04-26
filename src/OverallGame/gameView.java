@@ -26,7 +26,7 @@ public abstract class gameView {
     		images.add(i);
     		//imgWidth = bufferedImage.getWidth()/frameCount;
     		//imgHeight = bufferedImage.getHeight();
-    		return true;
+    		return true; 
     	} catch (IOException e) {
     		System.out.println("Error at Image: "+imgName);
     		return false;
