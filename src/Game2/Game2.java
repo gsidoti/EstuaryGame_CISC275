@@ -23,7 +23,7 @@ import OverallGame.gameObject;
 /**
  * Write a description of class Game2 here.
  * 
- * @author Jakub Simacek 
+ * @author Cody Fox
  * @version 0.1
  */
 
