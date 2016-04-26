@@ -27,7 +27,7 @@ public class Game2View extends gameView{
 		g.fillRect(0,(int)(((Window.HEIGHT/2)-50)*Window.SCALE),(int) (Window.WIDTH*Window.SCALE),(int)(100*Window.SCALE) );
 		//draw boats
 		g.setColor(Color.red);
-		for (int i = 0; i < objects.size(); i++)
+		for (int i = 1; i < objects.size(); i++)
 			g.fillRect(objects.get(i).getX(),objects.get(i).getY(),25,50);
 		
 
