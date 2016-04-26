@@ -37,6 +37,8 @@ public class Game1View extends gameView{
 				g.fillRect(objects.get(i).getX(),objects.get(i).getY(),20,20);
 			}
 		}
+		g.setColor(Color.red);
+		g.fillRect(objects.get(0).getX(), objects.get(0).getY(), 30, 30);
 
 		g.setColor(Color.green);
 		//g.drawRect((int)((Window.WIDTH-150)*Window.SCALE),(int)(50*Window.SCALE),(int) (50*Window.SCALE),(int) (150*Window.SCALE));
