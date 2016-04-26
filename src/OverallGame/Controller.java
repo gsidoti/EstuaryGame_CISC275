@@ -125,6 +125,14 @@ public class Controller extends Canvas{
 			}
 			break;
 		case Game3:
+			if(game3.running == false){
+				clearML();
+				this.addMouseListener(game3);
+				System.out.println("setting game4 to running");
+				game3.running = true;
+			}else{
+				game3.tick();
+			}
 			break;
 		case Game4:
 			if(game4.running == false){

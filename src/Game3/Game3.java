@@ -15,15 +15,18 @@ import OverallGame.gameObject;
 
 public class Game3 extends MouseAdapter {
 	public boolean running = false;
+	Random rand = new Random();
 	ArrayList<gameObject> objects = new ArrayList<gameObject>();
 	
 	public Game3View view;
+	int tick = 0;
 
 	public int actNumCrab = 0;
 	public int clickNumCrab = 0;
 	
 	public Game3(){
-		
+		randSpawn(true, 2,2);
+		randSpawn(false,2,2);
 		view = new Game3View();
 	}
 	
@@ -48,28 +51,30 @@ public class Game3 extends MouseAdapter {
 		}
 	}
 	
-	public void randSpawn(boolean Enemy, int speed){
+	public void randSpawn(boolean Enemy, int speed, int Amount){
 		Random rand = new Random();
-		switch (rand.nextInt(4)){
-			case 0:
-				spawnLeft(Enemy,speed);
-				break;
-			case 1:
-				spawnRight(Enemy,speed);
-				break;
-			case 2:
-				spawnTop(Enemy,speed);
-				break;
-			case 3:
-				spawnBottom(Enemy,speed);
-				break;
+		for(int i = 0;i < Amount;i++){
+			switch (rand.nextInt(4)){
+				case 0:
+					spawnLeft(Enemy,speed);
+					break;
+				case 1:
+					spawnRight(Enemy,speed);
+					break;
+				case 2:
+					spawnTop(Enemy,speed);
+					break;
+				case 3:
+					spawnBottom(Enemy,speed);
+					break;
+			}
 		}
 	}
 	
 	public void spawnLeft(boolean Enemy, int speed){
 		Random rand = new Random();
 		int x = 0;
-		int y = rand.nextInt(Window.HEIGHT-200+1)+200;
+		int y = (int)((rand.nextInt(Window.HEIGHT-200+1)+200)*Window.SCALE);
 		int velx;
 		int vely;
 		Direction dir;
@@ -95,7 +100,7 @@ public class Game3 extends MouseAdapter {
 	public void spawnRight(boolean Enemy, int speed){
 		Random rand = new Random();
 		int x = (int)(Window.WIDTH*Window.SCALE);
-		int y = rand.nextInt(Window.HEIGHT-200+1)+200;
+		int y = (int)((rand.nextInt(Window.HEIGHT-200+1)+200)*Window.SCALE);
 		int velx;
 		int vely;
 		Direction dir;
@@ -120,7 +125,7 @@ public class Game3 extends MouseAdapter {
 	
 	public void spawnTop(boolean Enemy, int speed){
 		Random rand = new Random();
-		int x = rand.nextInt(Window.WIDTH-200+1)+200;
+		int x = (int)((rand.nextInt(Window.WIDTH-200+1)+200)*Window.SCALE);
 		int y = 0;
 		int velx;
 		int vely;
@@ -146,7 +151,7 @@ public class Game3 extends MouseAdapter {
 	
 	public void spawnBottom(boolean Enemy, int speed){
 		Random rand = new Random();
-		int x = rand.nextInt(Window.HEIGHT-200+1)+200;
+		int x = (int)((rand.nextInt(Window.HEIGHT-200+1)+200)*Window.SCALE);
 		int y = (int)(Window.HEIGHT*Window.SCALE);
 		int velx;
 		int vely;
@@ -173,8 +178,11 @@ public class Game3 extends MouseAdapter {
 	
 
 	public void tick() {
+		tick = (tick+1)%51;
+		if(tick==50){
+			randSpawn(rand.nextBoolean(),rand.nextInt(2)+1,rand.nextInt(2));		
+		}
 		updateAnimal();
-		//System.out.println();
 	}
 
 	public ArrayList<gameObject> getObjects(){
