@@ -80,11 +80,13 @@ public class Game2 extends MouseAdapter {
 	private void updateLives(){
 		for (int i = 0; i < objects.size(); i++) {
 			Boat b = (Boat) objects.get(i);
-			if (b.MadeIt(0)&&b.getInfested()&&b.getActive()) {
+			if (b.MadeIt((int)(100*Window.SCALE))&&b.getActive()) {
 				b.setActive(false);
-				Lives--;
-				if (Lives <= 0) {
-					resetGame();
+				if (b.getInfested()) {
+					Lives--;
+					if (Lives <= 0) {
+						resetGame();
+					}
 				}
 			}
 		}
