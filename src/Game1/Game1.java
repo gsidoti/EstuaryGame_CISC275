@@ -76,12 +76,12 @@ public class Game1 extends MouseAdapter {
 		Player p = (Player) (objects.get(0));
 		if(mousedown)
 			p.SetDest(mx, my);
-			p.Move();
+		p.Move();
 	}
 	
 	private void updateTrash(int index) {
-		Trash temp = (Trash)objects.get(index);
 		Player p = (Player)objects.get(0);
+		Trash temp = (Trash)objects.get(index);
 		if (temp.getActive())
 			temp.Move();
 		if (mouseOver(p.getX(),p.getY(),temp.getX(),temp.getY(),20,20)) {
@@ -116,7 +116,7 @@ public class Game1 extends MouseAdapter {
 		for (int i = 1; i < objects.size(); i++) {
 			updateTrash(i);
 			updateLives();
-			System.out.println("Boats: " + objects.size() + " Lives: " + Lives);
+			System.out.println("Trash: " + objects.size() + " Lives: " + Lives);
 		}
 	}
 	
@@ -135,9 +135,9 @@ public class Game1 extends MouseAdapter {
     private void resetGame() {
     	Random rand = new Random();
     	Lives = 10;
-    	lastTrash = 0;
+    	lastTrash = 1;
     	counter = 0;
-    	for(int i=0;i<100;i++)
+    	for(int i=1;i<100;i++)
         	objects.set(i, new Trash(("Trash"+i), (int)(0 * Window.SCALE), 
         			(rand.nextInt((int)(Window.HEIGHT*Window.SCALE))), 2, 0));
     	running = false;

@@ -35,7 +35,7 @@ public class Game3 extends MouseAdapter {
 	}
 
 
-	private void updateAnimal(){
+	void updateAnimal(){
 		Animal a;
 		for(gameObject o:objects){
 			a = (Animal)(o);
@@ -229,4 +229,54 @@ public class Game3 extends MouseAdapter {
 	public ArrayList<gameObject> getObjects(){
 		return this.objects;
 	}
+
+	public boolean isRunning() {
+		return running;
+	}
+
+	public void setRunning(boolean running) {
+		this.running = running;
+	}
+
+	public boolean isStart() {
+		return start;
+	}
+
+	public void setStart(boolean start) {
+		this.start = start;
+	}
+
+	public int getTick() {
+		return tick;
+	}
+
+	public void setTick(int tick) {
+		this.tick = tick;
+	}
+
+	public static int getAnimals() {
+		return animals;
+	}
+
+	public static void setAnimals(int animals) {
+		Game3.animals = animals;
+	}
+
+	public int getActNumCrab() {
+		return actNumCrab;
+	}
+
+	public void setActNumCrab(int actNumCrab) {
+		this.actNumCrab = actNumCrab;
+	}
+
+	public int getClickNumCrab() {
+		return clickNumCrab;
+	}
+
+	public void setClickNumCrab(int clickNumCrab) {
+		this.clickNumCrab = clickNumCrab;
+	}
+	
+	
 }

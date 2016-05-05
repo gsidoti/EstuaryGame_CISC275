@@ -13,5 +13,20 @@ public class Animal extends gameObject{
 		this.onScreen = true;
 	}
 	
+	public Direction getDir() {
+		return dir;
+	}
+	
+	public void setDir(Direction d) {
+		dir = d;
+	}
+	
+	public boolean getOnScreen() {
+		return onScreen;
+	}
+	
+	public void setOnScreen(boolean value) {
+		onScreen = value;
+	}
 	
 }

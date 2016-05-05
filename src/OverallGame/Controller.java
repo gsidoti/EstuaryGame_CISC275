@@ -28,7 +28,7 @@ public class Controller extends Canvas{
 
 	public static STATE gameState = STATE.Menu;
 
-	private Controller(){
+	public Controller(){
 		window = new Window("Estuary Game",this);
 		menu = new Menu(window);
 		game1 = new Game1();

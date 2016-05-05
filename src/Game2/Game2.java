@@ -38,7 +38,7 @@ public class Game2 extends MouseAdapter {
 	
 	public Game2View view;
 	boolean mousedown = false;
-    private long Lives;
+    private int Lives;
    
     public Game2() {
         int i;
@@ -47,7 +47,7 @@ public class Game2 extends MouseAdapter {
         maxvel=1;
         Random rand = new Random();
         for(i=0;i<100;i++)
-        	objects.add(new Boat(("Boat"+i), (int)(Window.WIDTH * Window.SCALE), (rand.nextInt((int)(Window.HEIGHT*Window.SCALE))), 2, 0, rand.nextBoolean()));
+        	objects.add(new Boat(("Boat "+i), (int)(Window.WIDTH * Window.SCALE), (rand.nextInt((int)(Window.HEIGHT*Window.SCALE))), 2, 0, rand.nextBoolean()));
         view = new Game2View();
     }
     
@@ -124,5 +124,69 @@ public class Game2 extends MouseAdapter {
         			(rand.nextInt((int)(Window.HEIGHT*Window.SCALE))), 2, 0, rand.nextBoolean()));
     	running = false;
     	Controller.gameState = STATE.Menu;
+    }
+    
+    public int getLives() {
+    	return Lives;
+    }
+    
+    public void setLives(int num) {
+    	Lives = num;
+    }
+    
+    public int getMaxVel() {
+    	return maxvel;
+    }
+    
+    public void setMaxVel(int num) {
+    	maxvel = num;
+    }
+    
+    public int getCounter() {
+    	return counter;
+    }
+    
+    public void setCounter(int num) {
+    	counter = num;
+    }
+    
+    public int getLastBoat() {
+    	return lastBoat;
+    }
+    
+    public void setLastBoat(int num) {
+    	lastBoat = num;
+    }
+    
+    public int getMX() {
+    	return mx;
+    }
+    
+    public void setMX(int num) {
+    	mx = num;
+    }
+    
+    public int getMY() {
+    	return my;
+    }
+    
+    public void setMY(int num) {
+    	my = num;
+    }
+    
+    public boolean getRunning() {
+    	return running;
+    }
+    
+    public void setRunning(boolean value) {
+    	running = value;
+    }
+    
+    public boolean getMousedown() {
+    	return mousedown;
+    }
+    
+    public void setMousedown(boolean value) {
+    	mousedown = value;
     }
 }
