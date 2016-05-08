@@ -61,7 +61,7 @@ public class Game2 extends MouseAdapter {
 		mousedown = false;
 	}
 	
-	private void updateBoat(int index) {
+	void updateBoat(int index) {
 		Boat b = (Boat)objects.get(index);
 		if (b.getActive())
 			b.Move();
@@ -70,7 +70,7 @@ public class Game2 extends MouseAdapter {
 		}
 	}
 	
-	private void updateLives(){
+	void updateLives(){
 		for (int i = 0; i < objects.size(); i++) {
 			Boat b = (Boat) objects.get(i);
 			if (b.MadeIt((int)(100*Window.SCALE))&&b.getActive()) {
@@ -114,7 +114,7 @@ public class Game2 extends MouseAdapter {
         } else return false;
     }
     
-    private void resetGame() {
+    void resetGame() {
     	Random rand = new Random();
     	Lives = 10;
     	lastBoat = 0;

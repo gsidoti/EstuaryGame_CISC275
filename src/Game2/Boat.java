@@ -66,5 +66,9 @@ public class Boat extends gameObject
 		this.setX(this.getX()-this.getVelx());
 	//	System.out.println("left "+ x + " " + velx);
 	}
+    
+    public String toString() {
+    	return "Name: " + name + " X " + x + " Y " + y + " velX " + velx + " velY " + vely + " Active " + isActive + " Infested " + isInfested;
+    }
 }
 
