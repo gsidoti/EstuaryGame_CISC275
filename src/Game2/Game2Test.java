@@ -2,6 +2,9 @@ package Game2;
 
 import static org.junit.Assert.*;
 
+import java.awt.Component;
+import java.awt.event.MouseEvent;
+
 import org.junit.Test;
 
 import OverallGame.Controller;
@@ -24,18 +27,51 @@ public class Game2Test {
 		game.setMX(40);
 		game.setMY(41);
 		game.updateBoat(1);
-		System.out.println(temp);
 		assertFalse(temp.getInfested());
 		temp.setX(0);
 		temp.setInfested(true);
 		game.getObjects().set(1, temp);
+		game.setLives(1);
 		game.tick();
-		assertEquals(9, game.getLives());
-		assertEquals(1, game.getCounter());
-		for (int i = 0; i < 9; i++) 
+		assertEquals(10, game.getLives());
+		assertEquals(0, game.getCounter());
+		for (int i = 0; i < 10; i++) 
 			game.tick();
 		assertEquals(10, game.getCounter());
-		
 	}
+	
+	@Test
+	public void testGetterSetter() {
+		Window.SCALE = 1;
+		Game2 game = new Game2();
+		game.setMaxVel(5);
+		assertEquals(5, game.getMaxVel());
+		game.setCounter(10);
+		assertEquals(10, game.getCounter());
+		game.setLastBoat(20);
+		assertEquals(20, game.getLastBoat());
+		game.setMX(5);
+		game.setMY(5);
+		assertEquals(5, game.getMX());
+		assertEquals(5, game.getMY());
+		game.setRunning(true);
+		game.setMousedown(false);
+		assertTrue(game.getRunning());
+		assertFalse(game.getMousedown());
+	}
+	/*
+	@Test
+	public  void testMouse() {
+		Window.SCALE = 1;
+		Game2 game = new Game2();
+		MouseEvent e = new MouseEvent(null, 1, 1, 1, 1, 1, 1, false);
+		game.mousePressed(e);
+		assertEquals(1, game.getMX());
+		assertEquals(1, game.getMY());
+		assertTrue(game.getMousedown());
+		game.mouseReleased(e);
+		assertFalse(game.getMousedown());
+	}
+	*/
 
 }
