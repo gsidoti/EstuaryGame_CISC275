@@ -24,8 +24,9 @@ public class BoatTest {
 		boat.setInfested(false);
 		assertFalse(boat.getInfested());
 		assertTrue(boat.getActive());
+		assertFalse(boat.MadeIt(0));
 		boat.Move();
-		assertTrue(boat.MadeIt(0));		
+		assertTrue(boat.MadeIt(0));
 	}
 
 }

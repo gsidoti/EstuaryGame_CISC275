@@ -34,7 +34,7 @@ public class Game4 extends MouseAdapter {
 	}
 
 
-	private void updatePlayer(){
+	void updatePlayer(){
 		G4Player p = (G4Player) (objects.get(0));
 		if(mousedown){
 			if(p.getY()>100.0*Window.SCALE)
@@ -45,7 +45,7 @@ public class Game4 extends MouseAdapter {
 		}
 	}
 	
-	private void updateScore(){
+	void updateScore(){
 		gameObject player = objects.get(0);
 		gameObject g = objects.get(1);
 		gameObject r = objects.get(2);
@@ -83,4 +83,51 @@ public class Game4 extends MouseAdapter {
 	public ArrayList<gameObject> getObjects(){
 		return this.objects;
 	}
+
+
+	public boolean isRunning() {
+		return running;
+	}
+
+
+	public void setRunning(boolean running) {
+		this.running = running;
+	}
+
+
+	public boolean isMousedown() {
+		return mousedown;
+	}
+
+
+	public void setMousedown(boolean mousedown) {
+		this.mousedown = mousedown;
+	}
+
+
+	public int getGreenScore() {
+		return greenScore;
+	}
+
+
+	public void setGreenScore(int greenScore) {
+		this.greenScore = greenScore;
+	}
+
+
+	public int getRedScore() {
+		return redScore;
+	}
+
+
+	public void setRedScore(int redScore) {
+		this.redScore = redScore;
+	}
+
+
+	public void setObjects(ArrayList<gameObject> objects) {
+		this.objects = objects;
+	}
+	
+	
 }
