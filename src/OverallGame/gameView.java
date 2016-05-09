@@ -11,9 +11,9 @@ import javax.imageio.ImageIO;
 public abstract class gameView {
 	ArrayList<image> images= new ArrayList<image>();
 	
-	//public abstract void render(Graphics g);
+	//public abstract void loadImages();
 	
-    protected boolean createImage(String imgName,int frameCount){
+    protected boolean createImage(String imgName,int scale){
     	//int currFrame = 0;
     	//int imgWidth;
     	//int imgHeight;
