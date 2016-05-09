@@ -9,10 +9,16 @@ import OverallGame.gameObject;
 import OverallGame.gameView;
 
 public class Game4View extends gameView{
-
 	
-	public Game4View(){}
 	
+	public Game4View(){
+		
+		
+	}
+	
+	public void loadImages(){
+		//createImage(null, 0);
+	}
 	
 	public void render(Graphics g, ArrayList<gameObject> objects){
 		
