@@ -53,9 +53,4 @@ public class Game3View extends gameView{
 	}
 
 
-	@Override
-	public void loadImages() {
-		// TODO Auto-generated method stub
-		
-	}
 }
