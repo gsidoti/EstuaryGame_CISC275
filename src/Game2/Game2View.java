@@ -53,4 +53,11 @@ public class Game2View extends gameView{
 		//g.fillRect((int)((Window.WIDTH-75)*Window.SCALE),(int)(50*Window.SCALE),(int) (50*Window.SCALE),(int)(objects.get(2).getY()/10*Window.SCALE));
 		//g.fillRect((int)((Window.WIDTH-75)*Window.SCALE),(int)(50*Window.SCALE),(int) (50*Window.SCALE), (int)(150*Window.SCALE));
 	}
+
+
+	@Override
+	public void loadImages() {
+		// TODO Auto-generated method stub
+		
+	}
 }

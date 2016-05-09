@@ -32,6 +32,7 @@ public class Game4View extends gameView{
 		
 		g.drawImage(images.get("underwater2"), scaleW(0), scaleH(0), null);
 		g.drawImage(images.get("vessel"), scaleW(400), scaleH(20), null);
+		g.drawImage(images.get("vessel"), scaleW(400), scaleH(20), null);
 		
 		
 		//draw safe zone

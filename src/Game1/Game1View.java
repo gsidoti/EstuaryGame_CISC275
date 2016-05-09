@@ -117,4 +117,11 @@ public class Game1View extends gameView{
 		pos++;
 		if(pos>(int)(Window.WIDTH*Window.SCALE)-20)pos=0;
 	}
+
+
+	@Override
+	public void loadImages() {
+		// TODO Auto-generated method stub
+		
+	}
 }
