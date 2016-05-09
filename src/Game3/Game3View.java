@@ -12,7 +12,16 @@ import OverallGame.gameView;
 public class Game3View extends gameView{
 
 	
-	public Game3View(){}
+	public Game3View(){
+		loadImages();
+	}
+	
+	public void loadImages(){
+		createImage("bluecrab_0");
+		createImage("horseshoe_crab_left_0");
+		createImage("mittencrab_1");
+		//images.put("underwater2",resizeImg(images.get("underwater2"),scaleW(Window.WIDTH),scaleH(Window.HEIGHT)));
+	}
 	
 	
 	public void render(Graphics g, ArrayList<gameObject> objects){
@@ -26,8 +35,9 @@ public class Game3View extends gameView{
 		for(gameObject o: objects){
 			Animal a = (Animal)(o);
 			if(o.name == "HorseShoe"){
-				g.setColor(Color.green);
-				g.fillOval(a.getX()-(int)(75*Window.SCALE),a.getY()-(int)(75*Window.SCALE), (int)(150*Window.SCALE),(int)(150*Window.SCALE));
+				g.drawImage(images.get("horseshoe_crab_left_0"), scaleW(75), scaleH(75), null);
+				//g.setColor(Color.green);
+				//g.fillOval(a.getX()-(int)(75*Window.SCALE),a.getY()-(int)(75*Window.SCALE), (int)(150*Window.SCALE),(int)(150*Window.SCALE));
 			}else if(o.name == "Enemy"){
 				g.setColor(Color.red);
 				g.fillOval(a.getX()-(int)(75*Window.SCALE),a.getY()-(int)(75*Window.SCALE), (int)(150*Window.SCALE),(int)(150*Window.SCALE));
