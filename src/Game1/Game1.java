@@ -89,12 +89,12 @@ public class Game1 extends MouseAdapter {
 		mousedown = false;
 	}
 
-	private void updatePlayer(){
+	void updatePlayer(){
 		Player p = (Player) (objects.get(0));
 		p.Move();
 	}
 
-	private void updateTrash(int index) {
+	void updateTrash(int index) {
 		Player p = (Player)objects.get(0);
 		gameObject o=objects.get(index);
 		if(o.name == "Trash")
@@ -114,7 +114,7 @@ public class Game1 extends MouseAdapter {
 		}
 	}
 
-	private void updateLives(int i){
+	void updateLives(int i){
 		Trash temp = (Trash) objects.get(i);
 		if (temp.MadeIt((int)(Window.WIDTH*Window.SCALE))&&temp.getActive()) {
 			temp.setActive(false);
@@ -202,4 +202,114 @@ public class Game1 extends MouseAdapter {
 
     	Controller.gameState = STATE.Menu;
     }
+
+	public boolean isRunning() {
+		return running;
+	}
+
+	public void setRunning(boolean running) {
+		this.running = running;
+	}
+
+	public boolean isMousedown() {
+		return mousedown;
+	}
+
+	public void setMousedown(boolean mousedown) {
+		this.mousedown = mousedown;
+	}
+
+	public int getMx() {
+		return mx;
+	}
+
+	public void setMx(int mx) {
+		this.mx = mx;
+	}
+
+	public int getMy() {
+		return my;
+	}
+
+	public void setMy(int my) {
+		this.my = my;
+	}
+
+	public int getCounter() {
+		return counter;
+	}
+
+	public void setCounter(int counter) {
+		this.counter = counter;
+	}
+
+	public int getLastTrash() {
+		return lastTrash;
+	}
+
+	public void setLastTrash(int lastTrash) {
+		this.lastTrash = lastTrash;
+	}
+
+	public int getMaxtrash() {
+		return maxtrash;
+	}
+
+	public void setMaxtrash(int maxtrash) {
+		this.maxtrash = maxtrash;
+	}
+
+	public int getTrashcount() {
+		return trashcount;
+	}
+
+	public void setTrashcount(int trashcount) {
+		this.trashcount = trashcount;
+	}
+
+	public int getMaxvel() {
+		return maxvel;
+	}
+
+	public void setMaxvel(int maxvel) {
+		this.maxvel = maxvel;
+	}
+
+	public long getScore() {
+		return Score;
+	}
+
+	public void setScore(long score) {
+		Score = score;
+	}
+
+	public long getHiScore() {
+		return HiScore;
+	}
+
+	public void setHiScore(long hiScore) {
+		HiScore = hiScore;
+	}
+
+	public long getLives() {
+		return Lives;
+	}
+
+	public void setLives(long lives) {
+		Lives = lives;
+	}
+
+	public boolean isSkipTick() {
+		return SkipTick;
+	}
+
+	public void setSkipTick(boolean skipTick) {
+		SkipTick = skipTick;
+	}
+
+	public void setObjects(ArrayList<gameObject> objects) {
+		this.objects = objects;
+	}
+    
+    
 }
