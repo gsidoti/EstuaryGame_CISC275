@@ -22,8 +22,8 @@ import OverallGame.Window;
 
 /**
  * Write a description of class GameOne here.
- * 
- * @author Jakub Simacek 
+ *
+ * @author Jakub Simacek
  * @version 0.1
  */
 
@@ -39,278 +39,167 @@ public class Game1 extends MouseAdapter {
     //private Thread gameThread;
     //private SimpleMouseInput mouse;
     // KeyboardInput keyboard;
-    private Player player;
+    //private Player player;
     //private Trash[] trash = new Trash[100];
     //private boolean[] trashactive=new boolean[100];
     private int maxtrash;
+    private int trashcount;
     private int maxvel;
     public Game1View view;
-    
+
     private long Score;
+    private long HiScore;
     private long Lives;
-    
+
+    private boolean SkipTick=true;
+
 	ArrayList<gameObject> objects = new ArrayList<gameObject>();
-   
+
     public Game1() {
-    	int i;        
+    	int i;
         Lives=10;
-        maxvel=1;
+        maxvel=2;
+        maxtrash=10;
+        trashcount=0;
+        Score=0;
+        HiScore=0;
         Random rand = new Random();
-		objects.add( new Player("Player",(int)((Window.WIDTH/2)*Window.SCALE),(int)((Window.HEIGHT/2)*Window.SCALE),2,5));
-        for(i=1;i<100;i++)
-        	objects.add(new Trash("Trash "+i, 0, rand.nextInt((int)(Window.HEIGHT*Window.SCALE)), 20, 20));
+		objects.add( new Player("Player",(int)((Window.WIDTH/2)*Window.SCALE),(int)((Window.HEIGHT/2)*Window.SCALE),20,0));
+    	objects.add( new Scoreboard("Score",10,10,0,0));
+    	Scoreboard sb=(Scoreboard)objects.get(1);
+    	sb.setScore((int)Score);
+    	sb.setLives((int)Lives);
+
+       //for(i=1;i<100;i++)
+        	//objects.add(i, new Trash(("Trash"), (int)(0 * Window.SCALE),
+        		//	(rand.nextInt((int)(Window.HEIGHT*Window.SCALE))),
+        			//1+maxvel*rand.nextInt((int)(Score)+1), 0));
         view = new Game1View();
     }
-    
+
 	public void mousePressed(MouseEvent e){
 		mousedown = true;
+		Player p = (Player) (objects.get(0));
 		mx = e.getX();
 		my = e.getY();
-	}
-	
+		p.SetDest(mx, my);
+}
+
 	public void mouseReleased(MouseEvent e){
 		mousedown = false;
 	}
-	
+
 	private void updatePlayer(){
 		Player p = (Player) (objects.get(0));
-		if(mousedown)
-			p.SetDest(mx, my);
 		p.Move();
 	}
-	
+
 	private void updateTrash(int index) {
 		Player p = (Player)objects.get(0);
-		Trash temp = (Trash)objects.get(index);
-		if (temp.getActive())
-			temp.Move();
-		if (mouseOver(p.getX(),p.getY(),temp.getX(),temp.getY(),20,20)) {
-				 temp.setActive(false);
-		}
-	}
-	
-	private void updateLives(){
-		for (int i = 1; i < objects.size(); i++) {
-			Trash temp = (Trash) objects.get(i);
-			if (temp.MadeIt((int)(Window.WIDTH*Window.SCALE))&&temp.getActive()) {
-				temp.setActive(false);
-				Lives--;
-				if (Lives <= 0) {
-					resetGame();
+		gameObject o=objects.get(index);
+		if(o.name == "Trash")
+		{
+			Trash temp = (Trash)objects.get(index);
+			if (temp.getActive())
+			{
+				temp.Move();
+				if (temp.IsCaught(p.getX(),p.getY())) {
+					Score++;
+					if(Score>HiScore)HiScore=Score;
+					if((Score%10)==0)maxtrash++;
+					temp.setActive(false);
+					trashcount--;
 				}
 			}
 		}
 	}
 
-	
-	public void tick() {
-		counter++;
-		if (counter%10 == 0) {
-			Trash temp = (Trash)objects.get(lastTrash);
-			temp.setActive(true);
-			objects.set(lastTrash, temp);
-			if (lastTrash < 99)
-				lastTrash++;
-		}
-		updatePlayer();
-		for (int i = 1; i < objects.size(); i++) {
-			updateTrash(i);
-			updateLives();
-			System.out.println("Trash: " + objects.size() + " Lives: " + Lives);
+	private void updateLives(int i){
+		Trash temp = (Trash) objects.get(i);
+		if (temp.MadeIt((int)(Window.WIDTH*Window.SCALE))&&temp.getActive()) {
+			temp.setActive(false);
+			objects.add(new Beached("Beached",temp.getX()-10,temp.getY(),0,0));
+			Lives--;
+			trashcount--;
+			if (Lives <= 0) {
+				resetGame();
+			}
 		}
 	}
-	
+
+
+	public void tick() {
+		if(SkipTick)
+		{
+			SkipTick=false;
+			return;
+		}
+		else
+		{
+			SkipTick=true;
+		}
+        Random rand = new Random();
+		counter++;
+		if (counter%10 == 0) {
+			counter=0;
+			if(trashcount<maxtrash)
+			{
+				Trash temp = new Trash("Trash", (int)(0 * Window.SCALE),
+	        			(rand.nextInt((int)(Window.HEIGHT*Window.SCALE))),
+	        			1+maxvel*rand.nextInt((int)(Score/10)+1), 0);
+				temp.setActive(true);
+				objects.add(temp);
+				trashcount++;
+			}
+		}
+		updatePlayer();
+		// Clear dead trash
+		for (int i = objects.size()-1;i>1; i--) {
+			gameObject o=objects.get(i);
+			if (o.name=="Trash")
+			{
+				if(!(((Trash)objects.get(i)).getActive()))objects.remove(i);
+			}
+		}
+		for (int i = 2;i<objects.size(); i++) {
+			gameObject o=objects.get(i);
+			if (o.name=="Trash")
+			{
+				updateTrash(i);
+				updateLives(i);
+			}
+	    	Scoreboard sb=(Scoreboard)objects.get(1);
+	    	sb.setScore((int)Score);
+	    	sb.setLives((int)Lives);
+	    	sb.setHi((int)HiScore);
+
+		}
+		//System.out.println("Trash: " + objects.size() + " Lives: " + Lives);
+
+	}
+
 	public ArrayList<gameObject> getObjects(){
 		return this.objects;
 	}
-	
-    private boolean mouseOver(int mx, int my, int x, int y, int width, int height) {
-        if (mx > x && mx < x + width) {
-            if (my > y && my < y + height) {
-                return true;
-            } else return false;
-        } else return false;
-    }
-    
+
     private void resetGame() {
+
     	Random rand = new Random();
+    	objects.set(0, new Player("Player",(int)((Window.WIDTH/2)*Window.SCALE),(int)((Window.HEIGHT/2)*Window.SCALE),20,0));
+    	Scoreboard SB=new Scoreboard("Score",10,10,0,0);
+    	SB.setHi((int)HiScore);
+    	objects.set(1, SB);
+        maxvel=2;
+        maxtrash=10;
+        trashcount=0;
+        Score=0;
     	Lives = 10;
-    	lastTrash = 1;
     	counter = 0;
-    	for(int i=1;i<100;i++)
-        	objects.set(i, new Trash(("Trash"+i), (int)(0 * Window.SCALE), 
-        			(rand.nextInt((int)(Window.HEIGHT*Window.SCALE))), 2, 0));
     	running = false;
+		for (int i = objects.size()-1;i>1; i--) {
+			objects.remove(i);
+		}
+
     	Controller.gameState = STATE.Menu;
     }
-
-//    protected void createAndShowGUI() {
-//        player = new Player(320,240,25.0);
-//        Canvas canvas = new Canvas();
-//        canvas.setSize( 640, 480 );
-//        canvas.setBackground( Color.BLUE );
-//        canvas.setIgnoreRepaint( true );
-//        getContentPane().add( canvas );
-//        setTitle( "Game One" );
-//        setIgnoreRepaint( true );
-//        pack();
-//        // Add key listeners
-//        keyboard = new KeyboardInput();
-//        canvas.addKeyListener( keyboard );
-//        // Add mouse listeners
-//        mouse = new SimpleMouseInput();
-//        canvas.addMouseListener( mouse );
-//        canvas.addMouseMotionListener( mouse );
-//        canvas.addMouseWheelListener( mouse );
-//        setVisible( true );
-//        canvas.createBufferStrategy( 2 );
-//        bs = canvas.getBufferStrategy();
-//        canvas.requestFocus();
-//        player = new Player(320,240,5.0);
-//        gameThread = new Thread( this );
-//        gameThread.start();
-//    }
-
-//    public void run() {
-//        running = true;
-//        frameRate.initialize();
-//        while( running ) {
-//            gameLoop();
-//        }
-//    }
-//
-//    private void gameLoop() {
-//        int i;
-//        
-//        processInput();
-//        player.Move();
-//        for(i=0;i<maxtrash;i++)
-//        {
-//            if(trashactive[i])
-//            {
-//                trash[i].Move();
-//            }
-//        }
-//       
-//        renderFrame();
-//        
-//        for(i=0;i<maxtrash;i++)
-//        {
-//            if(trashactive[i])
-//            {
-//                if(trash[i].MadeIt(640))
-//                {
-//                    trashactive[i]=false;
-//                    Lives--;
-//                    if(Lives<=0)System.exit( 0 );
-//                }
-//                else
-//                {
-//                    if(trash[i].IsCaught(player.getx(),player.gety()))
-//                    {
-//                        trashactive[i]=false;
-//                        Score++;
-//                        maxvel=1+(int)Score/10;
-//                        if((Score%10)==1)maxtrash=(maxtrash<99)?maxtrash+1:100;
-//                    }
-//                }
-//            }
-//        }
-//
-//        for(i=0;i<maxtrash;i++)
-//        {
-//            if(!trashactive[i])
-//            {
-//                trash[i]=new Trash(480,maxvel);
-//                trashactive[i]=true;
-//                break;
-//            }
-//        }
-//        
-//        sleep( 40L );
-//    }
-//
-//    private void renderFrame() {
-//        do {
-//            do {
-//                Graphics g = null;
-//                try {
-//                    g = bs.getDrawGraphics();
-//                    g.clearRect( 0, 0, getWidth(), getHeight() );
-//                    render( g );
-//                } finally {
-//                    if( g != null ) {
-//                        g.dispose();
-//                    }
-//                }
-//            } while( bs.contentsRestored() );
-//            bs.show();
-//        } while( bs.contentsLost() );
-//    }
-//
-//    private void sleep( long sleep ) {
-//        try {
-//            Thread.sleep( sleep );
-//        } catch( InterruptedException ex ) { }
-//    }
-//
-//    private void processInput() {
-//        keyboard.poll();
-//        mouse.poll();
-//        if( keyboard.keyDownOnce( KeyEvent.VK_SPACE ) ) {
-//            System.out.println("VK_SPACE");
-//        }
-//        // if button is pressed for first time,
-//        // start drawing lines
-//        if( mouse.buttonDownOnce( MouseEvent.BUTTON1 ) ) {
-//            player.SetDest(mouse.getPosition().x,mouse.getPosition().y);
-//        }
-//    }
-//
-//    private void render( Graphics g ) {
-//        int i;
-//        
-//        Color color = Color.WHITE;
-//        g.setColor( color );
-//        frameRate.calculate();
-//        g.drawString( frameRate.getFrameRate(), 30, 30 );
-//        g.drawString( "Use mouse to set Destination", 30, 45 );
-//        g.drawString( String.format( "Score %s", Score ), 30, 60 );
-//        g.drawString( String.format( "Lives %s", Lives ), 30, 75 );
-//        g.drawString( mouse.getPosition().toString(), 30, 90 );
-//        for(i=0;i<maxtrash;i++)
-//        {
-//            if(trashactive[i])
-//            {
-//                trash[i].Draw(g);
-//            }
-//        }
-//            player.Draw(g);
-//    }
-//
-//    protected void onWindowClosing() {
-//        try {
-//            running = false;
-//            gameThread.join();
-//        } catch( InterruptedException e ) {
-//            e.printStackTrace();
-//        }
-//        System.exit( 0 );
-//    }
-//
-//    public static void main( String[] args ) {
-//
-//        final GameOne app = new GameOne();
-//
-//        app.addWindowListener( new WindowAdapter() {
-//            public void windowClosing( WindowEvent e ) {
-//                app.onWindowClosing();
-//            }
-//        });
-//        SwingUtilities.invokeLater( new Runnable() {
-//            public void run() {
-//                app.createAndShowGUI();
-//            }
-//        });
-//    }
 }
