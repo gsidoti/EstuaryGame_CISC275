@@ -57,6 +57,7 @@ public class Game4 extends MouseAdapter {
 				redScore = 1500;
 				g.setY(greenScore);
 				r.setY(redScore);
+				player.setY(Window.HEIGHT/2);
 				running = false;
 				Controller.gameState = STATE.Menu;
 			}
@@ -67,6 +68,7 @@ public class Game4 extends MouseAdapter {
 				redScore = 1500;
 				g.setY(greenScore);
 				r.setY(redScore);
+				player.setY(Window.HEIGHT/2);
 				running = false;
 				Controller.gameState = STATE.Menu;
 			}
