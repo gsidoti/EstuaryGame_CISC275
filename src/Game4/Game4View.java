@@ -9,23 +9,30 @@ import OverallGame.gameObject;
 import OverallGame.gameView;
 
 public class Game4View extends gameView{
+	G4Player player;
 	
 	
 	public Game4View(){
-		
-		
+		loadImages();
 	}
 	
 	public void loadImages(){
-		//createImage(null, 0);
+		createImage("vessel");
+		createImage("underwater2");
+		createImage("watertester");
+		images.put("underwater2",resizeImg(images.get("underwater2"),scaleW(Window.WIDTH),scaleH(Window.HEIGHT)));
 	}
 	
 	public void render(Graphics g, ArrayList<gameObject> objects){
-		
 		//fill screen
-		G4Player player = (G4Player) objects.get(0);
-		g.setColor(Color.blue);
-		g.fillRect(0, 0, (int)(Window.WIDTH*Window.SCALE), (int)(Window.HEIGHT*Window.SCALE));
+		player = (G4Player) objects.get(0);
+		//g.setColor(Color.blue);
+		//g.fillRect(0, 0, (int)(Window.WIDTH*Window.SCALE), (int)(Window.HEIGHT*Window.SCALE));
+		
+		
+		g.drawImage(images.get("underwater2"), scaleW(0), scaleH(0), null);
+		g.drawImage(images.get("vessel"), scaleW(400), scaleH(20), null);
+		
 		
 		//draw safe zone
 		g.setColor(Color.white);
