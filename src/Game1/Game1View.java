@@ -16,7 +16,15 @@ public class Game1View extends gameView{
     private int[] dy=new int[5];
     private int pos=0;
 
-	public Game1View(){}
+	public Game1View()
+	{
+	    loadImages();	
+	}
+
+	public void loadImages(){
+		createImage("can");
+		//images.put("can");
+	}
 
 
 	public void render(Graphics g, ArrayList<gameObject> objects){
@@ -59,7 +67,8 @@ public class Game1View extends gameView{
 				Trash temp = (Trash)(objects.get(i));
 				if (temp.getActive()) {
 					System.out.println(objects.get(i).name+"X: "+objects.get(i).getX()+" Y: "+ objects.get(i).getY()+objects.get(i).getVelx()+" "+ objects.get(i).getVely());
-					g.fillRect(objects.get(i).getX()-10,objects.get(i).getY()-10,20,20);
+					//g.fillRect(objects.get(i).getX()-10,objects.get(i).getY()-10,20,20);
+					g.drawImage(images.get("can"),objects.get(i).getX()-10,objects.get(i).getY()-10,20,20,null); 
 				}
 			}
 			else if(o.name=="Score")
@@ -73,8 +82,9 @@ public class Game1View extends gameView{
 			}
 			else if(o.name=="Beached")
 			{
-			    g.setColor( Color.BLACK );
-				g.fillRect(o.getX()-10,o.getY()-10,20,20);
+			    //g.setColor( Color.BLACK );
+				//g.fillRect(o.getX()-10,o.getY()-10,20,20);
+				g.drawImage(images.get("can"),o.getX()-10,o.getY()-10,20,20,null); 
 			}
 		}
 		// Now Player
@@ -116,12 +126,5 @@ public class Game1View extends gameView{
 		//g.fillRect((int)((Window.WIDTH-75)*Window.SCALE),(int)(50*Window.SCALE),(int) (50*Window.SCALE), (int)(150*Window.SCALE));
 		pos++;
 		if(pos>(int)(Window.WIDTH*Window.SCALE)-20)pos=0;
-	}
-
-
-	@Override
-	public void loadImages() {
-		// TODO Auto-generated method stub
-		
 	}
 }

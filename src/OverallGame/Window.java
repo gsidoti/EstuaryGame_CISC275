@@ -5,6 +5,7 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Insets;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class Window{
 

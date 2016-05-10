@@ -18,7 +18,7 @@ public class Boat extends gameObject
 {
     // instance variables - replace the example below with your own
     private boolean isInfested;
-    private boolean isActive = false;
+    private boolean isActive = true;
     
     /**
      * Constructor for objects of class Player
