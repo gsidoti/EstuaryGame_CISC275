@@ -14,7 +14,7 @@ import javax.imageio.ImageIO;
 
 
 public abstract class gameView {
-	protected Map<String,BufferedImage> images=  new HashMap<String, BufferedImage>();
+	public Map<String,BufferedImage> images=  new HashMap<String, BufferedImage>();
 	
 	public abstract void loadImages();
 	

@@ -39,13 +39,13 @@ public class Game2View extends gameView{
 				if(temp.getActive()){
 					g.drawImage(images.get("dirtyvessel"), scaleW(temp.getX()), scaleH(temp.getY()), null);
 				}else{
-					g.drawImage(images.get("dirtyvessel"), scaleW(50-20+(30*temp.getVely())), scaleH(temp.getY()), null);
+					g.drawImage(images.get("dirtyvessel"), scaleW(50+(30*temp.getVely())), scaleH(temp.getY()), null);
 				}
 			}else if(!temp.getInfested()){
 				if(temp.getActive()){
 					g.drawImage(images.get("cleanvessel"), scaleW(temp.getX()), scaleH(temp.getY()), null);
 				}else{
-					g.drawImage(images.get("cleanvessel"), scaleW(50-(10*temp.getVelx())+(30*temp.getVely())), scaleH(temp.getY()), null);
+					g.drawImage(images.get("cleanvessel"), scaleW(50+(30*temp.getVely())), scaleH(temp.getY()), null);
 				}
 			}
 					//g.setColor(Color.red);
@@ -76,12 +76,12 @@ public class Game2View extends gameView{
 		createImage("dirtyvessel");
 		createImage("game2background");
 		BufferedImage temp = images.get("cleanvessel");
-		System.out.println(temp.getWidth()+" "+temp.getHeight());
-		images.put("cleanvessel",resizeImg(temp,scaleW(temp.getWidth()/2),scaleH(temp.getHeight()/2)));
-		System.out.println(temp.getWidth()+" "+temp.getHeight());
+		//System.out.println(temp.getWidth()+" "+temp.getHeight());
+		images.put("cleanvessel",resizeImg(temp,temp.getWidth()/2,temp.getHeight()/2));
+		//System.out.println(temp.getWidth()+" "+temp.getHeight());
 		temp = images.get("dirtyvessel");
-		System.out.println(temp.getWidth()+" "+temp.getHeight());
-		images.put("dirtyvessel",resizeImg(temp,scaleW(temp.getWidth()/2),scaleH(temp.getHeight()/2)));
-		System.out.println(temp.getWidth()+" "+temp.getHeight());
+		//System.out.println(temp.getWidth()+" "+temp.getHeight());
+		images.put("dirtyvessel",resizeImg(temp,temp.getWidth()/2,temp.getHeight()/2));
+		//System.out.println(temp.getWidth()+" "+temp.getHeight());
 	}
 }

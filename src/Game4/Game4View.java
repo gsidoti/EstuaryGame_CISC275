@@ -20,6 +20,8 @@ public class Game4View extends gameView{
 		createImage("vessel");
 		createImage("underwater2");
 		createImage("watertester");
+
+		System.out.println(	images.get("watertester").getWidth()+" "+		images.get("watertester").getHeight());
 		images.put("underwater2",resizeImg(images.get("underwater2"),scaleW(Window.WIDTH),scaleH(Window.HEIGHT)));
 	}
 	
@@ -32,14 +34,14 @@ public class Game4View extends gameView{
 		g.drawImage(images.get("vessel"), scaleW(380), scaleH(13), null);
 		//draw green zone
 		g.setColor(new Color(0f, .5f, 0f, .5f));
-		g.fillRect(0,(int)(((Window.HEIGHT/2)-50)*Window.SCALE),(int) (Window.WIDTH*Window.SCALE),(int)(100*Window.SCALE) );
+		g.fillRect(0,scaleH(Window.HEIGHT/2-50),scaleW(Window.WIDTH),scaleH(100));
 		
 		//draw rope
 		g.setColor(Color.black);
 		g.fillRect(scaleW(618),scaleH(53),scaleW(4),scaleH(player.y-20));
 		
 		//draw watertester
-		g.drawImage(images.get("watertester"), scaleW(Window.WIDTH/2-38), scaleH(player.y-25), null);
+		g.drawImage(images.get("watertester"), scaleW(Window.WIDTH/2-37), scaleH(player.y-25), null);
 		
 		//draw score bar
 		g.setColor(Color.green);

@@ -37,40 +37,37 @@ public class Game4 extends MouseAdapter {
 	void updatePlayer(){
 		G4Player p = (G4Player) (objects.get(0));
 		if(mousedown){
-			if(p.getY()>100.0*Window.SCALE)
+			if(scaleH(p.getY())>scaleH(150.0))
 				p.moveUp();
 		}else{
-			if(objects.get(0).getY()<(Window.HEIGHT-100)*Window.SCALE)
+			if(scaleH(objects.get(0).getY())<scaleH(Window.HEIGHT-100))
 				p.moveDown();
 		}
+	}
+	void resetGame(gameObject player, gameObject g, gameObject r){
+		greenScore = 1500;
+		redScore = 1500;
+		g.setY(greenScore);
+		r.setY(redScore);
+		player.setY(Window.HEIGHT/2);
+		running = false;
+		Controller.gameState = STATE.Menu;
 	}
 	
 	void updateScore(){
 		gameObject player = objects.get(0);
 		gameObject g = objects.get(1);
 		gameObject r = objects.get(2);
-		if(player.getY()>(Window.HEIGHT/2-50)*Window.SCALE && player.getY()<(Window.HEIGHT/2+50)*Window.SCALE){
+		if(scaleH(player.getY()+10)>scaleH(Window.HEIGHT/2-50) && scaleH(player.getY()+view.images.get("watertester").getHeight()-10)<scaleH(Window.HEIGHT/2+50)){
 			g.setY(greenScore--);
 			if(greenScore <= 0){
 				Menu.Menu.ESCORE += 100;
-				greenScore = 1500;
-				redScore = 1500;
-				g.setY(greenScore);
-				r.setY(redScore);
-				player.setY(Window.HEIGHT/2);
-				running = false;
-				Controller.gameState = STATE.Menu;
+				resetGame(player,g,r);
 			}
 		}else{
 			r.setY(redScore--);
 			if(redScore <= 0){
-				greenScore = 1500;
-				redScore = 1500;
-				g.setY(greenScore);
-				r.setY(redScore);
-				player.setY(Window.HEIGHT/2);
-				running = false;
-				Controller.gameState = STATE.Menu;
+				resetGame(player,g,r);
 			}
 		}
 	}
@@ -80,6 +77,14 @@ public class Game4 extends MouseAdapter {
 		updatePlayer();
 		updateScore();
 		System.out.println("Green: "+greenScore+" Red: "+redScore);
+	}
+	
+	public int scaleW(double x){
+		return (int)(Window.SCALE*x);
+	}
+	
+	public int scaleH(double x){
+		return (int)(Window.SCALE*x);
 	}
 
 	public ArrayList<gameObject> getObjects(){

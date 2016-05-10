@@ -203,7 +203,7 @@ public class Game3 extends MouseAdapter {
 				animals = 0;
 				actNumCrab = 0;
 				clickNumCrab = 0;
-				objects.removeAll(objects);
+				objects.clear();
 				Controller.gameState = STATE.Menu;
 			}
 		}else if(objects.size() == animals+1){
