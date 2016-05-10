@@ -10,7 +10,7 @@ import OverallGame.gameObject;
 import OverallGame.gameView;
 
 public class Game3View extends gameView{
-
+	int count;
 	
 	public Game3View(){
 		loadImages();
@@ -18,8 +18,12 @@ public class Game3View extends gameView{
 	
 	public void loadImages(){
 		createImage("bluecrab_0");
-		createImage("horseshoe_crab_left_0");
+		for(Direction d :Direction.values())//create every horseshoe crab image
+			createImage("horseshoe_crab_"+d);
 		createImage("mittencrab_1");
+		createImage("dialogue2");
+		createImage("game3sand");
+		createImage("game3wood");
 		//images.put("underwater2",resizeImg(images.get("underwater2"),scaleW(Window.WIDTH),scaleH(Window.HEIGHT)));
 	}
 	
@@ -27,40 +31,42 @@ public class Game3View extends gameView{
 	public void render(Graphics g, ArrayList<gameObject> objects){
 		
 		//fill screen and draw brown box
-		g.setColor(new Color(102,51,0));
-		g.fillRect(0, 0, (int)(Window.WIDTH*Window.SCALE), (int)(Window.HEIGHT*Window.SCALE));
-		g.setColor(new Color(244,164,96));
-		g.fillRect((int)(100*Window.SCALE), (int)(100*Window.SCALE), (int)((Window.WIDTH-200)*Window.SCALE), (int)((Window.HEIGHT-200)*Window.SCALE));
+		//g.setColor(new Color(102,51,0));
+		//g.fillRect(0, 0, (int)(Window.WIDTH*Window.SCALE), (int)(Window.HEIGHT*Window.SCALE));
+		//g.setColor(new Color(244,164,96));
+		//g.fillRect((int)(100*Window.SCALE), (int)(100*Window.SCALE), (int)((Window.WIDTH-200)*Window.SCALE), (int)((Window.HEIGHT-200)*Window.SCALE));
+		g.drawImage(images.get("game3sand"), 0, 0, null);
 		
 		for(gameObject o: objects){
 			Animal a = (Animal)(o);
-			if(o.name == "HorseShoe"){
-				g.drawImage(images.get("horseshoe_crab_left_0"), scaleW(75), scaleH(75), null);
-				//g.setColor(Color.green);
-				//g.fillOval(a.getX()-(int)(75*Window.SCALE),a.getY()-(int)(75*Window.SCALE), (int)(150*Window.SCALE),(int)(150*Window.SCALE));
-			}else if(o.name == "Enemy"){
-				g.setColor(Color.red);
-				g.fillOval(a.getX()-(int)(75*Window.SCALE),a.getY()-(int)(75*Window.SCALE), (int)(150*Window.SCALE),(int)(150*Window.SCALE));
-			}else if(o.name == "EndGame"){
-				g.setColor(Color.gray);
-				g.fillRect((int)((Window.WIDTH/2-200)*Window.SCALE), (int) (((Window.HEIGHT/2)-200)*Window.SCALE), (int)(400*Window.SCALE), (int)(200*Window.SCALE));
-				g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
+			if(a.name == "HorseShoe"){
+				g.drawImage(images.get("horseshoe_crab_"+a.getDir().toString()), scaleW(a.getX()-50), scaleH(a.getY()-50), null);
+			}else if(a.name == "Enemy"){
+				g.drawImage(images.get("mittencrab_1"), scaleW(a.getX()), scaleH(a.getY()), null);
+			}else if(a.name == "EndGame"){
+				//g.setColor(Color.gray);
+				//g.fillRect((int)((Window.WIDTH/2-200)*Window.SCALE), (int) (((Window.HEIGHT/2)-200)*Window.SCALE), (int)(400*Window.SCALE), (int)(200*Window.SCALE));
+				g.drawImage(images.get("dialogue2"), scaleW((Window.WIDTH/2)-200), scaleH((Window.HEIGHT/2)-200), null);
+				g.setFont(new Font("TimesRoman", Font.PLAIN, scaleW(50)));
 				g.setColor(Color.black);
-				g.drawString("You Predicted: "+ o.y ,(int)((Window.WIDTH/2-200+20)*Window.SCALE), (int) (((Window.HEIGHT/2)-200+50)*Window.SCALE));
-				g.drawString("Actual: "+ o.x ,(int)((Window.WIDTH/2-200+20)*Window.SCALE), (int) (((Window.HEIGHT/2)-200+100)*Window.SCALE));
-			}else if(o.name == "Count"){
-				g.setColor(Color.yellow);
-				g.setFont(new Font("TimesRoman", Font.PLAIN, 50));
-				g.drawString("Count: "+ o.x ,(int)((Window.WIDTH-250)*Window.SCALE), (int) ((60)*Window.SCALE));
+				g.drawString("You Predicted: "+ o.y ,(int)((Window.WIDTH/2-200+20)*Window.SCALE), (int) (((Window.HEIGHT/2)-200+60)*Window.SCALE));
+				g.drawString("Actual: "+ o.x ,(int)((Window.WIDTH/2-200+75)*Window.SCALE), (int) (((Window.HEIGHT/2)-200+120)*Window.SCALE));
+			}else if(a.name == "Count"){
+				count = a.getX();
 			}
 		}
+		g.drawImage(images.get("game3wood"), 0, 0, null);
+		g.setColor(Color.yellow);
+		g.setFont(new Font("Verdana", Font.PLAIN, scaleW(55)));
+		g.drawString("Count: "+ count,scaleW(Window.WIDTH-275), scaleH(60));
 
+		
+		
 		//draw score bar
 		//g.setColor(Color.gray);
 		//g.fillRect((int)((Window.WIDTH-150)*Window.SCALE),(int) (50*Window.SCALE),(int) (50*Window.SCALE),(int)((objects.get(1).getY()/10)*Window.SCALE));
 		//g.fillRect((int)((Window.WIDTH-75)*Window.SCALE),(int)(50*Window.SCALE),(int) (50*Window.SCALE),(int)(objects.get(2).getY()/10*Window.SCALE));
 		//g.fillRect((int)((Window.WIDTH-75)*Window.SCALE),(int)(50*Window.SCALE),(int) (50*Window.SCALE), (int)(150*Window.SCALE));
 	}
-
 
 }

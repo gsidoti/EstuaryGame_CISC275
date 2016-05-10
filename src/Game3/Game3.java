@@ -22,7 +22,7 @@ public class Game3 extends MouseAdapter {
 	boolean init2 = false;
 	boolean start = false;
 	int tick;
-	public static int animals = 0;
+	public int animals = 0;
 	public int actNumCrab = 0;
 	public int clickNumCrab = 0;
 	
@@ -200,6 +200,7 @@ public class Game3 extends MouseAdapter {
 				init2 = false;
 				running = false;
 				start = false;
+				animals = 0;
 				actNumCrab = 0;
 				clickNumCrab = 0;
 				objects.removeAll(objects);
@@ -254,12 +255,12 @@ public class Game3 extends MouseAdapter {
 		this.tick = tick;
 	}
 
-	public static int getAnimals() {
+	public int getAnimals() {
 		return animals;
 	}
 
-	public static void setAnimals(int animals) {
-		Game3.animals = animals;
+	public void setAnimals(int animals) {
+		this.animals = animals;
 	}
 
 	public int getActNumCrab() {
