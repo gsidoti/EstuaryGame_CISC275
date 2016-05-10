@@ -44,25 +44,25 @@ public class MenuView extends gameView{
 		//g.setColor(Color.red);		
 		//g.fillRect(((int)(w*wS)/100)*20,((int)(h*hS)/100)*20,this.scaleW(200),this.scaleH(200));
 		g.setColor(Color.black);
-		g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
+		g.setFont(new Font("verdana", Font.PLAIN, scaleW(28)));
 		g.drawString("Game1",((int)(w*wS)/100)*20+30,((int)(h*hS)/100)*20+80);
 		//second button
 		//g.setColor(Color.red);
 		//g.fillRect(((int)(w*wS)/100)*60,((int)(h*hS)/100)*20,this.scaleW(200),this.scaleH(200));
-		g.setColor(Color.black);
-		g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
+		//g.setColor(Color.black);
+		//g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
 		g.drawString("Game2",((int)(w*wS)/100)*60+30,((int)(h*hS)/100)*20+80);
 		
 		//g.setColor(Color.red);
 		//g.fillRect(((int)(w*wS)/100)*20,((int)(h*hS)/100)*60,this.scaleW(200),this.scaleH(200));
 		//g.setColor(Color.black);
-		g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
+		//g.setFont(new Font("TimesRoman", Font.PLAIN, scaleW(30)));
 		g.drawString("Game3",((int)(w*wS)/100)*20+30,((int)(h*hS)/100)*60+80);
 		
 		//g.setColor(Color.red);
 		//g.fillRect(((int)(w*wS)/100)*60,((int)(h*hS)/100)*60,this.scaleW(200),this.scaleH(200));
-		g.setColor(Color.black);
-		g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
+		//g.setColor(Color.black);
+		//g.setFont(new Font("TimesRoman", Font.PLAIN, scaleW(30)));
 		g.drawString("Game4",((int)(w*wS)/100)*60+30,((int)(h*hS)/100)*60+80);
 		
 		//g.setColor(Color.green);
