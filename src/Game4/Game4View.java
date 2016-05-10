@@ -39,7 +39,7 @@ public class Game4View extends gameView{
 		g.fillRect(scaleW(618),scaleH(53),scaleW(4),scaleH(player.y-20));
 		
 		//draw watertester
-		g.drawImage(images.get("watertester"), scaleW(player.x-12), scaleH(player.y-25), null);
+		g.drawImage(images.get("watertester"), scaleW(Window.WIDTH/2-38), scaleH(player.y-25), null);
 		
 		//draw score bar
 		g.setColor(Color.green);
