@@ -3,6 +3,7 @@ package OverallGame;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import java.awt.Insets;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -19,7 +20,8 @@ public class Window{
 	public Window(String title,Controller c){
 		frame = new JFrame(title);
 		GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		Dimension screenDimension = env.getMaximumWindowBounds().getSize();
+		//Dimension screenDimension = env.getMaximumWindowBounds().getSize();
+		Dimension screenDimension = Toolkit.getDefaultToolkit().getScreenSize();
 		Insets insets = frame.getInsets();
 		screenDimension.height = screenDimension.height-insets.bottom-insets.top;
 		screenDimension.width = screenDimension.width-insets.left-insets.right;

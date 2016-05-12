@@ -51,7 +51,7 @@ public class MenuView extends gameView{
 		//g.fillRect(((int)(w*wS)/100)*60,((int)(h*hS)/100)*20,this.scaleW(200),this.scaleH(200));
 		//g.setColor(Color.black);
 		//g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
-		g.drawString("Game2",((int)(w*wS)/100)*60+30,((int)(h*hS)/100)*20+80);
+		g.drawString("Game2",scaleW(770+15),((int)(h*hS)/100)*20+80);
 		
 		//g.setColor(Color.red);
 		//g.fillRect(((int)(w*wS)/100)*20,((int)(h*hS)/100)*60,this.scaleW(200),this.scaleH(200));
@@ -63,7 +63,7 @@ public class MenuView extends gameView{
 		//g.fillRect(((int)(w*wS)/100)*60,((int)(h*hS)/100)*60,this.scaleW(200),this.scaleH(200));
 		//g.setColor(Color.black);
 		//g.setFont(new Font("TimesRoman", Font.PLAIN, scaleW(30)));
-		g.drawString("Game4",((int)(w*wS)/100)*60+30,((int)(h*hS)/100)*60+80);
+		g.drawString("Game4",scaleW(770+15),((int)(h*hS)/100)*60+80);
 		
 		//g.setColor(Color.green);
 		//g.fillRect(((int)(w*wS)/100)*50-250,((int)(h*hS)/100)*2,500,70);

@@ -50,7 +50,7 @@ public class Game3View extends gameView{
 				g.drawImage(images.get("dialogue2"), scaleW((Window.WIDTH/2)-200), scaleH((Window.HEIGHT/2)-200), null);
 				g.setFont(new Font("TimesRoman", Font.PLAIN, scaleW(50)));
 				g.setColor(Color.black);
-				g.drawString("You Predicted: "+ o.y ,(int)((Window.WIDTH/2-200+20)*Window.SCALE), (int) (((Window.HEIGHT/2)-200+60)*Window.SCALE));
+				g.drawString("You Counted: "+ o.y ,(int)((Window.WIDTH/2-200+20)*Window.SCALE), (int) (((Window.HEIGHT/2)-200+60)*Window.SCALE));
 				g.drawString("Actual: "+ o.x ,(int)((Window.WIDTH/2-200+75)*Window.SCALE), (int) (((Window.HEIGHT/2)-200+120)*Window.SCALE));
 			}else if(a.name == "Count"){
 				count = a.getX();

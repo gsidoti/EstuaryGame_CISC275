@@ -90,7 +90,7 @@ public class Game3 extends MouseAdapter {
 		if(Enemy){
 			name = "Enemy";
 		}
-		velx = 1*speed;
+		velx = 2*speed;
 		int r = rand.nextInt(3);
 		if( r== 0){
 			dir = Direction.NE;
@@ -117,7 +117,7 @@ public class Game3 extends MouseAdapter {
 		if(Enemy){
 			name = "Enemy";
 		}
-		velx = -1*speed;
+		velx = -2*speed;
 		int r = rand.nextInt(3);
 		if( r== 0){
 			dir = Direction.NW;
