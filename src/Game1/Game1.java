@@ -37,7 +37,7 @@ public class Game1 extends MouseAdapter {
     int counter = 0;
     int lastTrash = 1;
     //private Thread gameThread;
-    //private SimpleMouseInput mouse;
+    //private SimpleMouseInput mouse;d
     // KeyboardInput keyboard;
     //private Player player;
     //private Trash[] trash = new Trash[100];
