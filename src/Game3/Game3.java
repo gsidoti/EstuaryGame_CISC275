@@ -82,7 +82,7 @@ public class Game3 extends MouseAdapter {
 	public void spawnLeft(boolean Enemy, int speed){
 		Random rand = new Random();
 		int x = 0;
-		int y = (int)((rand.nextInt(240)+240)*Window.SCALE);
+		int y = (int)((rand.nextInt(240)+240));
 		int velx;
 		int vely;
 		Direction dir;
@@ -108,8 +108,8 @@ public class Game3 extends MouseAdapter {
 	
 	public void spawnRight(boolean Enemy, int speed){
 		Random rand = new Random();
-		int x = (int)(Window.WIDTH*Window.SCALE);
-		int y = (int)((rand.nextInt(240)+240)*Window.SCALE);
+		int x = (int)(Window.WIDTH);
+		int y = (int)((rand.nextInt(240)+240));
 		int velx;
 		int vely;
 		Direction dir;
@@ -135,7 +135,7 @@ public class Game3 extends MouseAdapter {
 	
 	public void spawnTop(boolean Enemy, int speed){
 		Random rand = new Random();
-		int x = (int)((rand.nextInt(425)+425)*Window.SCALE);
+		int x = (int)((rand.nextInt(425)+425));
 		int y = 0;
 		int velx;
 		int vely;
@@ -162,8 +162,8 @@ public class Game3 extends MouseAdapter {
 	
 	public void spawnBottom(boolean Enemy, int speed){
 		Random rand = new Random();
-		int x = (int)((rand.nextInt(425)+425)*Window.SCALE);
-		int y = (int)(Window.HEIGHT*Window.SCALE);
+		int x = (int)((rand.nextInt(425)+425));
+		int y = (int)(Window.HEIGHT);
 		int velx;
 		int vely;
 		Direction dir;
