@@ -23,6 +23,7 @@ public class Game4View extends gameView{
 
 		System.out.println(	images.get("watertester").getWidth()+" "+		images.get("watertester").getHeight());
 		images.put("underwater2",resizeImg(images.get("underwater2"),scaleW(Window.WIDTH),scaleH(Window.HEIGHT)));
+		createImage("exit");
 	}
 	
 	public void render(Graphics g, ArrayList<gameObject> objects){
@@ -51,5 +52,6 @@ public class Game4View extends gameView{
 		g.setColor(Color.gray);
 		g.fillRect((int)((Window.WIDTH-150)*Window.SCALE),(int) (50*Window.SCALE),(int) (50*Window.SCALE),(int)((objects.get(1).getY()/10)*Window.SCALE));
 		g.fillRect((int)((Window.WIDTH-75)*Window.SCALE),(int)(50*Window.SCALE),(int) (50*Window.SCALE),(int)(objects.get(2).getY()/10*Window.SCALE));
+		g.drawImage(images.get("exit"), scaleW(5), scaleH(5), null);
 	}
 }

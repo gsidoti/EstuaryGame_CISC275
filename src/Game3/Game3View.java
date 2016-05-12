@@ -24,6 +24,7 @@ public class Game3View extends gameView{
 		createImage("dialogue2");
 		createImage("game3sand");
 		createImage("game3wood");
+		createImage("exit");
 		//images.put("underwater2",resizeImg(images.get("underwater2"),scaleW(Window.WIDTH),scaleH(Window.HEIGHT)));
 	}
 	
@@ -59,6 +60,8 @@ public class Game3View extends gameView{
 		g.setColor(Color.yellow);
 		g.setFont(new Font("Verdana", Font.PLAIN, scaleW(55)));
 		g.drawString("Count: "+ count,scaleW(Window.WIDTH-275), scaleH(60));
+		
+		g.drawImage(images.get("exit"), scaleW(5), scaleH(5), null);
 
 		
 		
