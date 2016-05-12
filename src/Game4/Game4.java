@@ -58,7 +58,7 @@ public class Game4 extends MouseAdapter {
 		gameObject player = objects.get(0);
 		gameObject g = objects.get(1);
 		gameObject r = objects.get(2);
-		if(scaleH(player.getY()+10)>scaleH(Window.HEIGHT/2-50) && scaleH(player.getY()+view.images.get("watertester").getHeight()-10)<scaleH(Window.HEIGHT/2+50)){
+		if(scaleH(player.getY()+15)>scaleH(Window.HEIGHT/2-50) && scaleH(player.getY()+50-15)<scaleH(Window.HEIGHT/2+50)){
 			g.setY(greenScore--);
 			if(greenScore <= 0){
 				Menu.Menu.ESCORE += 100;
