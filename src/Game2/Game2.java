@@ -41,7 +41,10 @@ public class Game2 extends MouseAdapter {
 		mx = e.getX();
 		my = e.getY();
 		System.out.println("X: "+mx+" Y: "+my);
+		if(mouseOver(mx,my,scaleW(5),scaleH(5),scaleW(80),scaleH(44)))
+			resetGame();
 	}
+
 	
 	public void mouseReleased(MouseEvent e){//dont need
 		mousedown = false;

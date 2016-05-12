@@ -54,6 +54,7 @@ public class Game2View extends gameView{
 			//	g.fillRect(objects.get(i).getX(),objects.get(i).getY(),25,50);
 			//}
 		}
+		g.drawImage(images.get("exit"), scaleW(5), scaleH(5), null);
 
 		//g.setColor(Color.green);
 		//g.drawRect((int)((Window.WIDTH-150)*Window.SCALE),(int)(50*Window.SCALE),(int) (50*Window.SCALE),(int) (150*Window.SCALE));
@@ -75,6 +76,7 @@ public class Game2View extends gameView{
 		createImage("cleanvessel");
 		createImage("dirtyvessel");
 		createImage("game2background");
+		createImage("exit");
 		BufferedImage temp = images.get("cleanvessel");
 		//System.out.println(temp.getWidth()+" "+temp.getHeight());
 		images.put("cleanvessel",resizeImg(temp,temp.getWidth()/2,temp.getHeight()/2));

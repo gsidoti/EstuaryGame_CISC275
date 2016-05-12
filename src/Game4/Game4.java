@@ -15,6 +15,7 @@ public class Game4 extends MouseAdapter {
 	
 	public Game4View view;
 	boolean mousedown = false;
+	int mx,my;
 	public int greenScore = 1500;
 	public int redScore = 1500;
 	
@@ -28,6 +29,10 @@ public class Game4 extends MouseAdapter {
 	
 	public void mousePressed(MouseEvent e){
 		mousedown = true;
+		mx = e.getX();
+		my = e.getY();
+		if(mouseOver(mx,my,scaleW(5),scaleH(5),scaleW(80),scaleH(44)))
+			resetGame();
 	}
 	public void mouseReleased(MouseEvent e){
 		mousedown = false;
@@ -44,7 +49,10 @@ public class Game4 extends MouseAdapter {
 				p.moveDown();
 		}
 	}
-	void resetGame(gameObject player, gameObject g, gameObject r){
+	void resetGame(){
+		gameObject player = objects.get(0);
+		gameObject g = objects.get(1);
+		gameObject r = objects.get(2);
 		greenScore = 1500;
 		redScore = 1500;
 		g.setY(greenScore);
@@ -58,16 +66,16 @@ public class Game4 extends MouseAdapter {
 		gameObject player = objects.get(0);
 		gameObject g = objects.get(1);
 		gameObject r = objects.get(2);
-		if(scaleH(player.getY()+10)>scaleH(Window.HEIGHT/2-50) && scaleH(player.getY()+view.images.get("watertester").getHeight()-10)<scaleH(Window.HEIGHT/2+50)){
+		if(scaleH(player.getY()+10)>scaleH(Window.HEIGHT/2-50) && scaleH(player.getY()+40)<scaleH(Window.HEIGHT/2+50)){
 			g.setY(greenScore--);
 			if(greenScore <= 0){
 				Menu.Menu.ESCORE += 100;
-				resetGame(player,g,r);
+				resetGame();
 			}
 		}else{
 			r.setY(redScore--);
 			if(redScore <= 0){
-				resetGame(player,g,r);
+				resetGame();
 			}
 		}
 	}
@@ -78,6 +86,14 @@ public class Game4 extends MouseAdapter {
 		updateScore();
 		System.out.println("Green: "+greenScore+" Red: "+redScore);
 	}
+	
+    boolean mouseOver(int mx, int my, int x, int y, int width, int height) {
+        if (mx > x && mx < x + width) {
+            if (my > y && my < y + height) {
+                return true;
+            } else return false;
+        } else return false;
+    }
 	
 	public int scaleW(double x){
 		return (int)(Window.SCALE*x);

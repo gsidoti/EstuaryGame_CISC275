@@ -18,6 +18,7 @@ public class Game3 extends MouseAdapter {
 	public Game3View view;
 	long timer1;
 	long timer2;
+	int mx,my;
 	boolean init = false;
 	boolean init2 = false;
 	boolean start = false;
@@ -32,6 +33,10 @@ public class Game3 extends MouseAdapter {
 	
 	public void mousePressed(MouseEvent e){
 		clickNumCrab++;
+		mx = e.getX();
+		my = e.getY();
+		if(mouseOver(mx,my,scaleW(5),scaleH(5),scaleW(80),scaleH(44)))
+			resetGame();
 	}
 
 
@@ -196,15 +201,7 @@ public class Game3 extends MouseAdapter {
 		}else if(init2){
 			if(System.currentTimeMillis() > timer2+5000.0){
 				//System.out.println("else case");
-				init = false;
-				init2 = false;
-				running = false;
-				start = false;
-				animals = 0;
-				actNumCrab = 0;
-				clickNumCrab = 0;
-				objects.clear();
-				Controller.gameState = STATE.Menu;
+				resetGame();
 			}
 		}else if(objects.size() == animals+1){
 			if(init2 == false){
@@ -214,6 +211,18 @@ public class Game3 extends MouseAdapter {
 				init2 = true;
 			}
 		}
+	}
+	
+	public void resetGame(){
+		init = false;
+		init2 = false;
+		running = false;
+		start = false;
+		animals = 0;
+		actNumCrab = 0;
+		clickNumCrab = 0;
+		objects.clear();
+		Controller.gameState = STATE.Menu;
 	}
 
 	
@@ -225,6 +234,22 @@ public class Game3 extends MouseAdapter {
 		}
 		checkEndGame();
 		updateAnimal();
+	}
+	
+    boolean mouseOver(int mx, int my, int x, int y, int width, int height) {
+        if (mx > x && mx < x + width) {
+            if (my > y && my < y + height) {
+                return true;
+            } else return false;
+        } else return false;
+    }
+	
+	public int scaleW(double x){
+		return (int)(Window.SCALE*x);
+	}
+	
+	public int scaleH(double x){
+		return (int)(Window.SCALE*x);
 	}
 
 	public ArrayList<gameObject> getObjects(){

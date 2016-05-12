@@ -83,6 +83,8 @@ public class Game1 extends MouseAdapter {
 		mx = e.getX();
 		my = e.getY();
 		p.SetDest(mx, my);
+		if(mouseOver(mx,my,scaleW(Window.WIDTH-85),scaleH(5),scaleW(80),scaleH(44)))
+			resetGame();
 }
 
 	public void mouseReleased(MouseEvent e){
@@ -202,6 +204,22 @@ public class Game1 extends MouseAdapter {
 
     	Controller.gameState = STATE.Menu;
     }
+    
+    boolean mouseOver(int mx, int my, int x, int y, int width, int height) {
+        if (mx > x && mx < x + width) {
+            if (my > y && my < y + height) {
+                return true;
+            } else return false;
+        } else return false;
+    }
+	
+	public int scaleW(double x){
+		return (int)(Window.SCALE*x);
+	}
+	
+	public int scaleH(double x){
+		return (int)(Window.SCALE*x);
+	}
 
 	public boolean isRunning() {
 		return running;
