@@ -24,6 +24,7 @@ public class Game3View extends gameView{
 		createImage("dialogue2");
 		createImage("game3sand");
 		createImage("game3wood");
+		createImage("exit");
 		//images.put("underwater2",resizeImg(images.get("underwater2"),scaleW(Window.WIDTH),scaleH(Window.HEIGHT)));
 	}
 	
@@ -49,7 +50,7 @@ public class Game3View extends gameView{
 				g.drawImage(images.get("dialogue2"), scaleW((Window.WIDTH/2)-200), scaleH((Window.HEIGHT/2)-200), null);
 				g.setFont(new Font("TimesRoman", Font.PLAIN, scaleW(50)));
 				g.setColor(Color.black);
-				g.drawString("You Predicted: "+ o.y ,(int)((Window.WIDTH/2-200+20)*Window.SCALE), (int) (((Window.HEIGHT/2)-200+60)*Window.SCALE));
+				g.drawString("You Counted: "+ o.y ,(int)((Window.WIDTH/2-200+20)*Window.SCALE), (int) (((Window.HEIGHT/2)-200+60)*Window.SCALE));
 				g.drawString("Actual: "+ o.x ,(int)((Window.WIDTH/2-200+75)*Window.SCALE), (int) (((Window.HEIGHT/2)-200+120)*Window.SCALE));
 			}else if(a.name == "Count"){
 				count = a.getX();
@@ -59,6 +60,8 @@ public class Game3View extends gameView{
 		g.setColor(Color.yellow);
 		g.setFont(new Font("Verdana", Font.PLAIN, scaleW(55)));
 		g.drawString("Count: "+ count,scaleW(Window.WIDTH-275), scaleH(60));
+		
+		g.drawImage(images.get("exit"), scaleW(5), scaleH(5), null);
 
 		
 		

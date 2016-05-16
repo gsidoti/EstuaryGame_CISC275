@@ -14,18 +14,11 @@ import OverallGame.STATE;
 import OverallGame.Window;
 import OverallGame.gameObject;
 
-/**
- * Write a description of class Game2 here.
- * 
- * @author Cody Fox
- * @version 0.1
- */
 
 public class Game2 extends MouseAdapter {
 
     private int speed = 1;
     private int boatspeed = 200;
-    private int boatcount = 0;
     private int counter = 0;
     private int lastBoat = 0;//dont need
     private int mx, my;
@@ -37,7 +30,7 @@ public class Game2 extends MouseAdapter {
 	public Game2View view;
 	Random rand = new Random();
 	boolean mousedown = false;//dont need
-    private int Lives = 3;
+    private int Lives = 3000;
    
     public Game2() {
         view = new Game2View();
@@ -48,7 +41,10 @@ public class Game2 extends MouseAdapter {
 		mx = e.getX();
 		my = e.getY();
 		System.out.println("X: "+mx+" Y: "+my);
+		if(mouseOver(mx,my,scaleW(5),scaleH(5),scaleW(80),scaleH(44)))
+			resetGame();
 	}
+
 	
 	public void mouseReleased(MouseEvent e){//dont need
 		mousedown = false;
@@ -58,16 +54,17 @@ public class Game2 extends MouseAdapter {
 		Boat b = (Boat)objects.get(index);
 		if (b.getActive())
 			b.Move();
-		if (mouseOver(mx,my,scaleW(b.getX()-5),scaleH(b.getY()-5),130,65)&&b.getActive()) {
+		if (mouseOver(mx,my,scaleW(b.getX()-5),scaleH(b.getY()-5),scaleW(130),scaleH(65))&&b.getActive()) {
 				 b.setInfested(false);
 		}
 	}
 	
-	void updateLives(){
+	void updateBoats(){
 		Boat b;
 		for (int i = 0; i < objects.size(); i++) {
 			b = (Boat) objects.get(i);
-			if (b.MadeIt(scaleW(50+(b.getVely()*30)))&&b.getActive()) {
+			if (b.MadeIt(scaleW(90+(b.getVely()*30)))&&b.getActive()) {
+				System.out.println(b.getVely());
 				b.setActive(false);
 				if (b.getInfested()) {
 					Lives--;
@@ -75,40 +72,44 @@ public class Game2 extends MouseAdapter {
 						resetGame();
 					}
 				}
+			}else if(b.getActive()){
+				if (mouseOver(mx,my,scaleW(b.getX()-5),scaleH(b.getY()-5),scaleW(130),scaleH(65)))
+					 b.setInfested(false);
+				b.Move();
 			}
 		}
 	}
 	
 	public void addBoat(){
 		int r = rand.nextInt(6),y = 0;
-		if(objects.size()!=36){
+		if(objects.size()!=35){
 			do {
 				r = rand.nextInt(6);
 				//System.out.println("R: "+r);
 			}while(docks[r]>5);
 			switch(r){
 			case 0:
-				y = scaleH(65);
+				y = 55;
 				docks[0]++;
 				break;
 			case 1:
-				y = scaleH(175);
+				y = 170;
 				docks[1]++;
 				break;
 			case 2:
-				y = scaleH(267);
+				y = 253;
 				docks[2]++;
 				break;
 			case 3:
-				y = scaleH(380);
+				y = 367;
 				docks[3]++;
 				break;
 			case 4:
-				y = scaleH(476);
+				y = 453;
 				docks[4]++;
 				break;
 			case 5:
-				y = scaleH(600);
+				y = 600;
 				docks[5]++;
 				break;
 			}
@@ -119,9 +120,9 @@ public class Game2 extends MouseAdapter {
 
 			
 				
-			Boat b = new Boat("Boat",(int)(Window.WIDTH*Window.SCALE),y,speed,docks[r]-1,bool);
+			Boat b = new Boat("Boat",Window.WIDTH,y,speed,docks[r]-1,bool);
 			objects.add(b);
-			System.out.println(boatcount++);
+			//System.out.println(boatcount++);
 		}else{
 			resetGame();
 		}
@@ -142,10 +143,9 @@ public class Game2 extends MouseAdapter {
 			my = 0;
 		}
 		
-		for (int i = 0; i < objects.size(); i++) {
-			updateBoat(i);
-			updateLives();
-		}
+
+
+			updateBoats();
 	}
 	
 	public ArrayList<gameObject> getObjects(){

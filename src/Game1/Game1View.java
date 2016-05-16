@@ -23,6 +23,7 @@ public class Game1View extends gameView{
 
 	public void loadImages(){
 		createImage("can");
+		createImage("exit");
 		//images.put("can");
 	}
 
@@ -86,6 +87,7 @@ public class Game1View extends gameView{
 				//g.fillRect(o.getX()-10,o.getY()-10,20,20);
 				g.drawImage(images.get("can"),o.getX()-10,o.getY()-10,20,20,null); 
 			}
+			g.drawImage(images.get("exit"), scaleW(Window.WIDTH-85), scaleH(5), null);
 		}
 		// Now Player
 
