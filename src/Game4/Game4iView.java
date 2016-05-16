@@ -22,7 +22,13 @@ public class Game4iView extends gameView{
 
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
-		g.drawString("Insert Game 4 Instructions Here", (int)(Window.WIDTH*Window.SCALE)/2, (int)(Window.HEIGHT*Window.SCALE)/2);
+		g.drawString("Collect the Sample", (int)(Window.WIDTH*Window.SCALE)/4, (int)(Window.HEIGHT*Window.SCALE)/4);
+		g.drawString("The reserve needs your help to test the water around the estuary", (int)(Window.WIDTH*Window.SCALE)/4, (int)(Window.HEIGHT*Window.SCALE)/4+60);
+		g.drawString("Click and hold to make your water collection device move up", (int)(Window.WIDTH*Window.SCALE)/4, (int)(Window.HEIGHT*Window.SCALE)/4+120);
+		g.drawString("Let go of the mouse to let your water collection device move down", (int)(Window.WIDTH*Window.SCALE)/4, (int)(Window.HEIGHT*Window.SCALE)/4+150);
+		g.drawString("Keep your water collection device in the green area of the water to ", (int)(Window.WIDTH*Window.SCALE)/4, (int)(Window.HEIGHT*Window.SCALE)/4+210);
+		g.drawString("collect a correct water sample", (int)(Window.WIDTH*Window.SCALE)/4, (int)(Window.HEIGHT*Window.SCALE)/4+240);
+		g.drawString("-> Click to begin <-", (int)(Window.WIDTH*Window.SCALE)/2, (int)(Window.HEIGHT*Window.SCALE)-50);
 	}
 
 	@Override

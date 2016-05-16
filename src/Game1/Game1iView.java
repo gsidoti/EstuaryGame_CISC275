@@ -34,11 +34,16 @@ public class Game1iView extends gameView{
 		{
 			g.drawLine(i, 0, i, (int)(Window.HEIGHT*Window.SCALE) );
 		}
-		g.setColor(Color.BLACK);
+		g.setColor(Color.WHITE);
 		g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
 		pos++;
 		if(pos>(int)(Window.WIDTH*Window.SCALE)-20)pos=0;
-		g.drawString("Insert Game 1 Instructions Here", (int)(Window.WIDTH*Window.SCALE)/2, (int)(Window.HEIGHT*Window.SCALE)/2);
+		g.drawString("Collect The Trash!", (int)(Window.WIDTH*Window.SCALE)/4, (int)(Window.HEIGHT*Window.SCALE)/4);
+		g.drawString("Click where you want your boat to go", (int)(Window.WIDTH*Window.SCALE)/4, (int)(Window.HEIGHT*Window.SCALE)/4+60);
+		g.drawString("Run into the trash to collect it before it reaches the beach", (int)(Window.WIDTH*Window.SCALE)/4, (int)(Window.HEIGHT*Window.SCALE)/4+120);
+		g.drawString("If you let 10 pieces of trash by, it's Game Over ", (int)(Window.WIDTH*Window.SCALE)/4, (int)(Window.HEIGHT*Window.SCALE)/4+180);
+		g.drawString("-> Click to begin <-", (int)(Window.WIDTH*Window.SCALE)/2, (int)(Window.HEIGHT*Window.SCALE)-50);
+
 	}
 
 	@Override
