@@ -11,6 +11,7 @@ import Game4.Game4;
 import Menu.Menu;
 //import Game1.GameOne;
 import Game1.Game1;
+import Game1.Game1i;
 
 public class Controller extends Canvas{
 
@@ -21,10 +22,12 @@ public class Controller extends Canvas{
 
 	private Menu menu;
 	private Game1 game1;
+	private Game1i game1i;
 	private Game2 game2;
 	private Game3 game3;
 	private Game4 game4;
 	private Window window;
+	private long currTime = 0;
 
 	public static STATE gameState = STATE.Menu;
 
@@ -32,6 +35,7 @@ public class Controller extends Canvas{
 		window = new Window("Estuary Game",this);
 		menu = new Menu(window);
 		game1 = new Game1();
+		game1i = new Game1i(window);
 		game2 = new Game2();
 		game3 = new Game3();
 		game4 = new Game4();
@@ -114,6 +118,16 @@ public class Controller extends Canvas{
 				game1.tick();
 			}
 			break;
+		case Game1i:
+			if (game1i.running == false) {
+				clearML();
+				this.addMouseListener(game1i);
+				System.out.println("setting game1i to running");
+				game1i.running = true;
+			}else{
+				game1i.tick();
+			}
+			break;
 		case Game2:
 			if(game2.running == false){
 				clearML();
@@ -162,6 +176,9 @@ public class Controller extends Canvas{
 			break;
 		case Game1:
 			game1.view.render(g, game1.getObjects());
+			break;
+		case Game1i:
+			game1i.game1iView.render(g);
 			break;
 		case Game2:
 			game2.view.render(g, game2.getObjects());
