@@ -10,22 +10,14 @@ import OverallGame.Window;
 import OverallGame.gameView;
 
 public class Game1iView extends gameView{
-	int w;
-	int h;
-	int i;
-	int pos;
-	double wS;
-	double hS;
-	JFrame frame;
-	Image background;
+
+	   private int[] dx=new int[5];
+	    private int[] dy=new int[5];
+	    private int pos=0;
+	    private int i;
 	
-	public Game1iView(Window W){
+	public Game1iView(){
 		loadImages();
-		this.frame = W.frame;
-		this.w = Window.WIDTH;
-		this.h= Window.HEIGHT;
-		this.wS = Window.SCALE;
-		this.hS = Window.SCALE;
 	}
 	
 	public void render(Graphics g){
@@ -44,8 +36,9 @@ public class Game1iView extends gameView{
 		}
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
-
-		g.drawString("Insert Game 1 Instructions Here", (int)(w*wS)/2, (int)(h*hS)/2);
+		pos++;
+		if(pos>(int)(Window.WIDTH*Window.SCALE)-20)pos=0;
+		g.drawString("Insert Game 1 Instructions Here", (int)(Window.WIDTH*Window.SCALE)/2, (int)(Window.HEIGHT*Window.SCALE)/2);
 	}
 
 	@Override

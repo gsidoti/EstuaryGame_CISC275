@@ -45,17 +45,17 @@ public class Menu extends MouseAdapter {
 			running = false;
 			System.out.println("game1i");
 		}else if(mouseOver(mx,my,g2.getX(),g2.getY(),g2.getVelx(),g2.getVely())){
-			Controller.gameState = STATE.Game2;
+			Controller.gameState = STATE.Game2i;
 			running = false;
-			System.out.println("game2");
+			System.out.println("game2i");
 		}else if(mouseOver(mx,my,g3.getX(),g3.getY(),g3.getVelx(),g3.getVely())){
-			Controller.gameState = STATE.Game3;
+			Controller.gameState = STATE.Game3i;
 			running = false;
-			System.out.println("game3");
+			System.out.println("game3i");
 		}else if(mouseOver(mx,my,g4.getX(),g4.getY(),g4.getVelx(),g4.getVely())){
-			Controller.gameState = STATE.Game4;
+			Controller.gameState = STATE.Game4i;
 			running = false;
-			System.out.println("game4");
+			System.out.println("game4i");
 		}
 	}
 	//not being used

@@ -6,8 +6,11 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
 
 import Game2.Game2;
+import Game2.Game2i;
 import Game3.Game3;
+import Game3.Game3i;
 import Game4.Game4;
+import Game4.Game4i;
 import Menu.Menu;
 //import Game1.GameOne;
 import Game1.Game1;
@@ -24,8 +27,11 @@ public class Controller extends Canvas{
 	private Game1 game1;
 	private Game1i game1i;
 	private Game2 game2;
+	private Game2i game2i;
 	private Game3 game3;
+	private Game3i game3i;
 	private Game4 game4;
+	private Game4i game4i;
 	private Window window;
 	private long currTime = 0;
 
@@ -35,10 +41,13 @@ public class Controller extends Canvas{
 		window = new Window("Estuary Game",this);
 		menu = new Menu(window);
 		game1 = new Game1();
-		game1i = new Game1i(window);
+		game1i = new Game1i();
 		game2 = new Game2();
+		game2i = new Game2i();
 		game3 = new Game3();
+		game3i = new Game3i();
 		game4 = new Game4();
+		game4i = new Game4i();
 		this.start();
 		this.run();
 	}
@@ -138,6 +147,16 @@ public class Controller extends Canvas{
 				game2.tick();
 			}
 			break;
+		case Game2i:
+			if (game2i.running == false) {
+				clearML();
+				this.addMouseListener(game2i);
+				System.out.println("setting game2i to running");
+				game2i.running = true;
+			}else{
+				game2i.tick();
+			}
+			break;
 		case Game3:
 			if(game3.running == false){
 				clearML();
@@ -146,6 +165,16 @@ public class Controller extends Canvas{
 				game3.running = true;
 			}else{
 				game3.tick();
+			}
+			break;
+		case Game3i:
+			if (game3i.running == false) {
+				clearML();
+				this.addMouseListener(game3i);
+				System.out.println("setting game3i to running");
+				game3i.running = true;
+			}else{
+				game3i.tick();
 			}
 			break;
 		case Game4:
@@ -157,6 +186,18 @@ public class Controller extends Canvas{
 			}else{
 				game4.tick();
 			}
+			break;
+		case Game4i:
+			if (game4i.running == false) {
+				clearML();
+				this.addMouseListener(game4i);
+				System.out.println("setting game4i to running");
+				game4i.running = true;
+			}else{
+				game4i.tick();
+			}
+			break;
+		default:
 			break;
 		}
 	}
@@ -183,12 +224,23 @@ public class Controller extends Canvas{
 		case Game2:
 			game2.view.render(g, game2.getObjects());
 			break;
+		case Game2i:
+			game2i.game2iView.render(g);
+			break;
 		case Game3:
 			game3.view.render(g, game3.getObjects());
+			break;
+		case Game3i:
+			game3i.game3iView.render(g);
 			break;
 		case Game4:
 			game4.view.render(g,game4.getObjects());
 			break;
+		case Game4i:
+			game4i.game4iView.render(g);
+			break;
+			default:
+				break;
 		}
 		g.dispose();
 		bs.show();
