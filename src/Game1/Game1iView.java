@@ -9,15 +9,29 @@ import javax.swing.JPanel;
 import OverallGame.Window;
 import OverallGame.gameView;
 
+/**
+ * Game2iView is the view of Game2i and it handles drawing all of the images and text on screen 
+ * 
+ * @author Team 7
+ * @version 5/17
+ */
+
 public class Game1iView extends gameView{
 
 	    private int pos=0;
 	    private int i;
 	
+	    /**
+	     * 
+	     */
 	public Game1iView(){
 		loadImages();
 	}
 	
+	/**
+	 * 
+	 * @param g
+	 */
 	public void render(Graphics g) {
 		g.setColor(new Color(0,32,64));
 		g.fillRect(0, 0, (int)(Window.WIDTH*Window.SCALE)-20, (int)(Window.HEIGHT*Window.SCALE));
@@ -42,6 +56,9 @@ public class Game1iView extends gameView{
 		//if it will work out with the scaling -Cody
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public void loadImages() {
 		//createImage("smallButton");

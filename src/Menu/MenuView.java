@@ -9,6 +9,13 @@ import javax.swing.JPanel;
 import OverallGame.Window;
 import OverallGame.gameView;
 
+/**
+ * MenuView is the view of Menu and it handles drawing all of the images and text on screen at every tick
+ * 
+ * @author Team 7
+ * @version 5/17
+ */
+
 public class MenuView extends gameView{
 	int w;
 	int h;
@@ -17,6 +24,10 @@ public class MenuView extends gameView{
 	JFrame frame;
 	Image background;
 	
+	/**
+	 * 
+	 * @param W
+	 */
 	public MenuView(Window W){
 		loadImages();
 		this.frame = W.frame;
@@ -26,6 +37,10 @@ public class MenuView extends gameView{
 		this.hS = Window.SCALE;
 	}
 	
+	/**
+	 * 
+	 * @param g
+	 */
 	public void render(Graphics g){
 		//g.setColor(Color.pink);
 		//g.fillRect(0, 0,(int)(w*wS), (int)(h*hS));
@@ -72,6 +87,9 @@ public class MenuView extends gameView{
 		//g.drawString("Score",((int)(w*wS)/100)*50-30,((int)(h*hS)/100)*2+50);
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public void loadImages() {
 		createImage("smallButton");

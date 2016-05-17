@@ -9,14 +9,27 @@ import javax.swing.JPanel;
 import OverallGame.Window;
 import OverallGame.gameView;
 
+/**
+ * Game2iView is the view of Game2i and it handles drawing all of the images and text on screen 
+ * 
+ * @author Team 7
+ * @version 5/17
+ */
+
 public class Game2iView extends gameView{
 
-	
+	/**
+	 * 
+	 */
 	public Game2iView(){
 		loadImages();
 
 	}
 	
+	/**
+	 * 
+	 * @param g
+	 */
 	public void render(Graphics g){
 		g.drawImage(images.get("game2background"), 0, 0, null);
 		g.setColor(Color.WHITE);
@@ -29,6 +42,9 @@ public class Game2iView extends gameView{
 		g.drawString("-> Click to begin <-", (int)(Window.WIDTH*Window.SCALE)/2-150, (int)(Window.HEIGHT*Window.SCALE)-50);
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public void loadImages() {
 		createImage("game2background");

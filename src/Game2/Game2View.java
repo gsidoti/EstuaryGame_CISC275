@@ -10,14 +10,27 @@ import OverallGame.Window;
 import OverallGame.gameObject;
 import OverallGame.gameView;
 
+/**
+ * Game2View is the view of Game2 and it handles drawing all of the images and text on screen at every tick
+ * 
+ * @author Team 7
+ * @version 5/17
+ */
+
 public class Game2View extends gameView{
 
-	
+	/**
+	 * 
+	 */
 	public Game2View(){
 		loadImages();
 	}
 	
-	
+	/**
+	 * 
+	 * @param g
+	 * @param objects
+	 */
 	public void render(Graphics g, ArrayList<gameObject> objects){
 		
 		//fill screen
@@ -71,7 +84,9 @@ public class Game2View extends gameView{
 		//g.fillRect((int)((Window.WIDTH-75)*Window.SCALE),(int)(50*Window.SCALE),(int) (50*Window.SCALE), (int)(150*Window.SCALE));
 	}
 
-
+	/**
+	 * 
+	 */
 	@Override
 	public void loadImages() {
 		createImage("cleanvessel");

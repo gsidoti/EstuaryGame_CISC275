@@ -10,24 +10,41 @@ import OverallGame.Window;
 import OverallGame.gameObject;
 import OverallGame.gameView;
 
+/**
+ * Game1View is the view of Game1 and it handles drawing all of the images and text on screen at every tick
+ * 
+ * @author Team 7
+ * @version 5/17
+ */
+
 public class Game1View extends gameView{
 
     private int[] dx=new int[5];
     private int[] dy=new int[5];
     private int pos=0;
 
+    /**
+     * 
+     */
 	public Game1View()
 	{
 	    loadImages();	
 	}
 
+	/**
+	 * 
+	 */
 	public void loadImages(){
 		createImage("can");
 		createImage("exit");
 		//images.put("can");
 	}
 
-
+	/**
+	 * 
+	 * @param g
+	 * @param objects
+	 */
 	public void render(Graphics g, ArrayList<gameObject> objects){
 
 		double m;

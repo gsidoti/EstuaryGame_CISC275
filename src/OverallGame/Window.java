@@ -8,6 +8,13 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+/**
+ * Window is the class that holds the frame and handles all the variables of the frame's window size
+ * 
+ * @author Team 7
+ * @version 5/17
+ */
+
 public class Window{
 
 	//private static final long serialVersionUID = 1L;
@@ -16,7 +23,11 @@ public class Window{
 	public static final int HEIGHT = 720;
 	public static double SCALE;
 	
-
+	/**
+	 * 
+	 * @param title
+	 * @param c
+	 */
 	public Window(String title,Controller c){
 		frame = new JFrame(title);
 		GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -49,8 +60,12 @@ public class Window{
 		System.out.println(SCALE);
 	}
 	
-	
-	
+	/**
+	 * 
+	 * @param actual
+	 * @param virtual
+	 * @return
+	 */
 	public static Dimension getScaledDimension(Dimension actual, Dimension virtual) {
 		
 		double aRatio = actual.getWidth()/actual.getHeight();

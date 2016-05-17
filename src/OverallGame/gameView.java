@@ -11,13 +11,26 @@ import java.util.Map;
 
 import javax.imageio.ImageIO;
 
-
+/**
+ * gameView is an absract class used as a mold for the view of each game
+ * 
+ * @author Team 7
+ * @version 5/17
+ */
 
 public abstract class gameView {
 	public Map<String,BufferedImage> images=  new HashMap<String, BufferedImage>();
 	
+	/**
+	 * 
+	 */
 	public abstract void loadImages();
 	
+	/**
+	 * 
+	 * @param imgName
+	 * @return
+	 */
     protected boolean createImage(String imgName){ 	
     	BufferedImage bufferedImage;
     	try {
@@ -31,7 +44,13 @@ public abstract class gameView {
     	}
     }
     
-    
+    /**
+     * 
+     * @param img
+     * @param newW
+     * @param newH
+     * @return
+     */
     public static BufferedImage resizeImg(BufferedImage img, int newW, int newH){
     int w = img.getWidth();
     int h = img.getHeight();
@@ -44,10 +63,20 @@ public abstract class gameView {
     return dimg;      
    }
     
+    /**
+     * 
+     * @param x
+     * @return
+     */
 	public int scaleW(double x){
 		return (int)(Window.SCALE*x);
 	}
 	
+	/**
+	 * 
+	 * @param x
+	 * @return
+	 */
 	public int scaleH(double x){
 		return (int)(Window.SCALE*x);
 	}

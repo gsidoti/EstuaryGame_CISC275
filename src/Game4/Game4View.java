@@ -8,14 +8,26 @@ import OverallGame.Window;
 import OverallGame.gameObject;
 import OverallGame.gameView;
 
+/**
+ * Game4View is the view of Game4 and it handles drawing all of the images and text on screen at every tick
+ * 
+ * @author Team 7
+ * @version 5/17
+ */
+
 public class Game4View extends gameView{
 	G4Player player;
 	
-	
+	/**
+	 * 
+	 */
 	public Game4View(){
 		loadImages();
 	}
 	
+	/**
+	 * 
+	 */
 	public void loadImages(){
 		createImage("vessel");
 		createImage("underwater2");
@@ -26,6 +38,11 @@ public class Game4View extends gameView{
 		createImage("exit");
 	}
 	
+	/**
+	 * 
+	 * @param g
+	 * @param objects
+	 */
 	public void render(Graphics g, ArrayList<gameObject> objects){
 		//get player location
 		player = (G4Player) objects.get(0);

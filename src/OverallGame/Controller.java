@@ -16,6 +16,14 @@ import Menu.Menu;
 import Game1.Game1;
 import Game1.Game1i;
 
+/**
+ * Controller handles everything that goes on in the game and minigames. It knows what is currently being run and printed on-screen,
+ * and is the mediator between the minigames' object classes (Model) and view class (View).
+ * 
+ * @author Team 7
+ * @version 5/17
+ */
+
 public class Controller extends Canvas{
 
 	private static final long serialVersionUID = 1L;
@@ -37,6 +45,9 @@ public class Controller extends Canvas{
 
 	public static STATE gameState = STATE.Menu;
 
+	/**
+	 * 
+	 */
 	public Controller(){
 		window = new Window("Estuary Game",this);
 		menu = new Menu(window);
@@ -52,14 +63,18 @@ public class Controller extends Canvas{
 		this.run();
 	}
 
-
-
+	/**
+	 * 
+	 */
 	private synchronized void start(){
 		thread = new Thread(String.valueOf(this));
 		thread.start();
 		running = true;	
 	}
 
+	/**
+	 * 
+	 */
 	private synchronized void stop(){
 		try{
 			thread.join();
@@ -69,6 +84,9 @@ public class Controller extends Canvas{
 		}
 	}
 
+	/**
+	 * 
+	 */
 	private void run() {
 		this.requestFocus();
 		long lastTime = System.nanoTime();
@@ -98,6 +116,10 @@ public class Controller extends Canvas{
 		}
 		stop();
 	}
+	
+	/**
+	 * 
+	 */
 	private void clearML(){
 		for(MouseListener l:this.getMouseListeners()){
 			this.removeMouseListener(l);
@@ -105,6 +127,9 @@ public class Controller extends Canvas{
 		}
 	}
 
+	/**
+	 * 
+	 */
 	private void tick(){
 		switch(gameState){
 		case Menu:
@@ -202,7 +227,9 @@ public class Controller extends Canvas{
 		}
 	}
 
-
+	/**
+	 * 
+	 */
 	private void render(){
 		//System.out.println("Render");
 		BufferStrategy bs = this.getBufferStrategy();

@@ -12,6 +12,14 @@ import OverallGame.STATE;
 import OverallGame.Window;
 import OverallGame.gameObject;
 
+/**
+ * Menu is the screen that is displayed when the game starts, giving the player the option of choosing one of the 
+ * four games to play.
+ * 
+ * @author Team 7
+ * @version 5/17
+ */
+
 public class Menu extends MouseAdapter {
 	public MenuView menuView;
 	public boolean running = false;
@@ -20,6 +28,10 @@ public class Menu extends MouseAdapter {
 	public static int ESCORE = 0;
 	ArrayList<gameObject> objects = new ArrayList<gameObject>();
 	
+	/**
+	 * 
+	 * @param W
+	 */
 	public Menu(Window W){
 		objects.add(new gameObject("Game1",  ((int)(Window.WIDTH*Window.SCALE)/100)*20,  ((int)(Window.HEIGHT*Window.SCALE)/100)*20, (int)(200.0*Window.SCALE),(int)(200.0*Window.SCALE) ));
 		objects.add(new gameObject("Game2",  ((int)(Window.WIDTH*Window.SCALE)/100)*60,  ((int)(Window.HEIGHT*Window.SCALE)/100)*20, (int)(200.0*Window.SCALE),(int)(200.0*Window.SCALE) ));
@@ -28,11 +40,16 @@ public class Menu extends MouseAdapter {
 		menuView = new MenuView(W);
 	}
 	
+	/**
+	 * 
+	 */
 	public void stopMouseListener(){
 		mlActive = false;
 	}
 	
-
+	/**
+	 * 
+	 */
 	public void mousePressed(MouseEvent e){
 		int mx = e.getX();
 		int my = e.getY();
@@ -58,6 +75,17 @@ public class Menu extends MouseAdapter {
 			System.out.println("game4i");
 		}
 	}
+	
+	/**
+	 * 
+	 * @param mx
+	 * @param my
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @return
+	 */
 	//not being used
     private boolean mouseOver(int mx, int my, int x, int y, int width, int height) {
         if (mx > x && mx < x + width) {
@@ -67,6 +95,9 @@ public class Menu extends MouseAdapter {
         } else return false;
     }
 
+    /**
+     * 
+     */
 	public void tick() {
 		
 	}

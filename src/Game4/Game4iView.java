@@ -9,12 +9,26 @@ import javax.swing.JPanel;
 import OverallGame.Window;
 import OverallGame.gameView;
 
+/**
+ * Game4iView is the view of Game4i and it handles drawing all of the images and text on screen 
+ * 
+ * @author Team 7
+ * @version 5/17
+ */
+
 public class Game4iView extends gameView{
 	
+	/**
+	 * 
+	 */
 	public Game4iView(){
 		loadImages();
 	}
 	
+	/**
+	 * 
+	 * @param g
+	 */
 	public void render(Graphics g){
 		//g.setColor(Color.pink);
 		//g.fillRect(0, 0,(int)(w*wS), (int)(h*hS));
@@ -31,6 +45,9 @@ public class Game4iView extends gameView{
 		g.drawString("-> Click to begin <-", (int)(Window.WIDTH*Window.SCALE)/2-150, (int)(Window.HEIGHT*Window.SCALE)-50);
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public void loadImages() {
 		createImage("underwater2");

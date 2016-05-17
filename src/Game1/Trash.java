@@ -10,10 +10,12 @@ import javax.swing.*;
 import OverallGame.gameObject;
 
 /**
- * Write a description of class Trash here.
- *
- * @author (your name)
- * @version (a version number or a date)
+ * Trash is the object that the player is trying to pick up before it gets to the right side of the screen.
+ * Trash is collected by the player boat colliding with it.
+ * Each piece of trash causes the player to lose a life.
+ * 
+ * @author Team 7
+ * @version 5/17
  */
 public class Trash extends gameObject
 {
@@ -22,7 +24,12 @@ public class Trash extends gameObject
  // pixels per tick
 
     /**
-     * Constructor for objects of class Player
+     * 
+     * @param name
+     * @param x
+     * @param y
+     * @param velx
+     * @param vely
      */
     public Trash(String name,int x, int y, int velx, int vely)
     {
@@ -30,6 +37,11 @@ public class Trash extends gameObject
         // initialize instance variables
     }
 
+    /**
+     * 
+     * @param to
+     * @return
+     */
     public boolean MadeIt(int to)
     {
         if(x>=to)
@@ -42,22 +54,39 @@ public class Trash extends gameObject
         }
     }
 
+    /**
+     * 
+     * @param px
+     * @param py
+     * @return
+     */
     public boolean IsCaught(int px,int py)
     {
         if((Math.abs(px-x)+Math.abs(py-y))<20)return true;
         return false;
     }
 
+    /**
+     * 
+     */
     public void Move()
     {
         x+=velx;
         return;
     }
 
+    /**
+     * 
+     * @return
+     */
     public boolean getActive() {
     	return isActive;
     }
 
+    /**
+     * 
+     * @param value
+     */
     public void setActive(boolean value) {
     	isActive = value;
     }

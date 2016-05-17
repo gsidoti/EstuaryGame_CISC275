@@ -9,13 +9,26 @@ import OverallGame.Window;
 import OverallGame.gameObject;
 import OverallGame.gameView;
 
+/**
+ * Game3View is the view of Game3 and it handles drawing all of the images and text on screen at every tick
+ * 
+ * @author Team 7
+ * @version 5/17
+ */
+
 public class Game3View extends gameView{
 	int count;
 	
+	/**
+	 * 
+	 */
 	public Game3View(){
 		loadImages();
 	}
 	
+	/**
+	 * 
+	 */
 	public void loadImages(){
 		createImage("bluecrab_0");
 		for(Direction d :Direction.values())//create every horseshoe crab image
@@ -28,7 +41,11 @@ public class Game3View extends gameView{
 		//images.put("underwater2",resizeImg(images.get("underwater2"),scaleW(Window.WIDTH),scaleH(Window.HEIGHT)));
 	}
 	
-	
+	/**
+	 * 
+	 * @param g
+	 * @param objects
+	 */
 	public void render(Graphics g, ArrayList<gameObject> objects){
 		
 		//fill screen and draw brown box

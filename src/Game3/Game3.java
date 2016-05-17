@@ -10,6 +10,16 @@ import OverallGame.STATE;
 import OverallGame.Window;
 import OverallGame.gameObject;
 
+/**
+ * Game3 is a game where the objective is to count how many Horseshoe Crabs pass by the screen. It resembles the real life
+ * scenario of a Horseshoe Crab spawning survey.
+ * For each Horseshoe Crab seen, click the mouse to increase the counter.
+ * After all the Animals have come and went, it will display the player's count estimate and the real count, adding score accordingly.
+ * 
+ * @author Team 7
+ * @version 5/17
+ */
+
 public class Game3 extends MouseAdapter {
 	public boolean running = false;
 	Random rand = new Random();
@@ -27,10 +37,16 @@ public class Game3 extends MouseAdapter {
 	public int actNumCrab = 0;
 	public int clickNumCrab = 0;
 	
+	/**
+	 * 
+	 */
 	public Game3(){
 		view = new Game3View();
 	}
 	
+	/**
+	 * 
+	 */
 	public void mousePressed(MouseEvent e){
 		clickNumCrab++;
 		mx = e.getX();
@@ -39,7 +55,9 @@ public class Game3 extends MouseAdapter {
 			resetGame();
 	}
 
-
+	/**
+	 * 
+	 */
 	void updateAnimal(){
 		Animal a;
 		for(gameObject o:objects){
@@ -58,7 +76,12 @@ public class Game3 extends MouseAdapter {
 		}
 	}
 	
-
+	/**
+	 * 
+	 * @param Enemy
+	 * @param speed
+	 * @param Amount
+	 */
 	public void randSpawn(boolean Enemy, int speed, int Amount){
 		Random rand = new Random();
 		for(int i = 0;i < Amount;i++){
@@ -79,6 +102,11 @@ public class Game3 extends MouseAdapter {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param Enemy
+	 * @param speed
+	 */
 	public void spawnLeft(boolean Enemy, int speed){
 		Random rand = new Random();
 		int x = 0;
@@ -106,6 +134,11 @@ public class Game3 extends MouseAdapter {
 		objects.add(new Animal(name,x,y,velx,vely,dir));
 	}
 	
+	/**
+	 * 
+	 * @param Enemy
+	 * @param speed
+	 */
 	public void spawnRight(boolean Enemy, int speed){
 		Random rand = new Random();
 		int x = (int)(Window.WIDTH);
@@ -133,6 +166,11 @@ public class Game3 extends MouseAdapter {
 		objects.add(new Animal(name,x,y,velx,vely,dir));
 	}
 	
+	/**
+	 * 
+	 * @param Enemy
+	 * @param speed
+	 */
 	public void spawnTop(boolean Enemy, int speed){
 		Random rand = new Random();
 		int x = (int)((rand.nextInt(425)+425));
@@ -160,6 +198,11 @@ public class Game3 extends MouseAdapter {
 		objects.add(new Animal(name,x,y,velx,vely,dir));
 	}
 	
+	/**
+	 * 
+	 * @param Enemy
+	 * @param speed
+	 */
 	public void spawnBottom(boolean Enemy, int speed){
 		Random rand = new Random();
 		int x = (int)((rand.nextInt(425)+425));
@@ -187,6 +230,9 @@ public class Game3 extends MouseAdapter {
 		objects.add(new Animal(name,x,y,velx,vely,dir));
 	}
 	
+	/**
+	 * 
+	 */
 	private void checkEndGame(){
 		if(init == false){
 			timer1 = System.currentTimeMillis();
@@ -213,6 +259,9 @@ public class Game3 extends MouseAdapter {
 		}
 	}
 	
+	/**
+	 * 
+	 */
 	public void resetGame(){
 		init = false;
 		init2 = false;
@@ -225,8 +274,9 @@ public class Game3 extends MouseAdapter {
 		Controller.gameState = STATE.Menu;
 	}
 
-	
-
+	/**
+	 * 
+	 */
 	public void tick() {
 		if(!start){
 			objects.add(new Animal("Count", 0, 0, 0, 0, null));
@@ -236,6 +286,16 @@ public class Game3 extends MouseAdapter {
 		updateAnimal();
 	}
 	
+	/**
+	 * 
+	 * @param mx
+	 * @param my
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @return
+	 */
     boolean mouseOver(int mx, int my, int x, int y, int width, int height) {
         if (mx > x && mx < x + width) {
             if (my > y && my < y + height) {
@@ -244,62 +304,124 @@ public class Game3 extends MouseAdapter {
         } else return false;
     }
 	
+    /**
+     * 
+     * @param x
+     * @return
+     */
 	public int scaleW(double x){
 		return (int)(Window.SCALE*x);
 	}
 	
+	/**
+	 * 
+	 * @param x
+	 * @return
+	 */
 	public int scaleH(double x){
 		return (int)(Window.SCALE*x);
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public ArrayList<gameObject> getObjects(){
 		return this.objects;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean isRunning() {
 		return running;
 	}
 
+	/**
+	 * 
+	 * @param running
+	 */
 	public void setRunning(boolean running) {
 		this.running = running;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean isStart() {
 		return start;
 	}
 
+	/**
+	 * 
+	 * @param start
+	 */
 	public void setStart(boolean start) {
 		this.start = start;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getTick() {
 		return tick;
 	}
 
+	/**
+	 * 
+	 * @param tick
+	 */
 	public void setTick(int tick) {
 		this.tick = tick;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getAnimals() {
 		return animals;
 	}
 
+	/**
+	 * 
+	 * @param animals
+	 */
 	public void setAnimals(int animals) {
 		this.animals = animals;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getActNumCrab() {
 		return actNumCrab;
 	}
 
+	/**
+	 * 
+	 * @param actNumCrab
+	 */
 	public void setActNumCrab(int actNumCrab) {
 		this.actNumCrab = actNumCrab;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getClickNumCrab() {
 		return clickNumCrab;
 	}
 
+	/**
+	 * 
+	 * @param clickNumCrab
+	 */
 	public void setClickNumCrab(int clickNumCrab) {
 		this.clickNumCrab = clickNumCrab;
 	}

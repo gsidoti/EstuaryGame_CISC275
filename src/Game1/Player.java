@@ -10,10 +10,11 @@ import javax.swing.*;
 import OverallGame.gameObject;
 
 /**
- * Write a description of class Player here.
- *
- * @author (your name)
- * @version (a version number or a date)
+ * Player is the object that the user controls. The player can move to anywhere on the screen by clicking there with the mouse
+ * and the goal is to collide the player with the moving trash before they reach the beach.
+ * 
+ * @author Team 7
+ * @version 5/17
  */
 public class Player extends gameObject
 {
@@ -25,7 +26,12 @@ public class Player extends gameObject
     private double Angle;
 
     /**
-     * Constructor for objects of class Player
+     * 
+     * @param name
+     * @param x
+     * @param y
+     * @param velx
+     * @param vely
      */
     public Player(String name, int x, int y, int velx, int vely)
     {
@@ -35,6 +41,11 @@ public class Player extends gameObject
         Angle=0.0;
     }
 
+    /**
+     * 
+     * @param xn
+     * @param yn
+     */
     public void SetDest(int xn,int yn)
     {
         double StepsNeeded;
@@ -54,6 +65,9 @@ public class Player extends gameObject
         Angle=Math.atan2(getVely(),getVelx());
     }
 
+    /**
+     * 
+     */
     public void Move()
     {
     	double dnow;
@@ -88,35 +102,72 @@ public class Player extends gameObject
 //        return;
 //    }
 
+    /**
+     * 
+     * @return
+     */
     public boolean getChangeDestination() {
     	return ChangeDestination;
     }
 
+    /**
+     * 
+     * @param value
+     */
     public void setChangeDestination(boolean value) {
     	ChangeDestination = value;
     }
 
+    /**
+     * 
+     * @return
+     */
     public int getxd() {
     	return xd;
     }
 
+    /**
+     * 
+     * @param value
+     */
     public void setxd(int value) {
     	xd = value;
     }
 
+    /**
+     * 
+     * @return
+     */
     public int getyd() {
     	return yd;
     }
 
+    /**
+     * 
+     * @param value
+     */
     public void setyd(int value) {
     	yd = value;
     }
+    
+    /**
+     * 
+     * @return
+     */
     public double getAngle(){return Angle;}
 
+    /**
+     * 
+     * @return
+     */
 	public double getVelocity() {
 		return velocity;
 	}
 
+	/**
+	 * 
+	 * @param velocity
+	 */
 	public void setVelocity(double velocity) {
 		this.velocity = velocity;
 	}

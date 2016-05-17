@@ -21,10 +21,11 @@ import OverallGame.STATE;
 import OverallGame.Window;
 
 /**
- * Write a description of class GameOne here.
+ * Game1 is a game where the object is to move your player boat to collect the trash that is moving by before
+ * they reach the beach, as the trash will disturb and harm the surrounding wildlife
  *
- * @author Jakub Simacek
- * @version 0.1
+ * @author Team 7
+ * @version 5/17
  */
 
 public class Game1 extends MouseAdapter {
@@ -55,6 +56,9 @@ public class Game1 extends MouseAdapter {
 
 	ArrayList<gameObject> objects = new ArrayList<gameObject>();
 
+	/**
+	 * 
+	 */
     public Game1() {
     	int i;
         Lives=10;
@@ -77,6 +81,9 @@ public class Game1 extends MouseAdapter {
         view = new Game1View();
     }
 
+    /**
+     * 
+     */
 	public void mousePressed(MouseEvent e){
 		mousedown = true;
 		Player p = (Player) (objects.get(0));
@@ -87,15 +94,25 @@ public class Game1 extends MouseAdapter {
 			resetGame();
 }
 
+	/**
+	 * 
+	 */
 	public void mouseReleased(MouseEvent e){
 		mousedown = false;
 	}
 
+	/**
+	 * 
+	 */
 	void updatePlayer(){
 		Player p = (Player) (objects.get(0));
 		p.Move();
 	}
 
+	/**
+	 * 
+	 * @param index
+	 */
 	void updateTrash(int index) {
 		Player p = (Player)objects.get(0);
 		gameObject o=objects.get(index);
@@ -116,6 +133,10 @@ public class Game1 extends MouseAdapter {
 		}
 	}
 
+	/**
+	 * 
+	 * @param i
+	 */
 	void updateLives(int i){
 		Trash temp = (Trash) objects.get(i);
 		if (temp.MadeIt((int)(Window.WIDTH*Window.SCALE))&&temp.getActive()) {
@@ -129,7 +150,9 @@ public class Game1 extends MouseAdapter {
 		}
 	}
 
-
+	/**
+	 * 
+	 */
 	public void tick() {
 		if(SkipTick)
 		{
@@ -180,10 +203,17 @@ public class Game1 extends MouseAdapter {
 
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public ArrayList<gameObject> getObjects(){
 		return this.objects;
 	}
 
+	/**
+	 * 
+	 */
     private void resetGame() {
 
     	Random rand = new Random();
@@ -205,6 +235,16 @@ public class Game1 extends MouseAdapter {
     	Controller.gameState = STATE.Menu;
     }
     
+    /**
+     * 
+     * @param mx
+     * @param my
+     * @param x
+     * @param y
+     * @param width
+     * @param height
+     * @return
+     */
     boolean mouseOver(int mx, int my, int x, int y, int width, int height) {
         if (mx > x && mx < x + width) {
             if (my > y && my < y + height) {
@@ -212,119 +252,237 @@ public class Game1 extends MouseAdapter {
             } else return false;
         } else return false;
     }
-	
+    
+	/**
+	 * 
+	 * @param x
+	 * @return
+	 */
 	public int scaleW(double x){
 		return (int)(Window.SCALE*x);
 	}
 	
+	/**
+	 * 
+	 * @param x
+	 * @return
+	 */
 	public int scaleH(double x){
 		return (int)(Window.SCALE*x);
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean isRunning() {
 		return running;
 	}
 
+	/**
+	 * 
+	 * @param running
+	 */
 	public void setRunning(boolean running) {
 		this.running = running;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean isMousedown() {
 		return mousedown;
 	}
 
+	/**
+	 * 
+	 * @param mousedown
+	 */
 	public void setMousedown(boolean mousedown) {
 		this.mousedown = mousedown;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getMx() {
 		return mx;
 	}
 
+	/**
+	 * 
+	 * @param mx
+	 */
 	public void setMx(int mx) {
 		this.mx = mx;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getMy() {
 		return my;
 	}
 
+	/**
+	 * 
+	 * @param my
+	 */
 	public void setMy(int my) {
 		this.my = my;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getCounter() {
 		return counter;
 	}
 
+	/**
+	 * 
+	 * @param counter
+	 */
 	public void setCounter(int counter) {
 		this.counter = counter;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getLastTrash() {
 		return lastTrash;
 	}
 
+	/**
+	 * 
+	 * @param lastTrash
+	 */
 	public void setLastTrash(int lastTrash) {
 		this.lastTrash = lastTrash;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getMaxtrash() {
 		return maxtrash;
 	}
 
+	/**
+	 * 
+	 * @param maxtrash
+	 */
 	public void setMaxtrash(int maxtrash) {
 		this.maxtrash = maxtrash;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getTrashcount() {
 		return trashcount;
 	}
 
+	/**
+	 * 
+	 * @param trashcount
+	 */
 	public void setTrashcount(int trashcount) {
 		this.trashcount = trashcount;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getMaxvel() {
 		return maxvel;
 	}
 
+	/**
+	 * 
+	 * @param maxvel
+	 */
 	public void setMaxvel(int maxvel) {
 		this.maxvel = maxvel;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public long getScore() {
 		return Score;
 	}
 
+	/**
+	 * 
+	 * @param score
+	 */
 	public void setScore(long score) {
 		Score = score;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public long getHiScore() {
 		return HiScore;
 	}
 
+	/**
+	 * 
+	 * @param hiScore
+	 */
 	public void setHiScore(long hiScore) {
 		HiScore = hiScore;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public long getLives() {
 		return Lives;
 	}
 
+	/**
+	 * 
+	 * @param lives
+	 */
 	public void setLives(long lives) {
 		Lives = lives;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean isSkipTick() {
 		return SkipTick;
 	}
 
+	/**
+	 * 
+	 * @param skipTick
+	 */
 	public void setSkipTick(boolean skipTick) {
 		SkipTick = skipTick;
 	}
 
+	/**
+	 * 
+	 * @param objects
+	 */
 	public void setObjects(ArrayList<gameObject> objects) {
 		this.objects = objects;
 	}
