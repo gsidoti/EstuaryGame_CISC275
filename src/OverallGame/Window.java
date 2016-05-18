@@ -46,7 +46,7 @@ public class Window{
 			frame.getRootPane().putClientProperty("apple.awt.fullscreenable", Boolean.valueOf(true));
 		}	
 		SCALE = scaledDimension.getWidth()/1280.0;
-		Window.SCALE = 0.4;
+		//Window.SCALE = 0.4;
 		frame.setPreferredSize(scaledDimension);
 		frame.setMaximumSize(scaledDimension);
 		frame.setMinimumSize(scaledDimension);
