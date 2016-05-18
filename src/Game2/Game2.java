@@ -35,7 +35,7 @@ public class Game2 extends MouseAdapter {
 	 * 					  - Lives holds the amount of lives the player has left, 0 means game over
 	 */
     private int speed = 1;
-    private int boatspeed = 200;
+    private int boatspeed = 170;
     private boolean spawnBoats = true;
     private int counter = 0;
     private long endTime;
@@ -49,7 +49,7 @@ public class Game2 extends MouseAdapter {
 	public Game2View view;
 	Random rand = new Random();
 	boolean mousedown = false;//dont need
-    private int Lives = 10;
+    private int Lives = 3;
    
     /**
      * Constructor for Game2 objects
@@ -132,11 +132,11 @@ public class Game2 extends MouseAdapter {
 	 */
 	public void addBoat(){
 		int r = rand.nextInt(6),y = 0;
-		if(boatsLeft >= 0){
+		if(boatsLeft > 1){
 			do {
 				r = rand.nextInt(6);
 				//System.out.println("R: "+r);
-			}while(docks[r]>5);
+			}while(docks[r]>7);
 			switch(r){
 			case 0:
 				y = 55;
@@ -172,12 +172,11 @@ public class Game2 extends MouseAdapter {
 			boatsLeft--;
 			//System.out.println(boatcount++);
 		}
-		if(boatsLeft == 0){
+		if(boatsLeft <= 0){
 			if(spawnBoats == true){
 				spawnBoats = false;
 				endTime = System.currentTimeMillis();
-			}
-			if(endTime<System.currentTimeMillis()+5000){
+			}else{
 				Menu.Menu.SCORE += 100;
 				resetGame();
 			}

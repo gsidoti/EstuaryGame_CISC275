@@ -35,6 +35,7 @@ public class Game3iView extends gameView{
 		//g.fillRect(0, 0,(int)(w*wS), (int)(h*hS));
 		g.drawImage(images.get("game3sand"), 0, 0, null);
 		g.drawImage(images.get("game3wood"), 0, 0, null);
+		g.drawImage(images.get("horseshoe_crab_Check"),scaleW(450) , scaleH(350), null);
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("TimesRoman", Font.PLAIN, scaleW(30)));
 		g.drawString("Horseshoe Crab Spawning Survey", (int)(Window.WIDTH*Window.SCALE)/4, (int)(Window.HEIGHT*Window.SCALE)/4);
@@ -50,6 +51,7 @@ public class Game3iView extends gameView{
 	 */
 	@Override
 	public void loadImages() {
+		createImage("horseshoe_crab_Check");
 		createImage("game3sand");
 		createImage("game3wood");
 	}
