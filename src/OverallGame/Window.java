@@ -57,10 +57,10 @@ public class Window{
 		frame.setMaximumSize(scaledDimension);
 		frame.setMinimumSize(scaledDimension);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		System.out.println("Print something");
 		frame.setLocationRelativeTo(null);
 		frame.add(c);
 		frame.setResizable(false);
+		frame.setUndecorated(true);
 		gd.setFullScreenWindow(frame);
 		frame.setVisible(true);
 		System.out.println(screenDimension);
