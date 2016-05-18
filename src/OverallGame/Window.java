@@ -31,24 +31,25 @@ public class Window{
 	 */
 	public Window(String title,Controller c){
 		frame = new JFrame(title);
-		GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		//Dimension screenDimension = env.getMaximumWindowBounds().getSize();
-		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 		Dimension screenDimension = Toolkit.getDefaultToolkit().getScreenSize();
+		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 		Insets insets = frame.getInsets();
+		System.out.println("I:"+insets.bottom+" "+insets.top+" "+insets.left+" "+insets.right);
 		screenDimension.height = screenDimension.height-insets.bottom-insets.top;
 		screenDimension.width = screenDimension.width-insets.left-insets.right;
-		Dimension scaledDimension = getScaledDimension(screenDimension,new Dimension(WIDTH,HEIGHT));//= new Dimension((int)(screenDimension.getHeight()*1.777778),screenDimension.height);
+		Dimension scaledDimension = getScaledDimension(screenDimension,new Dimension(WIDTH,HEIGHT));
 		SCALE = scaledDimension.getWidth()/1280.0;
-		double d = scaledDimension.getHeight()/720.0;
-		String osName = System.getProperty("os.name").toLowerCase();
-		boolean isMacOs = osName.startsWith("mac os x");
-		if (isMacOs) 
-		{
+		if(gd.isFullScreenSupported()){
+			//screenDimension = Toolkit.getDefaultToolkit().getScreenSize();
+			frame.setUndecorated(true);
+			gd.setFullScreenWindow(frame);
+		}else{
+			System.err.println("Full screen not supported");
+			GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
+			screenDimension = env.getMaximumWindowBounds().getSize();
 			
-		  System.out.println("Your on a mac");
 		}
-
 		//unnecessary apple full-screen functions
 		//com.apple.eawt.FullScreenUtilities.setWindowCanFullScreen(frame,true);
 		//com.apple.eawt.Application.getApplication().requestToggleFullScreen(frame);
@@ -60,15 +61,10 @@ public class Window{
 		frame.setLocationRelativeTo(null);
 		frame.add(c);
 		frame.setResizable(false);
-		frame.setUndecorated(true);
-		gd.setFullScreenWindow(frame);
 		frame.setVisible(true);
+
 		System.out.println(screenDimension);
 		System.out.println(scaledDimension);
-		System.out.println(1280.0*SCALE+ " "+ 720.0*SCALE);
-		
-		System.out.println(d);
-		System.out.println(SCALE);
 	}
 	
 	/**
