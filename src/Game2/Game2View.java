@@ -1,6 +1,7 @@
 package Game2;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -68,8 +69,15 @@ public class Game2View extends gameView{
 			//	g.fillRect(objects.get(i).getX(),objects.get(i).getY(),25,50);
 			//}
 		}
+		
+		g.setColor(Color.yellow);
+		g.setFont(new Font("Verdana", Font.BOLD, scaleW(50)));
+		g.drawString("Boats Left: "+ Game2.boatsLeft,scaleW(Window.WIDTH-400), scaleH(50));
+		
 		g.drawImage(images.get("exit"), scaleW(5), scaleH(5), null);
 
+		
+		
 		//g.setColor(Color.green);
 		//g.drawRect((int)((Window.WIDTH-150)*Window.SCALE),(int)(50*Window.SCALE),(int) (50*Window.SCALE),(int) (150*Window.SCALE));
 		//g.fillRect((int)((Window.WIDTH-150)*Window.SCALE),(int)(50*Window.SCALE),(int) (50*Window.SCALE),(int) (150*Window.SCALE));

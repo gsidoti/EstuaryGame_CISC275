@@ -36,11 +36,13 @@ public class Game2 extends MouseAdapter {
 	 */
     private int speed = 1;
     private int boatspeed = 200;
+    private boolean spawnBoats = true;
     private int counter = 0;
-    private int lastBoat = 0;//dont need
+    private long endTime;
     private int mx, my;
 	public boolean running = false;
-	public static int[] docks = new int[6];
+	public int[] docks = new int[6];
+	public static int boatsLeft = 36;
 	
 	ArrayList<gameObject> objects = new ArrayList<gameObject>();
 	
@@ -131,7 +133,7 @@ public class Game2 extends MouseAdapter {
 	 */
 	public void addBoat(){
 		int r = rand.nextInt(6),y = 0;
-		if(objects.size()!=35){
+		if(boatsLeft >= 0){
 			do {
 				r = rand.nextInt(6);
 				//System.out.println("R: "+r);
@@ -165,15 +167,21 @@ public class Game2 extends MouseAdapter {
 			boolean bool = rand.nextBoolean();
 			if(bool == false){
 				bool = rand.nextBoolean();
-			}
-
-			
-				
+			}	
 			Boat b = new Boat("Boat",Window.WIDTH,y,speed,docks[r]-1,bool);
 			objects.add(b);
+			boatsLeft--;
 			//System.out.println(boatcount++);
-		}else{
-			resetGame();
+		}
+		if(boatsLeft == 0){
+			if(spawnBoats == true){
+				spawnBoats = false;
+				endTime = System.currentTimeMillis();
+			}
+			if(endTime<System.currentTimeMillis()+5000){
+				Menu.Menu.SCORE += 100;
+				resetGame();
+			}
 		}
 	}
 
@@ -193,9 +201,6 @@ public class Game2 extends MouseAdapter {
 			mx = 0;
 			my = 0;
 		}
-		
-
-
 			updateBoats();
 	}
 	
@@ -229,6 +234,8 @@ public class Game2 extends MouseAdapter {
      * 
      */
     void resetGame() {
+    	boatsLeft=36;
+    	spawnBoats =true;
     	Lives = 3;
     	counter = 0;
         speed = 1;
@@ -287,22 +294,7 @@ public class Game2 extends MouseAdapter {
     public void setCounter(int num) {
     	counter = num;
     }
-    /**
-     * 
-     * @return
-     */
-    public int getLastBoat() {
-    	return lastBoat;
-    }
-    
-    /**
-     * 
-     * @param num
-     */
-    public void setLastBoat(int num) {
-    	lastBoat = num;
-    }
-    
+ 
     /**
      * 
      * @return

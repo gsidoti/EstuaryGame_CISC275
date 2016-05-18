@@ -42,8 +42,6 @@ public class Controller extends Canvas{
 	private Game3i game3i;
 	private Game4 game4;
 	private Game4i game4i;
-	private Window window;
-	private long currTime = 0;
 
 	public static STATE gameState = STATE.Menu;
 
@@ -51,8 +49,8 @@ public class Controller extends Canvas{
 	 * 
 	 */
 	public Controller(){
-		window = new Window("Estuary Game",this);
-		menu = new Menu(window);
+		Window w = new Window("Estuary Game",this);
+		menu = new Menu();
 		game1 = new Game1();
 		game1i = new Game1i();
 		game2 = new Game2();
@@ -141,6 +139,10 @@ public class Controller extends Canvas{
 				this.addMouseListener(menu);
 				System.out.println("setting menu to running");
 				menu.running = true;
+				if(menu.returning == false){
+					menu.initTime = System.currentTimeMillis()+7000;
+					menu.returning = true;
+				}
 			}else{
 				menu.tick();
 			}
@@ -243,7 +245,7 @@ public class Controller extends Canvas{
 		Graphics g = bs.getDrawGraphics();	
 		switch(gameState){
 		case Menu:
-			menu.menuView.render(g);
+			menu.menuView.render(g, menu.getObjects());
 			break;
 		case Game1:
 			game1.view.render(g, game1.getObjects());

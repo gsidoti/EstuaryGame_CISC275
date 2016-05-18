@@ -98,7 +98,7 @@ public class Game4 extends MouseAdapter {
 		if(scaleH(player.getY()+10)>scaleH(Window.HEIGHT/2-50) && scaleH(player.getY()+40)<scaleH(Window.HEIGHT/2+50)){
 			g.setY(greenScore--);
 			if(greenScore <= 0){
-				Menu.Menu.ESCORE += 100;
+				Menu.Menu.SCORE += 100;
 				resetGame();
 			}
 		}else{

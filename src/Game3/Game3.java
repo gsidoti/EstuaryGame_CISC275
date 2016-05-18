@@ -246,7 +246,13 @@ public class Game3 extends MouseAdapter {
 			}
 		}else if(init2){
 			if(System.currentTimeMillis() > timer2+5000.0){
-				//System.out.println("else case");
+				if(actNumCrab-clickNumCrab == 0){
+					Menu.Menu.SCORE += 100;
+				}else if(actNumCrab-clickNumCrab == 1 || clickNumCrab-actNumCrab == 1){
+					Menu.Menu.SCORE += 75;
+				}else if(actNumCrab-clickNumCrab == 2 || clickNumCrab-actNumCrab == 2){
+					Menu.Menu.SCORE += 50;
+				}
 				resetGame();
 			}
 		}else if(objects.size() == animals+1){

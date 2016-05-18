@@ -11,6 +11,7 @@ import Game1.Player;
 import Game1.Trash;
 import Game2.Boat;
 import Game4.G4Player;
+import Menu.Menu;
 import OverallGame.gameObject;
 
 import java.awt.event.MouseAdapter;
@@ -126,6 +127,7 @@ public class Game1 extends MouseAdapter {
 			Lives--;
 			trashcount--;
 			if ((Lives <= 0)) {
+				Menu.SCORE += Score*2;
 				resetGame();
 			}
 		}

@@ -3,6 +3,7 @@ package Menu;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,23 +22,24 @@ import OverallGame.gameObject;
  */
 
 public class Menu extends MouseAdapter {
+	int counter= 0;
+	int timer=0;
+	public boolean updatedScore = false;
+	public boolean returning = true;
+	public long initTime;
 	public MenuView menuView;
 	public boolean running = false;
 	boolean mlActive;
-	public static int HSCORE = 0;
-	public static int ESCORE = 0;
+	public static int SCORE = 0;
+	Random rand = new Random();
 	ArrayList<gameObject> objects = new ArrayList<gameObject>();
 	
 	/**
 	 * 
 	 * @param W
 	 */
-	public Menu(Window W){
-		objects.add(new gameObject("Game1",  ((int)(Window.WIDTH*Window.SCALE)/100)*20,  ((int)(Window.HEIGHT*Window.SCALE)/100)*20, (int)(200.0*Window.SCALE),(int)(200.0*Window.SCALE) ));
-		objects.add(new gameObject("Game2",  ((int)(Window.WIDTH*Window.SCALE)/100)*60,  ((int)(Window.HEIGHT*Window.SCALE)/100)*20, (int)(200.0*Window.SCALE),(int)(200.0*Window.SCALE) ));
-		objects.add(new gameObject("Game3",  ((int)(Window.WIDTH*Window.SCALE)/100)*20,  ((int)(Window.HEIGHT*Window.SCALE)/100)*60, (int)(200.0*Window.SCALE),(int)(200.0*Window.SCALE) ));
-		objects.add(new gameObject("Game4",  ((int)(Window.WIDTH*Window.SCALE)/100)*60,  ((int)(Window.HEIGHT*Window.SCALE)/100)*60, (int)(200.0*Window.SCALE),(int)(200.0*Window.SCALE) ));
-		menuView = new MenuView(W);
+	public Menu(){
+		menuView = new MenuView();
 	}
 	
 	/**
@@ -53,25 +55,29 @@ public class Menu extends MouseAdapter {
 	public void mousePressed(MouseEvent e){
 		int mx = e.getX();
 		int my = e.getY();
-		gameObject g1 = objects.get(0);
-		gameObject g2 = objects.get(1);
-		gameObject g3 = objects.get(2);
-		gameObject g4 = objects.get(3);
-		if(mouseOver(mx,my,g1.getX(),g1.getY(),g1.getVelx(),g1.getVely())){	
+		if(mouseOver(mx,my,scaleW(150), scaleH(150),scaleW(250),scaleH(275))){	
 			Controller.gameState = STATE.Game1i;
 			running = false;
+			returning = false;
+			objects.clear();
 			System.out.println("game1i");
-		}else if(mouseOver(mx,my,g2.getX(),g2.getY(),g2.getVelx(),g2.getVely())){
+		}else if(mouseOver(mx,my,scaleW(900), scaleH(250),scaleW(275),scaleH(275))){	
 			Controller.gameState = STATE.Game2i;
 			running = false;
+			returning = false;
+			objects.clear();
 			System.out.println("game2i");
-		}else if(mouseOver(mx,my,g3.getX(),g3.getY(),g3.getVelx(),g3.getVely())){
+		}else if(mouseOver(mx,my,scaleW(150), scaleH(480),scaleW(275),scaleH(275))){	
 			Controller.gameState = STATE.Game3i;
 			running = false;
+			returning = false;
+			objects.clear();
 			System.out.println("game3i");
-		}else if(mouseOver(mx,my,g4.getX(),g4.getY(),g4.getVelx(),g4.getVely())){
+		}else if(mouseOver(mx,my,scaleW(900), scaleH(480),scaleW(275),scaleH(275))){	
 			Controller.gameState = STATE.Game4i;
 			running = false;
+			returning = false;
+			objects.clear();
 			System.out.println("game4i");
 		}
 		if(mouseOver(mx,my,scaleW(5),scaleH(5),scaleW(80),scaleH(44))){
@@ -117,12 +123,64 @@ public class Menu extends MouseAdapter {
             } else return false;
         } else return false;
     }
+    
+	private void createTrash(int amount){
+		for(int i = 0;i < amount;i++){
+			switch (rand.nextInt(4)){
+				case 0:
+					objects.add(new gameObject("apple",rand.nextInt(125)+515,rand.nextInt(30)+200,0,rand.nextInt(2)+1));
+					break;
+				case 1:
+					objects.add(new gameObject("can",rand.nextInt(125)+515,rand.nextInt(30)+200,0,rand.nextInt(2)+1));
+					break;
+				case 2:
+					objects.add(new gameObject("box",rand.nextInt(125)+515,rand.nextInt(30)+200,0,rand.nextInt(2)+1));
+					break;
+				case 3:
+					objects.add(new gameObject("chipBag",rand.nextInt(125)+515,rand.nextInt(30)+200,0,rand.nextInt(2)+1));
+					break;
+			}
+		}
+	}
+		
+		private void moveTrash(){
+			gameObject o;
+			for(int i=0;i<objects.size();i++){
+				o = objects.get(i);
+				if(o.y>400){
+					o.name = "";
+				}else if(o.name != ""){
+					o.y +=o.getVely();
+				}
+			}
+		
+
+		
+	}
+    
 
     /**
      * 
      */
 	public void tick() {
-		
+		if(returning){
+			if(System.currentTimeMillis()<initTime){
+				updatedScore = false;
+				if(counter++%10 ==0)
+					createTrash(rand.nextInt(3));
+			}else if(updatedScore == false){
+				menuView.oldScore = SCORE;
+				updatedScore = true;
+			}
+		}
+
+		moveTrash();
+	}
+	
+	
+	public ArrayList<gameObject> getObjects(){
+		return this.objects;
 	}
 
 }
+
