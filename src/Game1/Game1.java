@@ -182,7 +182,7 @@ public class Game1 extends MouseAdapter {
 			if(trashcount<maxtrash)
 			{
 				Trash temp = new Trash("Trash", (int)(0 * Window.SCALE),
-	        			(int)(15+rand.nextInt((int)((Window.HEIGHT-50)))*Window.SCALE),
+	        			(int)(150+rand.nextInt((int)((Window.HEIGHT-150)))*Window.SCALE),
 	        			1+maxvel*rand.nextInt((int)(Score/10)+1), 0);
 				temp.setActive(true);
 				objects.add(temp);

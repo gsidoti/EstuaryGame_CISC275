@@ -73,7 +73,7 @@ public class Game2View extends gameView{
 		
 		g.setColor(Color.yellow);
 		g.setFont(new Font("Verdana", Font.BOLD, scaleW(50)));
-		g.drawString("Boats Left: "+ (Game2.boatsLeft-1),scaleW(Window.WIDTH-400), scaleH(50));
+		g.drawString("Boats Left: "+ (Game2.boatsLeft),scaleW(Window.WIDTH-400), scaleH(50));
 		
 		g.drawImage(images.get("exit"), scaleW(5), scaleH(5), null);
 

@@ -132,7 +132,7 @@ public class Game2 extends MouseAdapter {
 	 */
 	public void addBoat(){
 		int r = rand.nextInt(6),y = 0;
-		if(boatsLeft > 1){
+		if(boatsLeft > 0){
 			do {
 				r = rand.nextInt(6);
 				//System.out.println("R: "+r);
