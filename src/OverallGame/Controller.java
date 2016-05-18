@@ -260,9 +260,6 @@ public class Controller extends Canvas{
 				}
 				init = true;
 		}
-		g.setColor(Color.black);
-		g.fillRect(0, 0,window.screenDimension.width,window.screenDimension.height);
-
 		
 		
 		switch(gameState){
@@ -296,6 +293,8 @@ public class Controller extends Canvas{
 			default:
 				break;
 		}
+		g.setColor(Color.black);
+		g.fillRect(0,(int)(Window.HEIGHT*Window.SCALE),window.screenDimension.width,window.screenDimension.height-(int)(Window.HEIGHT*Window.SCALE));
 		g.dispose();
 		bs.show();
 	}
