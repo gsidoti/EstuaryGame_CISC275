@@ -31,29 +31,21 @@ public class Window{
 	 */
 	public Window(String title,Controller c){
 		frame = new JFrame(title);
-		//Dimension screenDimension = env.getMaximumWindowBounds().getSize();
 		Dimension screenDimension = Toolkit.getDefaultToolkit().getScreenSize();
 		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-		Insets insets = frame.getInsets();
-		System.out.println("I:"+insets.bottom+" "+insets.top+" "+insets.left+" "+insets.right);
-		screenDimension.height = screenDimension.height-insets.bottom-insets.top;
-		screenDimension.width = screenDimension.width-insets.left-insets.right;
 		Dimension scaledDimension = getScaledDimension(screenDimension,new Dimension(WIDTH,HEIGHT));
-		SCALE = scaledDimension.getWidth()/1280.0;
 		if(gd.isFullScreenSupported()){
-			//screenDimension = Toolkit.getDefaultToolkit().getScreenSize();
+			screenDimension = Toolkit.getDefaultToolkit().getScreenSize();
 			frame.setUndecorated(true);
 			gd.setFullScreenWindow(frame);
 		}else{
 			System.err.println("Full screen not supported");
 			GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
 			screenDimension = env.getMaximumWindowBounds().getSize();
-			
-		}
-		//unnecessary apple full-screen functions
-		//com.apple.eawt.FullScreenUtilities.setWindowCanFullScreen(frame,true);
-		//com.apple.eawt.Application.getApplication().requestToggleFullScreen(frame);
-	    frame.getRootPane().putClientProperty("apple.awt.fullscreenable", Boolean.valueOf(true));
+			scaledDimension = getScaledDimension(screenDimension,new Dimension(WIDTH,HEIGHT));
+			frame.getRootPane().putClientProperty("apple.awt.fullscreenable", Boolean.valueOf(true));
+		}	
+		SCALE = scaledDimension.getWidth()/1280.0;
 		frame.setPreferredSize(scaledDimension);
 		frame.setMaximumSize(scaledDimension);
 		frame.setMinimumSize(scaledDimension);
@@ -62,9 +54,8 @@ public class Window{
 		frame.add(c);
 		frame.setResizable(false);
 		frame.setVisible(true);
-
-		System.out.println(screenDimension);
-		System.out.println(scaledDimension);
+		System.out.println("Actual Screen Dimension: X:"+screenDimension.getWidth()+" Y: "+screenDimension.getHeight());
+		System.out.println("Scaled Screen Dimension: X:"+scaledDimension.getWidth()+" Y: "+scaledDimension.getHeight());
 	}
 	
 	/**
