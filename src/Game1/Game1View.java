@@ -1,6 +1,7 @@
 package Game1;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Random;
@@ -10,64 +11,75 @@ import OverallGame.Window;
 import OverallGame.gameObject;
 import OverallGame.gameView;
 
-/**
- * Game1View is the view of Game1 and it handles drawing all of the images and text on screen at every tick
- * 
- * @author Team 7
- * @version 5/17
- */
-
 public class Game1View extends gameView{
+
+	private int BkgOffset=0;
+	private int dBkgOffset=1;
 
     private int[] dx=new int[5];
     private int[] dy=new int[5];
     private int pos=0;
 
-    /**
-     * 
-     */
 	public Game1View()
 	{
 	    loadImages();	
 	}
 
-	/**
-	 * 
-	 */
 	public void loadImages(){
 		createImage("can");
 		createImage("exit");
+		createImage("boat2");
+		createImage("sea3");
 		//images.put("can");
 	}
 
-	/**
-	 * 
-	 * @param g
-	 * @param objects
-	 */
+
 	public void render(Graphics g, ArrayList<gameObject> objects){
 
 		double m;
 		double n;
 		int tx;
 		int ty;
-		int i;
+		int i,j;
 		int wy,wx;
+		int boatindex;
+		int boatoffset;
+		
 		Random rand = new Random();
 
 		//fill screen background
 		Player player = (Player) objects.get(0);
-		g.setColor(new Color(0,32,64));
-		g.fillRect(0, 0, (int)(Window.WIDTH*Window.SCALE)-20, (int)(Window.HEIGHT*Window.SCALE));
-		g.setColor(new Color(192,192,0));
-		g.fillRect((int)(Window.WIDTH*Window.SCALE)-20, 0, 20, (int)(Window.HEIGHT*Window.SCALE));
+		//g.setColor(new Color(0,32,64));
+		//g.fillRect(0, 0, (int)(Window.WIDTH*Window.SCALE)-20, (int)(Window.HEIGHT*Window.SCALE));
+		//g.setColor(new Color(192,192,0));
+		//g.fillRect((int)(Window.WIDTH*Window.SCALE)-20, 0, 20, (int)(Window.HEIGHT*Window.SCALE));
 
-		g.setColor(new Color(32,64,128));
+		//g.setColor(new Color(32,64,128));
 		//g.drawLine(pos, 0, pos,(int)(Window.HEIGHT*Window.SCALE) );
-		for(i=pos-(int)(Window.WIDTH*Window.SCALE);i<(int)(Window.WIDTH*Window.SCALE)-20;i+=100)
+		//for(i=pos-(int)(Window.WIDTH*Window.SCALE);i<(int)(Window.WIDTH*Window.SCALE)-20;i+=100)
+		//{
+			//g.drawLine(i, 0, i, (int)(Window.HEIGHT*Window.SCALE) );
+		//}
+		
+		// Background
+		
+		BkgOffset+=dBkgOffset;
+		if(BkgOffset>10)
 		{
-			g.drawLine(i, 0, i, (int)(Window.HEIGHT*Window.SCALE) );
+			BkgOffset=10;
+			dBkgOffset=-1;
 		}
+		if(BkgOffset<0)
+		{
+			BkgOffset=0;
+			dBkgOffset=1;
+		}
+		g.drawImage(images.get("sea3"),0,0,(int)(Window.WIDTH*Window.SCALE),
+				(int)(Window.HEIGHT*Window.SCALE),(int)(BkgOffset*Window.SCALE),
+				0,(int)((1360.0+BkgOffset)*Window.SCALE),
+				(int)(720*Window.SCALE),null); 
+		
+		
 
 		//draw safe zone
 		//g.setColor(Color.white);
@@ -86,47 +98,68 @@ public class Game1View extends gameView{
 				if (temp.getActive()) {
 					System.out.println(objects.get(i).name+"X: "+objects.get(i).getX()+" Y: "+ objects.get(i).getY()+objects.get(i).getVelx()+" "+ objects.get(i).getVely());
 					//g.fillRect(objects.get(i).getX()-10,objects.get(i).getY()-10,20,20);
-					g.drawImage(images.get("can"),objects.get(i).getX()-10,objects.get(i).getY()-10,20,20,null); 
+					g.drawImage(images.get("can"),objects.get(i).getX()-(int)(15*Window.SCALE),
+							objects.get(i).getY()-(int)(15*Window.SCALE),(int)(30*Window.SCALE),
+							(int)(30*Window.SCALE),null); 
 				}
 			}
 			else if(o.name=="Score")
 			{
 			    Scoreboard tmp = (Scoreboard)(objects.get(i));
 			    g.setColor( Color.RED );
-		        g.drawString( String.format( "High Score %s", tmp.getHi() ), 30, 45 );
+			    g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
+		        g.drawString( String.format( "High Score %s", tmp.getHi() ), (int)(30*Window.SCALE), (int)(30*Window.SCALE) );
 			    g.setColor( Color.WHITE );
-		        g.drawString( String.format( "Score %s", tmp.getScore() ), 30, 60 );
-		        g.drawString( String.format( "Lives %s", tmp.getLives() ), 30, 75 );
+		        g.drawString( String.format( "Score %s", tmp.getScore() ), (int)(30*Window.SCALE), (int)(60*Window.SCALE) );
+		        g.drawString( String.format( "Lives:"), (int)(30*Window.SCALE), (int)(90*Window.SCALE) );
+		        for(j=0;j<tmp.getLives();j++)
+		        {
+		    		g.drawImage(images.get("boat2"),(int)((140+20*j)*Window.SCALE),(int)(65*Window.SCALE),
+		    				(int)((170+20*j)*Window.SCALE),(int)(95*Window.SCALE),
+		    				(int)(2700*Window.SCALE),0,(int)(2800*Window.SCALE),(int)(110*Window.SCALE),null); 		        	
+		        }
 			}
 			else if(o.name=="Beached")
 			{
 			    //g.setColor( Color.BLACK );
 				//g.fillRect(o.getX()-10,o.getY()-10,20,20);
-				g.drawImage(images.get("can"),o.getX()-10,o.getY()-10,20,20,null); 
+				g.drawImage(images.get("can"),o.getX()-(int)(15*Window.SCALE),
+						o.getY()-(int)(15*Window.SCALE),(int)(30*Window.SCALE),
+						(int)(30*Window.SCALE),null); 
 			}
 			g.drawImage(images.get("exit"), scaleW(Window.WIDTH-85), scaleH(5), null);
 		}
 		// Now Player
 
 		Player p = (Player)(objects.get(0));
-		g.setColor(Color.red);
-        m=Math.cos(p.getAngle());
-        n=Math.sin(p.getAngle());
         tx=(int)p.getX();
         ty=(int)p.getY();
-        dx[0]=tx+(int)(30.0*m);
-        dy[0]=ty+(int)(30.0*n);
-        dx[1]=tx+(int)(10.0*m-10.0*n);
-        dy[1]=ty+(int)(10.0*n+10.0*m);
-        dx[2]=tx+(int)(-20.0*m-10.0*n);
-        dy[2]=ty+(int)(-20.0*n+10.0*m);
-        dx[3]=tx+(int)(-20.0*m+10.0*n);
-        dy[3]=ty+(int)(-20.0*n-10.0*m);
-        dx[4]=tx+(int)(10.0*m+10.0*n);
-        dy[4]=ty+(int)(10.0*n-10.0*m);
-        g.fillPolygon(dx, dy, 5);
-        g.setColor(Color.YELLOW);
-        g.drawPolygon(dx,dy,5);
+        m=p.getAngle();
+        m*=180.0/3.14159265359;
+        if(m<0)m+=360;
+        boatindex=(int)(m/10);
+        boatoffset=(int)(boatindex*100*Window.SCALE);
+		g.drawImage(images.get("boat2"),tx-(int)(40*Window.SCALE),
+				ty-(int)(40*Window.SCALE),tx+(int)(40*Window.SCALE),
+				ty+(int)(40*Window.SCALE),(int)(boatoffset),0,
+				(int)((boatoffset+100.0*Window.SCALE)),(int)(110*Window.SCALE),null); 
+        
+		//g.setColor(Color.red);
+        //m=Math.cos(p.getAngle());
+        //n=Math.sin(p.getAngle());
+        //dx[0]=tx+(int)(30.0*m);
+        //dy[0]=ty+(int)(30.0*n);
+        //dx[1]=tx+(int)(10.0*m-10.0*n);
+        //dy[1]=ty+(int)(10.0*n+10.0*m);
+        //dx[2]=tx+(int)(-20.0*m-10.0*n);
+        //dy[2]=ty+(int)(-20.0*n+10.0*m);
+        //dx[3]=tx+(int)(-20.0*m+10.0*n);
+        //dy[3]=ty+(int)(-20.0*n-10.0*m);
+        //dx[4]=tx+(int)(10.0*m+10.0*n);
+        //dy[4]=ty+(int)(10.0*n-10.0*m);
+        //g.fillPolygon(dx, dy, 5);
+        //g.setColor(Color.YELLOW);
+        //g.drawPolygon(dx,dy,5);
 
 
 		//g.fillRect(objects.get(0).getX(), objects.get(0).getY(), 30, 30);
