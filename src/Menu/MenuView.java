@@ -1,6 +1,7 @@
 package Menu;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
 import OverallGame.Window;
@@ -74,12 +75,13 @@ public class MenuView extends gameView{
 		}
 		
 		g.drawImage(images.get("trash-43"), scaleW(500), scaleH(400), null);
-		g.setFont(new Font("Verdana", Font.BOLD, scaleW(30)));
+		//Font tallerFont = tallerFont.deriveFont(AffineTransform.getScaleInstance(1.0, 2.0));
+		g.setFont(new Font("Verdana", Font.BOLD, scaleW(50)));//.deriveFont(AffineTransform.getScaleInstance(1, Window.SCALE)));
 		g.setColor(Color.cyan);
-		g.drawString("Garbage",scaleW(565),scaleH(500));
-		g.drawString("Collected:",scaleW(555),scaleH(550));
+		g.drawString("Score:",scaleW(540),scaleH(500));
+		//g.drawString("Collected:",scaleW(555),scaleH(550));
 		g.setFont(new Font("Verdana", Font.BOLD, scaleW(70)));
-		g.drawString(String.valueOf(oldScore),scaleW(550),scaleH(620));
+		g.drawString(String.valueOf(oldScore),scaleW(540),scaleH(575));
 		g.drawImage(images.get("exit"), scaleW(5), scaleH(5), null);
 	}
 	

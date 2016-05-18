@@ -35,7 +35,7 @@ public class Game4iView extends gameView{
 		g.drawImage(images.get("underwater2"), scaleW(0), scaleH(0), null);
 
 		g.setColor(Color.WHITE);
-		g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
+		g.setFont(new Font("TimesRoman", Font.PLAIN, scaleW(30)));
 		g.drawString("Collect the Sample", (int)(Window.WIDTH*Window.SCALE)/4, (int)(Window.HEIGHT*Window.SCALE)/4);
 		g.drawString("The reserve needs your help to test the water around the estuary", (int)(Window.WIDTH*Window.SCALE)/4, (int)(Window.HEIGHT*Window.SCALE)/4+60);
 		g.drawString("Click and hold to make your water collection device move up", (int)(Window.WIDTH*Window.SCALE)/4, (int)(Window.HEIGHT*Window.SCALE)/4+120);

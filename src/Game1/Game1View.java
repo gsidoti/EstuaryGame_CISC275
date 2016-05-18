@@ -107,7 +107,7 @@ public class Game1View extends gameView{
 			{
 			    Scoreboard tmp = (Scoreboard)(objects.get(i));
 			    g.setColor( Color.RED );
-			    g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
+			    g.setFont(new Font("TimesRoman", Font.PLAIN, scaleW(30)));
 		        g.drawString( String.format( "High Score %s", tmp.getHi() ), (int)(30*Window.SCALE), (int)(30*Window.SCALE) );
 			    g.setColor( Color.WHITE );
 		        g.drawString( String.format( "Score %s", tmp.getScore() ), (int)(30*Window.SCALE), (int)(60*Window.SCALE) );

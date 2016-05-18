@@ -32,7 +32,7 @@ public class Game1iView extends gameView{
 			//g.drawLine(i, 0, i, (int)(Window.HEIGHT*Window.SCALE) );
 		//}
 		//g.setColor(Color.WHITE);
-		g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
+		g.setFont(new Font("TimesRoman", Font.PLAIN, scaleW(30)));
 		//pos++;
 		
 		BkgOffset+=dBkgOffset;
