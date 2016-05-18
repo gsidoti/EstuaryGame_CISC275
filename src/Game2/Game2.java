@@ -236,7 +236,7 @@ public class Game2 extends MouseAdapter {
     void resetGame() {
     	boatsLeft=36;
     	spawnBoats =true;
-    	Lives = 3;
+    	Lives = 10;
     	counter = 0;
         speed = 1;
         boatspeed = 200;
