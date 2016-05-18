@@ -33,7 +33,7 @@ public class Game4View extends gameView{
 		createImage("underwater2");
 		createImage("watertester");
 
-		System.out.println(	images.get("watertester").getWidth()+" "+		images.get("watertester").getHeight());
+		//System.out.println(	images.get("watertester").getWidth()+" "+		images.get("watertester").getHeight());
 		images.put("underwater2",resizeImg(images.get("underwater2"),scaleW(Window.WIDTH),scaleH(Window.HEIGHT)));
 		createImage("exit");
 	}
