@@ -1,11 +1,15 @@
 package OverallGame;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GraphicsEnvironment;
+import java.awt.Toolkit;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
+import java.util.Map;
 
 import Game2.Game2;
 import Game2.Game2i;
@@ -32,7 +36,7 @@ public class Controller extends Canvas{
 
 	private Thread thread;
 	public boolean running = false;
-
+	private boolean init = false;
 	private Menu menu;
 	private Game1 game1;
 	private Game1i game1i;
@@ -42,6 +46,7 @@ public class Controller extends Canvas{
 	private Game3i game3i;
 	private Game4 game4;
 	private Game4i game4i;
+	private Window window;
 
 	public static STATE gameState = STATE.Menu;
 
@@ -49,7 +54,7 @@ public class Controller extends Canvas{
 	 * Contructor for Controller objects
 	 */
 	public Controller(){
-		Window w = new Window("Estuary Game",this);
+		window = new Window("Estuary Game",this);
 		menu = new Menu();
 		game1 = new Game1();
 		game1i = new Game1i();
@@ -92,10 +97,10 @@ public class Controller extends Canvas{
 		long lastTime = System.nanoTime();
 		double amountOfTicks = 60.0;
 		double ns = 1000000000 / amountOfTicks;
+		int frames = 0;
+		int updates = 0;
 		double delta = 0;
 		long timer = System.currentTimeMillis();
-		int updates = 0;
-		int frames = 0;
 		while(running){
 			long now = System.nanoTime();
 			delta += (now - lastTime) / ns;
@@ -234,6 +239,7 @@ public class Controller extends Canvas{
 			break;
 		}
 	}
+	
 
 	/**
 	 * Checks the gameState and depending on what it is, calls the appropriate game's render method.
@@ -245,7 +251,22 @@ public class Controller extends Canvas{
 			this.createBufferStrategy(3);
 			return;
 		}
-		Graphics g = bs.getDrawGraphics();	
+		Graphics g = bs.getDrawGraphics();
+		if(!init){
+			Map<?, ?> desktopHints = 
+				    (Map<?, ?>) Toolkit.getDefaultToolkit().getDesktopProperty("awt.font.desktophints");
+
+				Graphics2D g2d = (Graphics2D) g;
+				if (desktopHints != null) {
+				    g2d.setRenderingHints(desktopHints);
+				}
+				init = true;
+		}
+		g.setColor(Color.black);
+		g.fillRect(0, 0,window.screenDimension.width,window.screenDimension.height);
+
+		
+		
 		switch(gameState){
 		case Menu:
 			menu.menuView.render(g, menu.getObjects());

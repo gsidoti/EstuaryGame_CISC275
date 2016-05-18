@@ -22,6 +22,7 @@ public class Window{
 	public static JFrame frame;
 	public static final int WIDTH = 1280;
 	public static final int HEIGHT = 720;
+	public Dimension screenDimension;
 	public static double SCALE;
 	
 	/**
@@ -32,7 +33,7 @@ public class Window{
 	 */
 	public Window(String title,Controller c){
 		frame = new JFrame(title);
-		Dimension screenDimension = Toolkit.getDefaultToolkit().getScreenSize();
+		screenDimension = Toolkit.getDefaultToolkit().getScreenSize();
 		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 		Dimension scaledDimension = getScaledDimension(screenDimension,new Dimension(WIDTH,HEIGHT));
 		if(gd.isFullScreenSupported()){
@@ -56,6 +57,8 @@ public class Window{
 		frame.add(c);
 		frame.setResizable(false);
 		frame.setVisible(true);
+		
+		
 		System.out.println("Actual Screen Dimension: X:"+screenDimension.getWidth()+" Y: "+screenDimension.getHeight());
 		System.out.println("Scaled Screen Dimension: X:"+scaledDimension.getWidth()+" Y: "+scaledDimension.getHeight());
 	}

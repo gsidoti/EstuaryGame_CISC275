@@ -1,7 +1,6 @@
 package Menu;
 
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
 import OverallGame.Window;
