@@ -34,7 +34,7 @@ public class Game2iView extends gameView{
 	public void render(Graphics g){
 		g.drawImage(images.get("game2background"), 0, 0, null);
 		g.setColor(Color.WHITE);
-		g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
+		g.setFont(new Font("TimesRoman", Font.PLAIN, scaleW(30)));
 		g.drawString("Clean The Boats!", (int)(Window.WIDTH*Window.SCALE)/4, (int)(Window.HEIGHT*Window.SCALE)/4);
 		g.drawString("Shipping boats are coming to port, but some brought", (int)(Window.WIDTH*Window.SCALE)/4, (int)(Window.HEIGHT*Window.SCALE)/4+60);
 		g.drawString("invasive species along with them", (int)(Window.WIDTH*Window.SCALE)/4, (int)(Window.HEIGHT*Window.SCALE)/4+90);

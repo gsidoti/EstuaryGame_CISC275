@@ -119,7 +119,7 @@ public class Game4 extends MouseAdapter {
 	public void tick() {
 		updatePlayer();
 		updateScore();
-		System.out.println("Green: "+greenScore+" Red: "+redScore);
+		//System.out.println("Green: "+greenScore+" Red: "+redScore);
 	}
 	
     /**

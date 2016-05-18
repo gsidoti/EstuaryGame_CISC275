@@ -36,7 +36,7 @@ public class Game3iView extends gameView{
 		g.drawImage(images.get("game3sand"), 0, 0, null);
 		g.drawImage(images.get("game3wood"), 0, 0, null);
 		g.setColor(Color.BLACK);
-		g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
+		g.setFont(new Font("TimesRoman", Font.PLAIN, scaleW(30)));
 		g.drawString("Horseshoe Crab Spawning Survey", (int)(Window.WIDTH*Window.SCALE)/4, (int)(Window.HEIGHT*Window.SCALE)/4);
 		g.drawString("There is marine wildlife everywhere, but the reserve needs", (int)(Window.WIDTH*Window.SCALE)/4, (int)(Window.HEIGHT*Window.SCALE)/4+60);
 		g.drawString("you to count how many Horseshoe Crabs there are", (int)(Window.WIDTH*Window.SCALE)/4, (int)(Window.HEIGHT*Window.SCALE)/4+90);

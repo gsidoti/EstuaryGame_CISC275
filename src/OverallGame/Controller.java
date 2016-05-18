@@ -142,7 +142,7 @@ public class Controller extends Canvas{
 				this.addMouseListener(menu);
 				System.out.println("setting menu to running");
 				menu.running = true;
-				if(menu.returning == false){
+				if(Menu.SCORE>menu.menuView.oldScore){
 					menu.initTime = System.currentTimeMillis()+7000;
 					menu.returning = true;
 				}
