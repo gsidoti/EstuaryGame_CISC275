@@ -85,6 +85,7 @@ public class MenuView extends gameView{
 		//g.setColor(Color.black);
 		//g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
 		//g.drawString("Score",((int)(w*wS)/100)*50-30,((int)(h*hS)/100)*2+50);
+		g.drawImage(images.get("exit"), scaleW(5), scaleH(5), null);
 	}
 
 	/**
@@ -92,6 +93,7 @@ public class MenuView extends gameView{
 	 */
 	@Override
 	public void loadImages() {
+		createImage("exit");
 		createImage("smallButton");
 		createImage("menuBG");
 		images.put("menuBG",resizeImg(images.get("menuBG"),scaleW(Window.WIDTH),scaleH(Window.HEIGHT)));

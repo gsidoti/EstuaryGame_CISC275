@@ -74,7 +74,30 @@ public class Menu extends MouseAdapter {
 			running = false;
 			System.out.println("game4i");
 		}
+		if(mouseOver(mx,my,scaleW(5),scaleH(5),scaleW(80),scaleH(44))){
+			System.exit(0);
+		}
 	}
+	
+    /**
+     * 
+     * @param x
+     * @return
+     */
+	public int scaleW(double x){
+		return (int)(Window.SCALE*x);
+	}
+	
+	/**
+	 * 
+	 * @param x
+	 * @return
+	 */
+	public int scaleH(double x){
+		return (int)(Window.SCALE*x);
+	}
+
+	
 	
 	/**
 	 * 

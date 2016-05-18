@@ -1,6 +1,7 @@
 package OverallGame;
 
 import java.awt.Dimension;
+import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Insets;
 import java.awt.Toolkit;
@@ -18,7 +19,7 @@ import javax.swing.JPanel;
 public class Window{
 
 	//private static final long serialVersionUID = 1L;
-	public JFrame frame;
+	public static JFrame frame;
 	public static final int WIDTH = 1280;
 	public static final int HEIGHT = 720;
 	public static double SCALE;
@@ -32,6 +33,7 @@ public class Window{
 		frame = new JFrame(title);
 		GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		//Dimension screenDimension = env.getMaximumWindowBounds().getSize();
+		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 		Dimension screenDimension = Toolkit.getDefaultToolkit().getScreenSize();
 		Insets insets = frame.getInsets();
 		screenDimension.height = screenDimension.height-insets.bottom-insets.top;
@@ -39,6 +41,13 @@ public class Window{
 		Dimension scaledDimension = getScaledDimension(screenDimension,new Dimension(WIDTH,HEIGHT));//= new Dimension((int)(screenDimension.getHeight()*1.777778),screenDimension.height);
 		SCALE = scaledDimension.getWidth()/1280.0;
 		double d = scaledDimension.getHeight()/720.0;
+		String osName = System.getProperty("os.name").toLowerCase();
+		boolean isMacOs = osName.startsWith("mac os x");
+		if (isMacOs) 
+		{
+			
+		  System.out.println("Your on a mac");
+		}
 
 		//unnecessary apple full-screen functions
 		//com.apple.eawt.FullScreenUtilities.setWindowCanFullScreen(frame,true);
@@ -48,9 +57,11 @@ public class Window{
 		frame.setMaximumSize(scaledDimension);
 		frame.setMinimumSize(scaledDimension);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		System.out.println("Print something");
 		frame.setLocationRelativeTo(null);
 		frame.add(c);
 		frame.setResizable(false);
+		gd.setFullScreenWindow(frame);
 		frame.setVisible(true);
 		System.out.println(screenDimension);
 		System.out.println(scaledDimension);

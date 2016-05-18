@@ -1,7 +1,9 @@
 package OverallGame;
 
 import java.awt.Canvas;
+import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.GraphicsEnvironment;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
 
@@ -29,7 +31,7 @@ public class Controller extends Canvas{
 	private static final long serialVersionUID = 1L;
 
 	private Thread thread;
-	private boolean running = false;
+	public boolean running = false;
 
 	private Menu menu;
 	private Game1 game1;
@@ -75,7 +77,7 @@ public class Controller extends Canvas{
 	/**
 	 * 
 	 */
-	private synchronized void stop(){
+	public synchronized void stop(){
 		try{
 			thread.join();
 			running = false;
@@ -131,6 +133,7 @@ public class Controller extends Canvas{
 	 * 
 	 */
 	private void tick(){
+		
 		switch(gameState){
 		case Menu:
 			if(menu.running == false){
