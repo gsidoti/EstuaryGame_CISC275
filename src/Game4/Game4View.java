@@ -19,14 +19,14 @@ public class Game4View extends gameView{
 	G4Player player;
 	
 	/**
-	 * 
+	 * Constructor for Game4View objects
 	 */
 	public Game4View(){
 		loadImages();
 	}
 	
 	/**
-	 * 
+	 * Loads the needed images for the game
 	 */
 	public void loadImages(){
 		createImage("vessel");
@@ -39,9 +39,10 @@ public class Game4View extends gameView{
 	}
 	
 	/**
+	 * Handles drawing all of the objects on screen at every tick.
 	 * 
-	 * @param g
-	 * @param objects
+	 * @param g The graphics for the game
+	 * @param objects The ArrayList of gameObjects in the game
 	 */
 	public void render(Graphics g, ArrayList<gameObject> objects){
 		//get player location

@@ -20,14 +20,14 @@ public class Game3View extends gameView{
 	int count;
 	
 	/**
-	 * 
+	 * Constructor for Game3View objects
 	 */
 	public Game3View(){
 		loadImages();
 	}
 	
 	/**
-	 * 
+	 * Loads the needed images for the game
 	 */
 	public void loadImages(){
 		createImage("bluecrab_0");
@@ -42,9 +42,10 @@ public class Game3View extends gameView{
 		}
 	
 	/**
+	 * Handles drawing all of the objects on screen at every tick.
 	 * 
-	 * @param g
-	 * @param objects
+	 * @param g The graphics for the game
+	 * @param objects The ArrayList of gameObjects in the game
 	 */
 	public void render(Graphics g, ArrayList<gameObject> objects){
 		

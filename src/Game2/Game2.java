@@ -52,14 +52,15 @@ public class Game2 extends MouseAdapter {
     private int Lives = 10;
    
     /**
-     * 
+     * Constructor for Game2 objects
      */
     public Game2() {
         view = new Game2View();
     }
     
     /**
-     * 
+     * When the mouse button is pressed, sets mousedown to true and sets mx/my to the mouse's x and y position.
+     * If the mouse was over the quit button when pressed, reset the game.
      */
 	public void mousePressed(MouseEvent e){
 		mousedown = true;//dont need
@@ -71,15 +72,18 @@ public class Game2 extends MouseAdapter {
 	}
 
 	/**
-	 * 
+	 * When the mouse button is released, sets mousedown to false.
 	 */
 	public void mouseReleased(MouseEvent e){//dont need
 		mousedown = false;
 	}
 	
 	/**
+	 * Updates a boat from the ArrayList of gameObjects.
+	 * If boat is active, call move method.
+	 * If boat is clicked on, set isInfested to false
 	 * 
-	 * @param index
+	 * @param index the index of the object in the ArrayList
 	 */
 	void updateBoat(int index) {
 		Boat b = (Boat)objects.get(index);
@@ -90,16 +94,13 @@ public class Game2 extends MouseAdapter {
 		}
 	}
 	
-	/*
+	/**
 	 * Iterates through the array of GameObjects, pulling each boat.
 	 * If the boat made it to the left side of the screen and is active, print y velocity and set isActive to false.
 	 * If the boat is also infested, subtract 1 from Lives.
 	 * If lives is 0, reset the game.
 	 * If the boat didn't make it but is active, checks to see if mouse was clicked over boat position, if so set isInfested
 	 * to false, then calls the move method.
-	 */
-	/**
-	 * 
 	 */
 	void updateBoats(){
 		Boat b;
@@ -122,14 +123,12 @@ public class Game2 extends MouseAdapter {
 		}
 	}
 	
-	/* Takes a random number (0-6) and assigns r to it and y to 0.
+	/**
+	 * Takes a random number (0-6) and assigns r to it and y to 0.
 	 * if there are less than 35 objects in the array of GameObjects, r equals another random integer (0-6) and, depending 
 	 * of the fullness of each dock, assigns the y value of the new boat to line up with the specified dock.
 	 * Makes the new boat with all of the variables and adds it to the array of GameObjects.
 	 * If objects is equal to 35, call the resetGame method
-	 */
-	/**
-	 * 
 	 */
 	public void addBoat(){
 		int r = rand.nextInt(6),y = 0;
@@ -186,7 +185,9 @@ public class Game2 extends MouseAdapter {
 	}
 
 	/**
-	 * 
+	 * Handles the methods called every tick of the game.
+	 * Increments the counter and adds a new boat, increases the speed, or decreases the boatspeed and sets mx/my to 0,
+	 * depending on the value of the counter.
 	 */
 	public void tick() {
 		counter++;
@@ -204,24 +205,21 @@ public class Game2 extends MouseAdapter {
 			updateBoats();
 	}
 	
-	/**
-	 * 
-	 * @return
-	 */
 	public ArrayList<gameObject> getObjects(){
 		return this.objects;
 	}
 	
-	/**
-	 * 
-	 * @param mx
-	 * @param my
-	 * @param x
-	 * @param y
-	 * @param width
-	 * @param height
-	 * @return
-	 */
+    /**
+     * Checks to see if the mouse is over given coordinates on the screen.
+     * 
+     * @param mx Mouse x-position
+     * @param my Mouse y-position
+     * @param x x-position of image being checked against mouse x-position
+     * @param y y-position of image being checked against mouse y-position
+     * @param width Width of image being checked for mouse over
+     * @param height Height of image being checked for mouse over 
+     * @return Returns true if mouse is over given image position, false if otherwise
+     */
     boolean mouseOver(int mx, int my, int x, int y, int width, int height) {
         if (mx > x && mx < x + width) {
             if (my > y && my < y + height) {
@@ -230,9 +228,9 @@ public class Game2 extends MouseAdapter {
         } else return false;
     }
     
-    /**
-     * 
-     */
+	/**
+	 * Resets Game2 by setting game values back to starting values, clearing the ArrayList, and setting gameState back to Menu.
+	 */
     void resetGame() {
     	boatsLeft=36;
     	spawnBoats =true;
@@ -247,114 +245,69 @@ public class Game2 extends MouseAdapter {
     }
     
     /**
+     * Takes the width of an image and scales it to the appropriate size for the current screen
      * 
-     * @param x
-     * @return
+     * @param x Width of image that needs to be scaled
+     * @return Returns scaled width for image
      */
 	public int scaleW(double x){
 		return (int)(Window.SCALE*x);
 	}
 	
 	/**
+	 * Takes the height of an image and scales it to the appropriate size for the current screen
 	 * 
-	 * @param x
-	 * @return
+	 * @param x Height of image that needs to be scaled
+	 * @return Returns scaled height for image
 	 */
 	public int scaleH(double x){
 		return (int)(Window.SCALE*x);
 	}
     
-	/**
-	 * 
-	 * @return
-	 */
     public int getLives() {
     	return Lives;
     }
     
-    /**
-     * 
-     * @param num
-     */
     public void setLives(int num) {
     	Lives = num;
     }
-    /**
-     * 
-     * @return
-     */
+
     public int getCounter() {
     	return counter;
     }
     
-    /**
-     * 
-     * @param num
-     */
     public void setCounter(int num) {
     	counter = num;
     }
  
-    /**
-     * 
-     * @return
-     */
     public int getMX() {
     	return mx;
     }
     
-    /**
-     * 
-     * @param num
-     */
     public void setMX(int num) {
     	mx = num;
     }
     
-    /**
-     * 
-     * @return
-     */
     public int getMY() {
     	return my;
     }
     
-    /**
-     * 
-     * @param num
-     */
     public void setMY(int num) {
     	my = num;
     }
     
-    /**
-     * 
-     * @return
-     */
     public boolean getRunning() {
     	return running;
     }
     
-    /**
-     * 
-     * @param value
-     */
     public void setRunning(boolean value) {
     	running = value;
     }
     
-    /**
-     * 
-     * @return
-     */
     public boolean getMousedown() {
     	return mousedown;
     }
     
-    /**
-     * 
-     * @param value
-     */
     public void setMousedown(boolean value) {
     	mousedown = value;
     }

@@ -16,13 +16,14 @@ public class Animal extends gameObject{
 	boolean onScreen;
 	
 	/**
-	 * 
-	 * @param name
-	 * @param x
-	 * @param y
-	 * @param velx
-	 * @param vely
-	 * @param dir
+     * Constructor for Animal objects
+     * 
+     * @param name name of the object
+	 * @param x x-position of the object
+	 * @param y y-position of the object
+	 * @param velx x velocity of the object
+	 * @param vely y velocity of the object
+	 * @param dir direction of the object's movement
 	 */
 	public Animal(String name, int x, int y, int velx, int vely, Direction dir) {
 		super(name, x, y, velx, vely);
@@ -30,34 +31,18 @@ public class Animal extends gameObject{
 		this.onScreen = true;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 */
 	public Direction getDir() {
 		return dir;
 	}
 	
-	/**
-	 * 
-	 * @param d
-	 */
 	public void setDir(Direction d) {
 		dir = d;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 */
 	public boolean getOnScreen() {
 		return onScreen;
 	}
 	
-	/**
-	 * 
-	 * @param value
-	 */
 	public void setOnScreen(boolean value) {
 		onScreen = value;
 	}

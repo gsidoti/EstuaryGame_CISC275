@@ -22,14 +22,15 @@ import OverallGame.STATE;
 import OverallGame.Window;
 
 /**
- * Write a description of class GameOne here.
+ * Game1 has a player-controlled boat and trash moving across the screen.
+ * The goal is to move the boat by clicking where you want to go, and collecting the trash
+ * before it reaches the beach.
  *
- * @author Jakub Simacek
- * @version 0.1
+ * @author Team 7
+ * @version 5/17
  */
 
 public class Game1 extends MouseAdapter {
-	boolean KillMe=false;
 	boolean mlActive;
 	
     //private FrameRate frameRate;
@@ -58,6 +59,10 @@ public class Game1 extends MouseAdapter {
 
 	ArrayList<gameObject> objects = new ArrayList<gameObject>();
 
+	/**
+	 * Constructor for Game1 objects 
+	 * Sets game variables to starting values
+	 */
     public Game1() {
     	int i;
         Lives=10;
@@ -80,6 +85,10 @@ public class Game1 extends MouseAdapter {
         view = new Game1View();
     }
 
+    /**
+     * When mouse is pressed, assigns mousedown to true, acquires the mouse position on screen and check if the 
+     * exit button was pressed.
+     */
 	public void mousePressed(MouseEvent e){
 		mousedown = true;
 		Player p = (Player) (objects.get(0));
@@ -90,15 +99,28 @@ public class Game1 extends MouseAdapter {
 			resetGame();
 	}
 
+	/**
+	 * When mouse button is released, sets mousedown to false
+	 */
 	public void mouseReleased(MouseEvent e){
 		mousedown = false;
 	}
 
+	/**
+	 * Updates player object by calling it's move() method
+	 */
 	void updatePlayer(){
 		Player p = (Player) (objects.get(0));
 		p.Move();
 	}
 
+	/**
+	 * Updates trash object by pulling it from the ArrayList of gameObjects and making sure it is a trash object.
+	 * If it is active, calls it's move method and updates score and maxtrash/trashcount accordingly if the object
+	 * was caught by the player.
+	 * 
+	 * @param index Index of Trash object in arrayList of gameObjects
+	 */
 	void updateTrash(int index) {
 		Player p = (Player)objects.get(0);
 		gameObject o=objects.get(index);
@@ -119,6 +141,12 @@ public class Game1 extends MouseAdapter {
 		}
 	}
 
+	/**
+	 * Updates player lives by pulling trash object from the ArrayList at given index and checks to see if the
+	 * object made it to the beach, decrementing Lives and trashcount if so, and resetting the game if Lives is 0 or less.
+	 * 
+	 * @param i Index of trash object in ArrayList of gameObjects 
+	 */
 	void updateLives(int i){
 		Trash temp = (Trash) objects.get(i);
 		if (temp.MadeIt((int)(Window.WIDTH*Window.SCALE))&&temp.getActive()) {
@@ -133,7 +161,10 @@ public class Game1 extends MouseAdapter {
 		}
 	}
 
-
+	/**
+	 * Skips every other tick. If an 'on' tick, adds to counter and adds new trash if certain amount of ticks have gone by.
+	 * Updates player, trash, and score objects.
+	 */
 	public void tick() {
 		if(SkipTick)
 		{
@@ -184,10 +215,18 @@ public class Game1 extends MouseAdapter {
 
 	}
 
+	/**
+	 * Returns ArrayList of gameObjects in Game1
+	 * 
+	 * @return Returns ArrayList of gameObjects
+	 */
 	public ArrayList<gameObject> getObjects(){
 		return this.objects;
 	}
 
+	/**
+	 * Resets Game1 by setting game values back to starting values, clearing the ArrayList, and setting gameState back to Menu.
+	 */
     private void resetGame() {
 
     	Random rand = new Random();
@@ -209,6 +248,17 @@ public class Game1 extends MouseAdapter {
     	Controller.gameState = STATE.Menu;
     }
     
+    /**
+     * Checks to see if the mouse is over given coordinates on the screen.
+     * 
+     * @param mx Mouse x-position
+     * @param my Mouse y-position
+     * @param x x-position of image being checked against mouse x-position
+     * @param y y-position of image being checked against mouse y-position
+     * @param width Width of image being checked for mouse over
+     * @param height Height of image being checked for mouse over 
+     * @return Returns true if mouse is over given image position, false if otherwise
+     */
     boolean mouseOver(int mx, int my, int x, int y, int width, int height) {
         if (mx > x && mx < x + width) {
             if (my > y && my < y + height) {
@@ -217,30 +267,67 @@ public class Game1 extends MouseAdapter {
         } else return false;
     }
 	
+    /**
+     * Takes the width of an image and scales it to the appropriate size for the current screen
+     * 
+     * @param x Width of image that needs to be scaled
+     * @return Returns scaled width for image
+     */
 	public int scaleW(double x){
 		return (int)(Window.SCALE*x);
 	}
 	
+	/**
+	 * Takes the height of an image and scales it to the appropriate size for the current screen
+	 * 
+	 * @param x Height of image that needs to be scaled
+	 * @return Returns scaled height for image
+	 */
 	public int scaleH(double x){
 		return (int)(Window.SCALE*x);
 	}
 
+	/**
+	 * Checks to see whether the game is running or not
+	 * 
+	 * @return Returns boolean value of running
+	 */
 	public boolean isRunning() {
 		return running;
 	}
 
+	/**
+	 * Sets running variable to given value
+	 * 
+	 * @param running New value for running
+	 */
 	public void setRunning(boolean running) {
 		this.running = running;
 	}
 
+	/**
+	 * Checks to see if the mouse is currently clicked or not
+	 * 
+	 * @return Returns boolean value of mousedown
+	 */
 	public boolean isMousedown() {
 		return mousedown;
 	}
 
+	/**
+	 * Sets mousedown to new boolean value
+	 * 
+	 * @param mousedown New boolean value for mousedown
+	 */
 	public void setMousedown(boolean mousedown) {
 		this.mousedown = mousedown;
 	}
 
+	/**
+	 * Gets mouse x-position on screen from last click
+	 * 
+	 * @return Returns mouse x-position
+	 */
 	public int getMx() {
 		return mx;
 	}

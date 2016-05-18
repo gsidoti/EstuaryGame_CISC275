@@ -11,7 +11,7 @@ public enum Direction {
 	N,S,E,W,NE,SE,NW,SW;
 	
 	/**
-	 * 
+	 * Creates a string representation of the object
 	 */
 	@Override
 	public String toString(){

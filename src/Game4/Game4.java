@@ -31,7 +31,7 @@ public class Game4 extends MouseAdapter {
 	public int redScore = 1500;
 	
 	/**
-	 * 
+	 * Constructor for Game4 objects
 	 */
 	public Game4(){
 		objects.add( new G4Player("Player",(int)((Window.WIDTH/2)*Window.SCALE),(int)((Window.HEIGHT/2)*Window.SCALE),2,5));
@@ -40,9 +40,10 @@ public class Game4 extends MouseAdapter {
 		view = new Game4View();
 	}
 	
-	/**
-	 * 
-	 */
+    /**
+     * When the mouse button is pressed, sets mousedown to true and sets mx/my to the mouse's x and y position.
+     * If the mouse was over the quit button when pressed, reset the game.
+     */
 	public void mousePressed(MouseEvent e){
 		mousedown = true;
 		mx = e.getX();
@@ -52,14 +53,14 @@ public class Game4 extends MouseAdapter {
 	}
 	
 	/**
-	 * 
+	 * When the mouse button is released, sets mousedown to false.
 	 */
 	public void mouseReleased(MouseEvent e){
 		mousedown = false;
 	}
 
 	/**
-	 * 
+	 * Updates the player by checking the value of mousedown. If true, the player moves up, else the player moves down
 	 */
 	void updatePlayer(){
 		G4Player p = (G4Player) (objects.get(0));
@@ -73,7 +74,7 @@ public class Game4 extends MouseAdapter {
 	}
 	
 	/**
-	 * 
+	 * Resets Game4 by setting game values back to starting values, clearing the ArrayList, and setting gameState back to Menu.
 	 */
 	void resetGame(){
 		gameObject player = objects.get(0);
@@ -89,7 +90,9 @@ public class Game4 extends MouseAdapter {
 	}
 	
 	/**
-	 * 
+	 * Updates the score of the game by checking whether the player is inside the green zone or not.
+	 * If yes, green score goes up, otherwise red score goes up.
+	 * If green score is full, reset game and add score, otherwise just reset game.
 	 */
 	void updateScore(){
 		gameObject player = objects.get(0);
@@ -110,7 +113,8 @@ public class Game4 extends MouseAdapter {
 	}
 	
 	/**
-	 * 
+	 * Handles the methods called every tick of the game.
+	 * Updates player and score, then prints out score values.
 	 */
 	public void tick() {
 		updatePlayer();
@@ -118,16 +122,17 @@ public class Game4 extends MouseAdapter {
 		System.out.println("Green: "+greenScore+" Red: "+redScore);
 	}
 	
-	/**
-	 * 
-	 * @param mx
-	 * @param my
-	 * @param x
-	 * @param y
-	 * @param width
-	 * @param height
-	 * @return
-	 */
+    /**
+     * Checks to see if the mouse is over given coordinates on the screen.
+     * 
+     * @param mx Mouse x-position
+     * @param my Mouse y-position
+     * @param x x-position of image being checked against mouse x-position
+     * @param y y-position of image being checked against mouse y-position
+     * @param width Width of image being checked for mouse over
+     * @param height Height of image being checked for mouse over 
+     * @return Returns true if mouse is over given image position, false if otherwise
+     */
     boolean mouseOver(int mx, int my, int x, int y, int width, int height) {
         if (mx > x && mx < x + width) {
             if (my > y && my < y + height) {
@@ -137,99 +142,61 @@ public class Game4 extends MouseAdapter {
     }
 	
     /**
+     * Takes the width of an image and scales it to the appropriate size for the current screen
      * 
-     * @param x
-     * @return
+     * @param x Width of image that needs to be scaled
+     * @return Returns scaled width for image
      */
 	public int scaleW(double x){
 		return (int)(Window.SCALE*x);
 	}
 	
 	/**
+	 * Takes the height of an image and scales it to the appropriate size for the current screen
 	 * 
-	 * @param x
-	 * @return
+	 * @param x Height of image that needs to be scaled
+	 * @return Returns scaled height for image
 	 */
 	public int scaleH(double x){
 		return (int)(Window.SCALE*x);
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
 	public ArrayList<gameObject> getObjects(){
 		return this.objects;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
 	public boolean isRunning() {
 		return running;
 	}
 
-	/**
-	 * 
-	 * @param running
-	 */
 	public void setRunning(boolean running) {
 		this.running = running;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
 	public boolean isMousedown() {
 		return mousedown;
 	}
 	
-	/**
-	 * 
-	 * @param mousedown
-	 */
 	public void setMousedown(boolean mousedown) {
 		this.mousedown = mousedown;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
 	public int getGreenScore() {
 		return greenScore;
 	}
 
-	/**
-	 * 
-	 * @param greenScore
-	 */
 	public void setGreenScore(int greenScore) {
 		this.greenScore = greenScore;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
 	public int getRedScore() {
 		return redScore;
 	}
 
-	/**
-	 * 
-	 * @param redScore
-	 */
 	public void setRedScore(int redScore) {
 		this.redScore = redScore;
 	}
 
-	/**
-	 * 
-	 * @param objects
-	 */
 	public void setObjects(ArrayList<gameObject> objects) {
 		this.objects = objects;
 	}

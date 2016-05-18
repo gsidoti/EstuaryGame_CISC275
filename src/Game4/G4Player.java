@@ -17,26 +17,27 @@ public class G4Player extends gameObject{
 	boolean mousedown;
 	
 	/**
-	 * 
-	 * @param name
-	 * @param x
-	 * @param y
-	 * @param velx
-	 * @param vely
+     * Constructor for G4Player objects
+     * 
+     * @param name name of the object
+	 * @param x x-position of the object
+	 * @param y y-position of the object
+	 * @param velx x velocity of the object
+	 * @param vely y velocity of the object
 	 */
 	public G4Player(String name, int x, int y, int velx, int vely) {
 		super(name, x, y, velx, vely);
 	}
 	
 	/**
-	 * 
+	 * Moves the player down
 	 */
 	void moveDown(){
 		y += vely;
 	}
 	
 	/**
-	 * 
+	 * Moves the player up
 	 */
 	void moveUp(){
 		y -= vely;

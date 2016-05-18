@@ -20,17 +20,18 @@ import OverallGame.gameView;
 
 public class Game2View extends gameView{
 
-	/**
-	 * 
-	 */
+    /**
+     * Constructor for Game2View objects
+     */
 	public Game2View(){
 		loadImages();
 	}
 	
 	/**
+	 * Handles drawing all of the objects on screen at every tick.
 	 * 
-	 * @param g
-	 * @param objects
+	 * @param g The graphics for the game
+	 * @param objects The ArrayList of gameObjects in the game
 	 */
 	public void render(Graphics g, ArrayList<gameObject> objects){
 		
@@ -93,7 +94,7 @@ public class Game2View extends gameView{
 	}
 
 	/**
-	 * 
+	 * Loads the needed images for the game
 	 */
 	@Override
 	public void loadImages() {

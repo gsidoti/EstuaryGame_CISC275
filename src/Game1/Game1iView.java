@@ -9,6 +9,13 @@ import javax.swing.JPanel;
 import OverallGame.Window;
 import OverallGame.gameView;
 
+/**
+ * Game1iView is the view of Game1i and it handles drawing all of the images and text on screen 
+ * 
+ * @author Team 7
+ * @version 5/17
+ */
+
 public class Game1iView extends gameView{
 
 	private int BkgOffset=0;
@@ -16,10 +23,18 @@ public class Game1iView extends gameView{
     //private int pos=0;
     private int i;
 	
+    /**
+     * Constructor for Game1iView objects
+     */
 	public Game1iView(){
 		loadImages();
 	}
 	
+	/**
+	 * Handles drawing all of the objects on screen at every tick.
+	 * 
+	 * @param g The graphics for the instruction screen
+	 */
 	public void render(Graphics g) {
 		//g.setColor(new Color(0,32,64));
 		//g.fillRect(0, 0, (int)(Window.WIDTH*Window.SCALE)-20, (int)(Window.HEIGHT*Window.SCALE));
@@ -63,6 +78,9 @@ public class Game1iView extends gameView{
 		//if it will work out with the scaling -Cody
 	}
 
+	/**
+	 * Loads the needed images for the instruction screen
+	 */
 	@Override
 	public void loadImages() {
 		createImage("sea3");

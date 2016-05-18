@@ -21,15 +21,17 @@ public class MenuView extends gameView{
 	boolean flip = false;
 	
 	/**
-	 * 
+	 * Constructor for MenuView objects
 	 */
 	public MenuView(){
 		loadImages();
 	}
 	
 	/**
+	 * Handles drawing all of the objects on screen at every tick.
 	 * 
-	 * @param g
+	 * @param g The graphics for the instruction screen
+	 * @param objects the ArrayList of gameObjects in the game
 	 */
 	public void render(Graphics g, ArrayList<gameObject> objects){
 		if(count++%wait == 0){
@@ -84,7 +86,7 @@ public class MenuView extends gameView{
 	}
 	
 	/**
-	 * 
+	 * Loads the needed images for the instruction screen
 	 */
 	@Override
 	public void loadImages() {

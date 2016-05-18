@@ -38,15 +38,16 @@ public class Game3 extends MouseAdapter {
 	public int clickNumCrab = 0;
 	
 	/**
-	 * 
+	 * Constructor for Game3 objects
 	 */
 	public Game3(){
 		view = new Game3View();
 	}
 	
-	/**
-	 * 
-	 */
+    /**
+     * When the mouse button is pressed, increments clickNumCrab and sets mx/my to the mouse's x and y position.
+     * If the mouse was over the quit button when pressed, reset the game.
+     */
 	public void mousePressed(MouseEvent e){
 		clickNumCrab++;
 		mx = e.getX();
@@ -56,7 +57,11 @@ public class Game3 extends MouseAdapter {
 	}
 
 	/**
-	 * 
+	 * Updates the animals in the ArrayList of gameObjects.
+	 * Makes animal move and if the animal' name is "Count", sets it's x position to the value of clickNumCrab.
+	 * If the animal is on the screen and outside the screen boundaries, and the name of it is "HorseShoe", increment actNumCrab, then 
+	 * increment animals and set it's onScreen value to false.
+	 * If it's name is not "HorseShoe", just increment animals and set it's onScreen value to false. 
 	 */
 	void updateAnimal(){
 		Animal a;
@@ -77,10 +82,11 @@ public class Game3 extends MouseAdapter {
 	}
 	
 	/**
+	 * Creates a random animal object
 	 * 
-	 * @param Enemy
-	 * @param speed
-	 * @param Amount
+	 * @param Enemy whether the animal is an enemy or not.
+	 * @param speed speed of the animal being created.
+	 * @param Amount amount of animal objects to be created.
 	 */
 	public void randSpawn(boolean Enemy, int speed, int Amount){
 		Random rand = new Random();
@@ -103,9 +109,10 @@ public class Game3 extends MouseAdapter {
 	}
 	
 	/**
+	 * Creates an animal object on the left side of the screen.
 	 * 
-	 * @param Enemy
-	 * @param speed
+	 * @param Enemy whether the animal is an enemy or not
+	 * @param speed speed of the animal being created
 	 */
 	public void spawnLeft(boolean Enemy, int speed){
 		Random rand = new Random();
@@ -135,9 +142,10 @@ public class Game3 extends MouseAdapter {
 	}
 	
 	/**
+	 * Creates an animal object on the right side of the screen
 	 * 
-	 * @param Enemy
-	 * @param speed
+	 * @param Enemy whether the animal is an enemy or not
+	 * @param speed speed of the animal being created
 	 */
 	public void spawnRight(boolean Enemy, int speed){
 		Random rand = new Random();
@@ -167,9 +175,10 @@ public class Game3 extends MouseAdapter {
 	}
 	
 	/**
+	 * Creates an animal object on the top of the screen
 	 * 
-	 * @param Enemy
-	 * @param speed
+	 * @param Enemy whether the animal is an enemy or not
+	 * @param speed speed of the animal being created
 	 */
 	public void spawnTop(boolean Enemy, int speed){
 		Random rand = new Random();
@@ -199,9 +208,10 @@ public class Game3 extends MouseAdapter {
 	}
 	
 	/**
+	 * Creates an animal object on the bottom of the screen
 	 * 
-	 * @param Enemy
-	 * @param speed
+	 * @param Enemy whether the animal is an enemy or not
+	 * @param speed speed of the animal being created
 	 */
 	public void spawnBottom(boolean Enemy, int speed){
 		Random rand = new Random();
@@ -231,7 +241,8 @@ public class Game3 extends MouseAdapter {
 	}
 	
 	/**
-	 * 
+	 * Checks to see if it is the end of the game and handles the score gained from the game depending on how close
+	 * the player count of horseshoe crabs was to the actual count.
 	 */
 	private void checkEndGame(){
 		if(init == false){
@@ -266,7 +277,7 @@ public class Game3 extends MouseAdapter {
 	}
 	
 	/**
-	 * 
+	 * Resets the game by setting the game variables to their starting values and sets the gameState back to the Menu
 	 */
 	public void resetGame(){
 		init = false;
@@ -281,7 +292,8 @@ public class Game3 extends MouseAdapter {
 	}
 
 	/**
-	 * 
+	 * Handles what methods are called on each tick of the game.
+	 * If start is not true, add a new animal and set start to true, otherwise call checkEndGame and updateAnimal
 	 */
 	public void tick() {
 		if(!start){
@@ -292,16 +304,17 @@ public class Game3 extends MouseAdapter {
 		updateAnimal();
 	}
 	
-	/**
-	 * 
-	 * @param mx
-	 * @param my
-	 * @param x
-	 * @param y
-	 * @param width
-	 * @param height
-	 * @return
-	 */
+    /**
+     * Checks to see if the mouse is over given coordinates on the screen.
+     * 
+     * @param mx Mouse x-position
+     * @param my Mouse y-position
+     * @param x x-position of image being checked against mouse x-position
+     * @param y y-position of image being checked against mouse y-position
+     * @param width Width of image being checked for mouse over
+     * @param height Height of image being checked for mouse over 
+     * @return Returns true if mouse is over given image position, false if otherwise
+     */
     boolean mouseOver(int mx, int my, int x, int y, int width, int height) {
         if (mx > x && mx < x + width) {
             if (my > y && my < y + height) {
@@ -311,123 +324,73 @@ public class Game3 extends MouseAdapter {
     }
 	
     /**
+     * Takes the width of an image and scales it to the appropriate size for the current screen
      * 
-     * @param x
-     * @return
+     * @param x Width of image that needs to be scaled
+     * @return Returns scaled width for image
      */
 	public int scaleW(double x){
 		return (int)(Window.SCALE*x);
 	}
 	
 	/**
+	 * Takes the height of an image and scales it to the appropriate size for the current screen
 	 * 
-	 * @param x
-	 * @return
+	 * @param x Height of image that needs to be scaled
+	 * @return Returns scaled height for image
 	 */
 	public int scaleH(double x){
 		return (int)(Window.SCALE*x);
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
 	public ArrayList<gameObject> getObjects(){
 		return this.objects;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
 	public boolean isRunning() {
 		return running;
 	}
 
-	/**
-	 * 
-	 * @param running
-	 */
 	public void setRunning(boolean running) {
 		this.running = running;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
 	public boolean isStart() {
 		return start;
 	}
 
-	/**
-	 * 
-	 * @param start
-	 */
 	public void setStart(boolean start) {
 		this.start = start;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
 	public int getTick() {
 		return tick;
 	}
 
-	/**
-	 * 
-	 * @param tick
-	 */
 	public void setTick(int tick) {
 		this.tick = tick;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
 	public int getAnimals() {
 		return animals;
 	}
 
-	/**
-	 * 
-	 * @param animals
-	 */
 	public void setAnimals(int animals) {
 		this.animals = animals;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
 	public int getActNumCrab() {
 		return actNumCrab;
 	}
 
-	/**
-	 * 
-	 * @param actNumCrab
-	 */
 	public void setActNumCrab(int actNumCrab) {
 		this.actNumCrab = actNumCrab;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
 	public int getClickNumCrab() {
 		return clickNumCrab;
 	}
 
-	/**
-	 * 
-	 * @param clickNumCrab
-	 */
 	public void setClickNumCrab(int clickNumCrab) {
 		this.clickNumCrab = clickNumCrab;
 	}

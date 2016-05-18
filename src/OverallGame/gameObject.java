@@ -16,12 +16,13 @@ public class gameObject {
 		public String name;
 		
 		/**
-		 * 
-		 * @param name
-		 * @param x
-		 * @param y
-		 * @param velx
-		 * @param vely
+	     * Constructor for gameObject objects
+	     * 
+	     * @param name name of the object
+		 * @param x x-position of the object
+		 * @param y y-position of the object
+		 * @param velx x velocity of the object
+		 * @param vely y velocity of the object
 		 */
 		public gameObject(String name, int x, int y, int velx, int vely){
 			this.name = name;
@@ -31,66 +32,34 @@ public class gameObject {
 			this.velx = velx;
 		}
 
-		/**
-		 * 
-		 * @return
-		 */
 		public int getX() {
 			return x;
 		}
 
-		/**
-		 * 
-		 * @param x
-		 */
 		public void setX(int x) {
 			this.x = x;
 		}
 
-		/**
-		 * 
-		 * @return
-		 */
 		public int getY() {
 			return y;
 		}
 
-		/**
-		 * 
-		 * @param y
-		 */
 		public void setY(int y) {
 			this.y = y;
 		}
 
-		/**
-		 * 
-		 * @return
-		 */
 		public int getVelx() {
 			return velx;
 		}
 
-		/**
-		 * 
-		 * @param velx
-		 */
 		public void setVelx(int velx) {
 			this.velx = velx;
 		}
 
-		/**
-		 * 
-		 * @return
-		 */
 		public int getVely() {
 			return vely;
 		}
 
-		/**
-		 * 
-		 * @param vely
-		 */
 		public void setVely(int vely) {
 			this.vely = vely;
 		}

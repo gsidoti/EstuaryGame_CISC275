@@ -10,11 +10,12 @@ import javax.swing.*;
 import OverallGame.gameObject;
 
 /**
- * Write a description of class Player here.
- *
- * @author (your name)
- * @version (a version number or a date)
+ * Player is the object that the user controls in Game1.
+ * 
+ * @author Team 7
+ * @version 5/17
  */
+
 public class Player extends gameObject
 {
     // instance variables - replace the example below with your own
@@ -25,8 +26,14 @@ public class Player extends gameObject
     private double Angle;
 
     /**
-     * Constructor for objects of class Player
-     */
+     * Constructor for Player objects
+     * 
+     * @param name name of the object
+	 * @param x x-position of the object
+	 * @param y y-position of the object
+	 * @param velx x velocity of the object
+	 * @param vely y velocity of the object
+	 */
     public Player(String name, int x, int y, int velx, int vely)
     {
         // initialize instance variables
@@ -35,6 +42,12 @@ public class Player extends gameObject
         Angle=0.0;
     }
 
+    /**
+     * Sets the destination for the player to move to
+     * 
+     * @param xn the x-position of the destination
+     * @param yn the y-position of the destination
+     */
     public void SetDest(int xn,int yn)
     {
         double StepsNeeded;
@@ -54,6 +67,9 @@ public class Player extends gameObject
         Angle=Math.atan2(getVely(),getVelx());
     }
 
+    /**
+     * Moves the player to the destinaton set by SetDest
+     */
     public void Move()
     {
     	double dnow;

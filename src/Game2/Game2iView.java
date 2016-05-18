@@ -19,7 +19,7 @@ import OverallGame.gameView;
 public class Game2iView extends gameView{
 
 	/**
-	 * 
+	 * Constructor for Game2iView objects
 	 */
 	public Game2iView(){
 		loadImages();
@@ -27,8 +27,9 @@ public class Game2iView extends gameView{
 	}
 	
 	/**
+	 * Handles drawing all of the objects on screen at every tick.
 	 * 
-	 * @param g
+	 * @param g The graphics for the instruction screen
 	 */
 	public void render(Graphics g){
 		g.drawImage(images.get("game2background"), 0, 0, null);
@@ -43,7 +44,7 @@ public class Game2iView extends gameView{
 	}
 
 	/**
-	 * 
+	 * Loads the needed images for the instruction screen
 	 */
 	@Override
 	public void loadImages() {

@@ -35,22 +35,24 @@ public class Menu extends MouseAdapter {
 	ArrayList<gameObject> objects = new ArrayList<gameObject>();
 	
 	/**
-	 * 
-	 * @param W
+	 * Constructor for Menu objects
 	 */
 	public Menu(){
 		menuView = new MenuView();
 	}
 	
 	/**
-	 * 
+	 * Stops the mouse listener for the instruction screen
 	 */
 	public void stopMouseListener(){
 		mlActive = false;
 	}
 	
 	/**
-	 * 
+	 * When mouse is clicked, sets mx/my to mouse x- and y-positions.
+	 * If the mouse was clicked over the button areas of any of the game buttons, set running to false, clear the ArrayList,
+	 * and change the gameState to the corresponding game's instruction screen.
+	 * If the mosue was clicked over the exit button, quit the game.
 	 */
 	public void mousePressed(MouseEvent e){
 		int mx = e.getX();
@@ -86,18 +88,20 @@ public class Menu extends MouseAdapter {
 	}
 	
     /**
+     * Takes the width of an image and scales it to the appropriate size for the current screen
      * 
-     * @param x
-     * @return
+     * @param x Width of image that needs to be scaled
+     * @return Returns scaled width for image
      */
 	public int scaleW(double x){
 		return (int)(Window.SCALE*x);
 	}
 	
 	/**
+	 * Takes the height of an image and scales it to the appropriate size for the current screen
 	 * 
-	 * @param x
-	 * @return
+	 * @param x Height of image that needs to be scaled
+	 * @return Returns scaled height for image
 	 */
 	public int scaleH(double x){
 		return (int)(Window.SCALE*x);
@@ -105,16 +109,17 @@ public class Menu extends MouseAdapter {
 
 	
 	
-	/**
-	 * 
-	 * @param mx
-	 * @param my
-	 * @param x
-	 * @param y
-	 * @param width
-	 * @param height
-	 * @return
-	 */
+    /**
+     * Checks to see if the mouse is over given coordinates on the screen.
+     * 
+     * @param mx Mouse x-position
+     * @param my Mouse y-position
+     * @param x x-position of image being checked against mouse x-position
+     * @param y y-position of image being checked against mouse y-position
+     * @param width Width of image being checked for mouse over
+     * @param height Height of image being checked for mouse over 
+     * @return Returns true if mouse is over given image position, false if otherwise
+     */
 	//not being used
     private boolean mouseOver(int mx, int my, int x, int y, int width, int height) {
         if (mx > x && mx < x + width) {
@@ -123,7 +128,12 @@ public class Menu extends MouseAdapter {
             } else return false;
         } else return false;
     }
-    
+
+    /**
+     * Creates 'trash' game objects that are used for the main menu
+     * 
+     * @param amount amount of new objects to make
+     */
 	private void createTrash(int amount){
 		for(int i = 0;i < amount;i++){
 			switch (rand.nextInt(4)){
@@ -143,24 +153,24 @@ public class Menu extends MouseAdapter {
 		}
 	}
 		
-		private void moveTrash(){
-			gameObject o;
-			for(int i=0;i<objects.size();i++){
-				o = objects.get(i);
-				if(o.y>400){
-					o.name = "";
-				}else if(o.name != ""){
-					o.y +=o.getVely();
-				}
+	/**
+	 * Moves the 'trash' on the main screen to make them look like they are being thrown away
+	 */
+	private void moveTrash(){
+		gameObject o;
+		for(int i=0;i<objects.size();i++){
+			o = objects.get(i);
+			if(o.y>400){
+				o.name = "";
+			}else if(o.name != ""){
+				o.y +=o.getVely();
 			}
-		
-
-		
+		}	
 	}
     
 
     /**
-     * 
+     * Handles the methods that are called every tick.
      */
 	public void tick() {
 		if(returning){

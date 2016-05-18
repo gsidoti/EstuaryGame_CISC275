@@ -12,7 +12,7 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 
 /**
- * gameView is an absract class used as a mold for the view of each game
+ * gameView is an abstract class used as a mold for the view of each game
  * 
  * @author Team 7
  * @version 5/17
@@ -22,14 +22,15 @@ public abstract class gameView {
 	public Map<String,BufferedImage> images=  new HashMap<String, BufferedImage>();
 	
 	/**
-	 * 
+	 * Loads the needed images for the game
 	 */
 	public abstract void loadImages();
 	
 	/**
+	 * Reads in the filename of an image, pulls the image and resizes it with correct scaling, then adds it to the HashMap of images
 	 * 
-	 * @param imgName
-	 * @return
+	 * @param imgName name of the image wanting to be loaded in
+	 * @return Returns true if loading the image was successful, returns false if an exception was caught
 	 */
     protected boolean createImage(String imgName){ 	
     	BufferedImage bufferedImage;
@@ -45,11 +46,12 @@ public abstract class gameView {
     }
     
     /**
+     * Resizes the image to the appropriate width and height using the scaling of the game window
      * 
-     * @param img
-     * @param newW
-     * @param newH
-     * @return
+     * @param img image being resized
+     * @param newW width of image wanted
+     * @param newH height of image wanted
+     * @return Returns the image with new dimensions
      */
     public static BufferedImage resizeImg(BufferedImage img, int newW, int newH){
     int w = img.getWidth();
@@ -64,18 +66,20 @@ public abstract class gameView {
    }
     
     /**
+     * Takes the width of an image and scales it to the appropriate size for the current screen
      * 
-     * @param x
-     * @return
+     * @param x Width of image that needs to be scaled
+     * @return Returns scaled width for image
      */
 	public int scaleW(double x){
 		return (int)(Window.SCALE*x);
 	}
 	
 	/**
+	 * Takes the height of an image and scales it to the appropriate size for the current screen
 	 * 
-	 * @param x
-	 * @return
+	 * @param x Height of image that needs to be scaled
+	 * @return Returns scaled height for image
 	 */
 	public int scaleH(double x){
 		return (int)(Window.SCALE*x);

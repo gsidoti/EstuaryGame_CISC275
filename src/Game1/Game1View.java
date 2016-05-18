@@ -11,6 +11,13 @@ import OverallGame.Window;
 import OverallGame.gameObject;
 import OverallGame.gameView;
 
+/**
+ * Game1View is the view of Game1 and it handles drawing all of the images and text on screen at every tick
+ * 
+ * @author Team 7
+ * @version 5/17
+ */
+
 public class Game1View extends gameView{
 
 	private int BkgOffset=0;
@@ -20,11 +27,17 @@ public class Game1View extends gameView{
     private int[] dy=new int[5];
     private int pos=0;
 
+    /**
+     * Constructor for Game1View objects
+     */
 	public Game1View()
 	{
 	    loadImages();	
 	}
 
+	/**
+	 * Loads the needed images for the game
+	 */
 	public void loadImages(){
 		createImage("can");
 		createImage("exit");
@@ -33,7 +46,12 @@ public class Game1View extends gameView{
 		//images.put("can");
 	}
 
-
+	/**
+	 * Handles drawing all of the objects on screen at every tick.
+	 * 
+	 * @param g The graphics for the game
+	 * @param objects The ArrayList of gameObjects in the game
+	 */
 	public void render(Graphics g, ArrayList<gameObject> objects){
 
 		double m;

@@ -25,9 +25,10 @@ public class Window{
 	public static double SCALE;
 	
 	/**
+	 * Constructor for Window objects
 	 * 
-	 * @param title
-	 * @param c
+	 * @param title title of the window
+	 * @param c controller of the window
 	 */
 	public Window(String title,Controller c){
 		frame = new JFrame(title);
@@ -59,10 +60,11 @@ public class Window{
 	}
 	
 	/**
+	 * Takes actual and virtual dimensions and returns fixed dimensions for the window
 	 * 
-	 * @param actual
-	 * @param virtual
-	 * @return
+	 * @param actual the actual dimensions of the window
+	 * @param virtual the virtual dimensions of the window
+	 * @return Returns the fixed dimensions for the window
 	 */
 	public static Dimension getScaledDimension(Dimension actual, Dimension virtual) {
 		

@@ -46,7 +46,7 @@ public class Controller extends Canvas{
 	public static STATE gameState = STATE.Menu;
 
 	/**
-	 * 
+	 * Contructor for Controller objects
 	 */
 	public Controller(){
 		Window w = new Window("Estuary Game",this);
@@ -64,7 +64,7 @@ public class Controller extends Canvas{
 	}
 
 	/**
-	 * 
+	 * Creates the thread and calls it's start method, then sets running to true.
 	 */
 	private synchronized void start(){
 		thread = new Thread(String.valueOf(this));
@@ -73,7 +73,7 @@ public class Controller extends Canvas{
 	}
 
 	/**
-	 * 
+	 * Joins the thread back and sets running to false.
 	 */
 	public synchronized void stop(){
 		try{
@@ -85,7 +85,7 @@ public class Controller extends Canvas{
 	}
 
 	/**
-	 * 
+	 * Constantly called to make the game run at 60fps. Calls the tick and render methods
 	 */
 	private void run() {
 		this.requestFocus();
@@ -118,7 +118,7 @@ public class Controller extends Canvas{
 	}
 	
 	/**
-	 * 
+	 * Removes the mouse listeners from the controller
 	 */
 	private void clearML(){
 		for(MouseListener l:this.getMouseListeners()){
@@ -128,7 +128,10 @@ public class Controller extends Canvas{
 	}
 
 	/**
-	 * 
+	 * Handles what methods are called every tick.
+	 * Depending on what the controller's gameState is set to, clear any mouse listeners, add a new one for the corresponding game,
+	 * then set that game's running variable to true and run the game. If the gameState's value's running variable is set to true, 
+	 * call the game's tick method.
 	 */
 	private void tick(){
 		
@@ -233,7 +236,7 @@ public class Controller extends Canvas{
 	}
 
 	/**
-	 * 
+	 * Checks the gameState and depending on what it is, calls the appropriate game's render method.
 	 */
 	private void render(){
 		//System.out.println("Render");
@@ -278,7 +281,7 @@ public class Controller extends Canvas{
 		bs.show();
 	}
 
-
+	
 	public static void main(String[] args) {
 		new Controller(); 
 	}

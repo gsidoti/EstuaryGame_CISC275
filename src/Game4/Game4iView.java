@@ -19,15 +19,16 @@ import OverallGame.gameView;
 public class Game4iView extends gameView{
 	
 	/**
-	 * 
+	 * Constructor for Game4iView objects
 	 */
 	public Game4iView(){
 		loadImages();
 	}
 	
 	/**
+	 * Handles drawing all of the objects on screen at every tick.
 	 * 
-	 * @param g
+	 * @param g The graphics for the instruction screen
 	 */
 	public void render(Graphics g){
 		//g.setColor(Color.pink);
@@ -46,7 +47,7 @@ public class Game4iView extends gameView{
 	}
 
 	/**
-	 * 
+	 * Loads the needed images for the instruction screen
 	 */
 	@Override
 	public void loadImages() {
