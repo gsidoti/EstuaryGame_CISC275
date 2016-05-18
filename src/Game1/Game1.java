@@ -84,7 +84,7 @@ public class Game1 extends MouseAdapter {
 		Player p = (Player) (objects.get(0));
 		mx = e.getX();
 		my = e.getY();
-		if(mx<Window.WIDTH*0.97)p.SetDest(mx, my);
+		if(mx<Window.WIDTH*Window.SCALE*0.95)p.SetDest(mx, my);
 		if(mouseOver(mx,my,scaleW(Window.WIDTH-85),scaleH(5),scaleW(80),scaleH(44)))
 			resetGame();
 	}
