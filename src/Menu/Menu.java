@@ -24,7 +24,7 @@ import OverallGame.gameObject;
 public class Menu extends MouseAdapter {
 	int counter= 0;
 	int timer=0;
-	public boolean updatedScore = false;
+	public boolean updatedScore = true;
 	public boolean returning = true;
 	public long initTime;
 	public MenuView menuView;
@@ -57,25 +57,25 @@ public class Menu extends MouseAdapter {
 	public void mousePressed(MouseEvent e){
 		int mx = e.getX();
 		int my = e.getY();
-		if(mouseOver(mx,my,scaleW(150), scaleH(150),scaleW(250),scaleH(275))){	
+		if(updatedScore && mouseOver(mx,my,scaleW(150), scaleH(150),scaleW(250),scaleH(275))){	
 			Controller.gameState = STATE.Game1i;
 			running = false;
 			returning = false;
 			objects.clear();
 			System.out.println("game1i");
-		}else if(mouseOver(mx,my,scaleW(900), scaleH(250),scaleW(275),scaleH(275))){	
+		}else if(updatedScore && mouseOver(mx,my,scaleW(900), scaleH(250),scaleW(275),scaleH(275))){	
 			Controller.gameState = STATE.Game2i;
 			running = false;
 			returning = false;
 			objects.clear();
 			System.out.println("game2i");
-		}else if(mouseOver(mx,my,scaleW(150), scaleH(480),scaleW(275),scaleH(275))){	
+		}else if(updatedScore && mouseOver(mx,my,scaleW(150), scaleH(480),scaleW(275),scaleH(275))){	
 			Controller.gameState = STATE.Game3i;
 			running = false;
 			returning = false;
 			objects.clear();
 			System.out.println("game3i");
-		}else if(mouseOver(mx,my,scaleW(900), scaleH(480),scaleW(275),scaleH(275))){	
+		}else if(updatedScore && mouseOver(mx,my,scaleW(900), scaleH(480),scaleW(275),scaleH(275))){	
 			Controller.gameState = STATE.Game4i;
 			running = false;
 			returning = false;

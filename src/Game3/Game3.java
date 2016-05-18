@@ -123,7 +123,11 @@ public class Game3 extends MouseAdapter {
 		Direction dir;
 		String name = "HorseShoe";
 		if(Enemy){
-			name = "Enemy";
+			if(rand.nextBoolean()){
+				name = "bluecrab_0";
+			}else{
+				name = "mittencrab_1";
+			}
 		}
 		velx = 2*speed;
 		int r = rand.nextInt(3);
@@ -141,6 +145,7 @@ public class Game3 extends MouseAdapter {
 		objects.add(new Animal(name,x,y,velx,vely,dir));
 	}
 	
+	
 	/**
 	 * Creates an animal object on the right side of the screen
 	 * 
@@ -156,7 +161,11 @@ public class Game3 extends MouseAdapter {
 		Direction dir;
 		String name = "HorseShoe";
 		if(Enemy){
-			name = "Enemy";
+			if(rand.nextBoolean()){
+				name = "bluecrab_0";
+			}else{
+				name = "mittencrab_1";
+			}
 		}
 		velx = -2*speed;
 		int r = rand.nextInt(3);
@@ -189,7 +198,11 @@ public class Game3 extends MouseAdapter {
 		Direction dir;
 		String name = "HorseShoe";
 		if(Enemy){
-			name = "Enemy";
+			if(rand.nextBoolean()){
+				name = "bluecrab_0";
+			}else{
+				name = "mittencrab_1";
+			}
 		}
 		vely = 1*speed;
 		int r = rand.nextInt(3);
@@ -222,7 +235,11 @@ public class Game3 extends MouseAdapter {
 		Direction dir;
 		String name = "HorseShoe";
 		if(Enemy){
-			name = "Enemy";
+			if(rand.nextBoolean()){
+				name = "bluecrab_0";
+			}else{
+				name = "mittencrab_1";
+			}
 		}
 		vely = -1*speed;
 		int r = rand.nextInt(3);

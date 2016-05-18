@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.Random;
 
 import OverallGame.Window;
 import OverallGame.gameObject;
@@ -55,8 +56,10 @@ public class Game3View extends gameView{
 			Animal a = (Animal)(o);
 			if(a.name == "HorseShoe"){
 				g.drawImage(images.get("horseshoe_crab_"+a.getDir().toString()), scaleW(a.getX()-50), scaleH(a.getY()-50), null);
-			}else if(a.name == "Enemy"){
+			}else if(a.name == "mittencrab_1"){
 				g.drawImage(images.get("mittencrab_1"), scaleW(a.getX()), scaleH(a.getY()), null);
+			}else if(a.name == "bluecrab_0"){
+				g.drawImage(images.get("bluecrab_0"), scaleW(a.getX()), scaleH(a.getY()), null);
 			}else if(a.name == "EndGame"){
 				//g.setColor(Color.gray);
 				//g.fillRect((int)((Window.WIDTH/2-200)*Window.SCALE), (int) (((Window.HEIGHT/2)-200)*Window.SCALE), (int)(400*Window.SCALE), (int)(200*Window.SCALE));
