@@ -42,13 +42,12 @@ public class MenuView extends gameView{
 	 * @param g
 	 */
 	public void render(Graphics g){
-		//g.setColor(Color.pink);
-		//g.fillRect(0, 0,(int)(w*wS), (int)(h*hS));
+		g.setColor(Color.black);
+		g.fillRect(0, 0,scaleW(Window.WIDTH+5),scaleH(Window.HEIGHT+5));
 		
-		g.drawImage(images.get("menuBG"), 0, 0, null);
+		g.drawImage(images.get("menubg2"), 0, 0, null);
 		
 		
-
 		g.drawImage(images.get("smallButton"), scaleW(770), scaleH(145), null);
 		g.drawImage(images.get("smallButton"), scaleW(270), scaleH(145), null);
 		g.drawImage(images.get("smallButton"), scaleW(270), scaleH(392), null);
@@ -96,7 +95,8 @@ public class MenuView extends gameView{
 		createImage("exit");
 		createImage("smallButton");
 		createImage("menuBG");
-		images.put("menuBG",resizeImg(images.get("menuBG"),scaleW(Window.WIDTH),scaleH(Window.HEIGHT)));
+		createImage("menubg2");
+		//images.put("menuBG",resizeImg(images.get("menuBG"),scaleW(Window.WIDTH),scaleH(Window.HEIGHT)));
 	}
 	
 	

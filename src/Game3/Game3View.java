@@ -34,12 +34,12 @@ public class Game3View extends gameView{
 		for(Direction d :Direction.values())//create every horseshoe crab image
 			createImage("horseshoe_crab_"+d);
 		createImage("mittencrab_1");
+		createImage("bluecrab_0");
 		createImage("dialogue2");
 		createImage("game3sand");
 		createImage("game3wood");
 		createImage("exit");
-		//images.put("underwater2",resizeImg(images.get("underwater2"),scaleW(Window.WIDTH),scaleH(Window.HEIGHT)));
-	}
+		}
 	
 	/**
 	 * 
@@ -48,11 +48,6 @@ public class Game3View extends gameView{
 	 */
 	public void render(Graphics g, ArrayList<gameObject> objects){
 		
-		//fill screen and draw brown box
-		//g.setColor(new Color(102,51,0));
-		//g.fillRect(0, 0, (int)(Window.WIDTH*Window.SCALE), (int)(Window.HEIGHT*Window.SCALE));
-		//g.setColor(new Color(244,164,96));
-		//g.fillRect((int)(100*Window.SCALE), (int)(100*Window.SCALE), (int)((Window.WIDTH-200)*Window.SCALE), (int)((Window.HEIGHT-200)*Window.SCALE));
 		g.drawImage(images.get("game3sand"), 0, 0, null);
 		
 		for(gameObject o: objects){
