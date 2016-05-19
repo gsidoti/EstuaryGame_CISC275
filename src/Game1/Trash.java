@@ -8,6 +8,7 @@ import util.*;
 import javax.swing.*;
 
 import OverallGame.gameObject;
+import OverallGame.Window;
 
 /**
  * Trash are the objects that move from left to right on the screen, that the player needs to collect before they
@@ -65,7 +66,7 @@ public class Trash extends gameObject
      */
     public boolean IsCaught(int px,int py)
     {
-        if((Math.abs(px-x)+Math.abs(py-y))<20)return true;
+        if((Math.abs(px-x)+Math.abs(py-y))<(int)(35*Window.SCALE))return true;
         return false;
     }
 

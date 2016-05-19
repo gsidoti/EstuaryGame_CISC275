@@ -49,7 +49,8 @@ public class Game3 extends MouseAdapter {
      * If the mouse was over the quit button when pressed, reset the game.
      */
 	public void mousePressed(MouseEvent e){
-		clickNumCrab++;
+		if(!init2)
+			clickNumCrab++;
 		mx = e.getX();
 		my = e.getY();
 		if(mouseOver(mx,my,scaleW(5),scaleH(5),scaleW(80),scaleH(44)))

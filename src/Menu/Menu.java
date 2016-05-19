@@ -63,19 +63,19 @@ public class Menu extends MouseAdapter {
 			returning = false;
 			objects.clear();
 			System.out.println("game1i");
-		}else if(updatedScore && mouseOver(mx,my,scaleW(900), scaleH(250),scaleW(275),scaleH(275))){	
+		}else if(updatedScore && mouseOver(mx,my,scaleW(900), scaleH(250),scaleW(275),scaleH(250))){	
 			Controller.gameState = STATE.Game2i;
 			running = false;
 			returning = false;
 			objects.clear();
 			System.out.println("game2i");
-		}else if(updatedScore && mouseOver(mx,my,scaleW(150), scaleH(480),scaleW(275),scaleH(275))){	
+		}else if(updatedScore && mouseOver(mx,my,scaleW(150), scaleH(480),scaleW(275),scaleH(250))){	
 			Controller.gameState = STATE.Game3i;
 			running = false;
 			returning = false;
 			objects.clear();
 			System.out.println("game3i");
-		}else if(updatedScore && mouseOver(mx,my,scaleW(900), scaleH(480),scaleW(275),scaleH(275))){	
+		}else if(updatedScore && mouseOver(mx,my,scaleW(900), scaleH(480),scaleW(275),scaleH(250))){	
 			Controller.gameState = STATE.Game4i;
 			running = false;
 			returning = false;
