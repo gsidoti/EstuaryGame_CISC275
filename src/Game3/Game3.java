@@ -22,6 +22,7 @@ import OverallGame.gameObject;
 
 public class Game3 extends MouseAdapter {
 	public boolean running = false;
+	boolean init = false;
 	Random rand = new Random();
 	ArrayList<gameObject> objects = new ArrayList<gameObject>();
 	
@@ -29,13 +30,13 @@ public class Game3 extends MouseAdapter {
 	long timer1;
 	long timer2;
 	int mx,my;
-	boolean init = false;
-	boolean init2 = false;
-	boolean start = false;
+	boolean endGameScreen;
+	boolean spawn;
+	boolean start;
 	int tick;
-	public int animals = 0;
-	public int actNumCrab = 0;
-	public int clickNumCrab = 0;
+	public int animals;
+	public int actNumCrab;
+	public int clickNumCrab;
 	
 	/**
 	 * Constructor for Game3 objects
@@ -49,12 +50,16 @@ public class Game3 extends MouseAdapter {
      * If the mouse was over the quit button when pressed, reset the game.
      */
 	public void mousePressed(MouseEvent e){
-		if(!init2)
-			clickNumCrab++;
 		mx = e.getX();
 		my = e.getY();
-		if(mouseOver(mx,my,scaleW(5),scaleH(5),scaleW(80),scaleH(44)))
-			resetGame();
+		if(!endGameScreen)
+			clickNumCrab++;
+		if(mouseOver(mx,my,scaleW(5),scaleH(5),scaleW(80),scaleH(44))){
+			endGame();
+			if(endGameScreen)
+				addScore();
+		}
+
 	}
 
 	/**
@@ -68,16 +73,19 @@ public class Game3 extends MouseAdapter {
 		Animal a;
 		for(gameObject o:objects){
 			a = (Animal)(o);
-			a.setX(a.getX()+a.getVelx());
-			a.setY(a.getY()+a.getVely());
 			if(a.name == "Count")
 				a.setX(clickNumCrab);
-			if(a.onScreen &&( a.getX()<0 || a.getX()>Window.WIDTH*Window.SCALE || a.getY()<0 || a.getY() > Window.HEIGHT*Window.SCALE)){
-				if(a.name == "HorseShoe"){
-					actNumCrab++;
+			else{
+				if(!spawn){
+					a.setX(a.getX()+a.getVelx());
+					a.setY(a.getY()+a.getVely());	
 				}
-				animals++;
+				a.setX(a.getX()+a.getVelx());
+				a.setY(a.getY()+a.getVely());
+			}
+			if(a.onScreen &&( a.getX()<0 || a.getX()>Window.WIDTH*Window.SCALE || a.getY()<0 || a.getY() > Window.HEIGHT*Window.SCALE)){
 				a.onScreen = false;
+				animals++;
 			}
 		}
 	}
@@ -89,207 +97,106 @@ public class Game3 extends MouseAdapter {
 	 * @param speed speed of the animal being created.
 	 * @param Amount amount of animal objects to be created.
 	 */
-	public void randSpawn(boolean Enemy, int speed, int Amount){
+	public void randSpawn(int Amount){
 		Random rand = new Random();
+		Direction dir = Direction.N;
+		String name = "";
 		for(int i = 0;i < Amount;i++){
-			switch (rand.nextInt(4)){
-				case 0:
-					spawnLeft(Enemy,speed);
-					break;
-				case 1:
-					spawnRight(Enemy,speed);
-					break;
-				case 2:
-					spawnTop(Enemy,speed);
-					break;
-				case 3:
-					spawnBottom(Enemy,speed);
-					break;
-			}
-		}
-	}
-	
-	/**
-	 * Creates an animal object on the left side of the screen.
-	 * 
-	 * @param Enemy whether the animal is an enemy or not
-	 * @param speed speed of the animal being created
-	 */
-	public void spawnLeft(boolean Enemy, int speed){
-		Random rand = new Random();
-		int x = 0;
-		int y = (int)((rand.nextInt(240)+240));
-		int velx;
-		int vely;
-		Direction dir;
-		String name = "HorseShoe";
-		if(Enemy){
-			if(rand.nextBoolean()){
+			int speed = rand.nextInt(2)+1;//random speed
+			int rAnim = rand.nextInt(3);//random Animal
+			int d = rand.nextInt(3);//random direction
+			int tRand = rand.nextInt(6);
+			int x=0,y=0,velx=0,vely=0;
+			
+			if( rAnim == 1)
 				name = "bluecrab_0";
-			}else{
+			else if(rAnim == 2)
 				name = "mittencrab_1";
+			else
+			    name = "HorseShoe";
+			if(tRand<2){//spawn left or right
+				y = rand.nextInt(280)+250;
+				if(rand.nextBoolean()){//spawn left
+					x = 0;
+					velx = 2*speed;
+					if( d== 0){
+						dir = Direction.NE;
+						vely = -1;
+					}else if(d == 1){
+						dir = Direction.SE;
+						vely = 1;
+					}else{
+						vely = 0;
+						dir = Direction.E;
+					}
+				}else{//spawn right
+					x = Window.WIDTH;
+					velx = -2*speed;
+					if( d== 0){
+						dir = Direction.NW;
+						vely = -1;
+					}else if(d == 1){
+						dir = Direction.SW;
+						vely = 1;
+					}else{
+						vely = 0;
+						dir = Direction.W;
+					}
+				}
+			}else{//spawn top or bottom
+				x = rand.nextInt(425)+425;
+				if(rand.nextBoolean()){//spawn top
+					y = 0;
+					vely = 1*speed;
+					if( d== 0){
+						dir = Direction.SW;
+						velx = -1*speed;
+					}else if(d == 1){
+						dir = Direction.SE;
+						velx = 1*speed;
+					}else{
+						velx = 0;
+						dir = Direction.S;
+					}
+				}else{//spawn bottom
+					y = Window.HEIGHT;
+					vely = -1*speed;
+					if( d== 0){
+						dir = Direction.NW;
+						velx = -1*speed;
+					}else if(d == 1){
+						dir = Direction.NE;
+						velx = 1*speed;
+					}else{
+						velx = 0;
+						dir = Direction.N;
+					}
+				}
 			}
+			if(name == "HorseShoe"){
+				actNumCrab++;
+			}
+			objects.add(new Animal(name,x,y,velx,vely,dir));
 		}
-		velx = 2*speed;
-		int r = rand.nextInt(3);
-		if( r== 0){
-			dir = Direction.NE;
-			vely = -1*speed;
-		}else if(r == 1){
-			dir = Direction.SE;
-			vely = 1*speed;
-		}else{
-			vely = 0;
-			dir = Direction.E;
-		}
-		System.out.println("SpawnLeft Created X: "+x+" Y: "+y);
-		objects.add(new Animal(name,x,y,velx,vely,dir));
 	}
 	
-	
-	/**
-	 * Creates an animal object on the right side of the screen
-	 * 
-	 * @param Enemy whether the animal is an enemy or not
-	 * @param speed speed of the animal being created
-	 */
-	public void spawnRight(boolean Enemy, int speed){
-		Random rand = new Random();
-		int x = (int)(Window.WIDTH);
-		int y = (int)((rand.nextInt(240)+240));
-		int velx;
-		int vely;
-		Direction dir;
-		String name = "HorseShoe";
-		if(Enemy){
-			if(rand.nextBoolean()){
-				name = "bluecrab_0";
-			}else{
-				name = "mittencrab_1";
-			}
-		}
-		velx = -2*speed;
-		int r = rand.nextInt(3);
-		if( r== 0){
-			dir = Direction.NW;
-			vely = -1*speed;
-		}else if(r == 1){
-			dir = Direction.SW;
-			vely = 1*speed;
-		}else{
-			vely = 0;
-			dir = Direction.W;
-		}
-		System.out.println("SpawnRight Created X: "+x+" Y: "+y);
-		objects.add(new Animal(name,x,y,velx,vely,dir));
-	}
-	
-	/**
-	 * Creates an animal object on the top of the screen
-	 * 
-	 * @param Enemy whether the animal is an enemy or not
-	 * @param speed speed of the animal being created
-	 */
-	public void spawnTop(boolean Enemy, int speed){
-		Random rand = new Random();
-		int x = (int)((rand.nextInt(425)+425));
-		int y = 0;
-		int velx;
-		int vely;
-		Direction dir;
-		String name = "HorseShoe";
-		if(Enemy){
-			if(rand.nextBoolean()){
-				name = "bluecrab_0";
-			}else{
-				name = "mittencrab_1";
-			}
-		}
-		vely = 1*speed;
-		int r = rand.nextInt(3);
-		if( r== 0){
-			dir = Direction.SW;
-			velx = -1*speed;
-		}else if(r == 1){
-			dir = Direction.SE;
-			velx = 1*speed;
-		}else{
-			velx = 0;
-			dir = Direction.S;
-		}
-		System.out.println("SpawnTop Created X: "+x+" Y: "+y);
-		objects.add(new Animal(name,x,y,velx,vely,dir));
-	}
-	
-	/**
-	 * Creates an animal object on the bottom of the screen
-	 * 
-	 * @param Enemy whether the animal is an enemy or not
-	 * @param speed speed of the animal being created
-	 */
-	public void spawnBottom(boolean Enemy, int speed){
-		Random rand = new Random();
-		int x = (int)((rand.nextInt(425)+425));
-		int y = (int)(Window.HEIGHT);
-		int velx;
-		int vely;
-		Direction dir;
-		String name = "HorseShoe";
-		if(Enemy){
-			if(rand.nextBoolean()){
-				name = "bluecrab_0";
-			}else{
-				name = "mittencrab_1";
-			}
-		}
-		vely = -1*speed;
-		int r = rand.nextInt(3);
-		if( r== 0){
-			dir = Direction.NW;
-			velx = -1*speed;
-		}else if(r == 1){
-			dir = Direction.NE;
-			velx = 1*speed;
-		}else{
-			velx = 0;
-			dir = Direction.N;
-		}
-		System.out.println("SpawnBottom Created X: "+x+" Y: "+y);
-		objects.add(new Animal(name,x,y,velx,vely,dir));
-	}
-	
+
 	/**
 	 * Checks to see if it is the end of the game and handles the score gained from the game depending on how close
-	 * the player count of horseshoe crabs was to the actual count.
+	 * the player count of horseshoe crabs was to the actual count. Adds horseshoe crabs if the game isn't over.
 	 */
 	private void checkEndGame(){
-		if(init == false){
-			timer1 = System.currentTimeMillis();
-			init = true;
-		}
-		if(System.currentTimeMillis() < timer1+15000.0){
-			//System.out.println("if case");
-			tick = (tick+1)%31;
-			if(tick==30){
-				randSpawn(rand.nextBoolean(),rand.nextInt(2)+1,rand.nextInt(2));		
-			}
-		}else if(init2){
-			if(System.currentTimeMillis() > timer2+5000.0){
-				if(actNumCrab-clickNumCrab == 0){
-					Menu.Menu.SCORE += 100;
-				}else if(actNumCrab-clickNumCrab == 1 || clickNumCrab-actNumCrab == 1){
-					Menu.Menu.SCORE += 75;
-				}else if(actNumCrab-clickNumCrab == 2 || clickNumCrab-actNumCrab == 2){
-					Menu.Menu.SCORE += 50;
+		if(System.currentTimeMillis() > timer1+15000.0){
+			spawn = false;
+			if(endGameScreen){
+				if (System.currentTimeMillis() > timer2+2500){
+					addScore();
+					endGame();
 				}
-				resetGame();
-			}
-		}else if(objects.size() == animals+1){
-			if(init2 == false){
+			} else if(objects.size() == animals+1){
 				timer2 = System.currentTimeMillis();
-				//System.out.println("end game");
 				objects.add(new Animal("EndGame",actNumCrab,clickNumCrab,0,0, null));
-				init2 = true;
+				endGameScreen = true;
 			}
 		}
 	}
@@ -297,16 +204,35 @@ public class Game3 extends MouseAdapter {
 	/**
 	 * Resets the game by setting the game variables to their starting values and sets the gameState back to the Menu
 	 */
-	public void resetGame(){
+	
+	public void initialize(){
+		timer1 = System.currentTimeMillis();
 		init = false;
-		init2 = false;
-		running = false;
+		spawn = true;
+		endGameScreen = false;
 		start = false;
+		running = true;
 		animals = 0;
 		actNumCrab = 0;
 		clickNumCrab = 0;
 		objects.clear();
+		objects.add(new Animal("Count",0,0,0,0,null));
+		tick = 0;
+	}
+	
+	public void endGame(){
+		running = false;
 		Controller.gameState = STATE.Menu;
+	}
+	
+	public void addScore(){
+		if(actNumCrab-clickNumCrab == 0){
+			Menu.Menu.SCORE += 100;
+		}else if(actNumCrab-clickNumCrab == 1 || clickNumCrab-actNumCrab == 1){
+			Menu.Menu.SCORE += 75;
+		}else if(actNumCrab-clickNumCrab == 2 || clickNumCrab-actNumCrab == 2){
+			Menu.Menu.SCORE += 50;
+		}
 	}
 
 	/**
@@ -314,12 +240,11 @@ public class Game3 extends MouseAdapter {
 	 * If start is not true, add a new animal and set start to true, otherwise call checkEndGame and updateAnimal
 	 */
 	public void tick() {
-		if(!start){
-			objects.add(new Animal("Count", 0, 0, 0, 0, null));
-			start = true;
-		}
 		checkEndGame();
+		if(tick%20 == 0 && spawn)
+			randSpawn(rand.nextInt(2));
 		updateAnimal();
+		tick++;
 	}
 	
     /**

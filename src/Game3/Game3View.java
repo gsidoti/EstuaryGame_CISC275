@@ -49,17 +49,17 @@ public class Game3View extends gameView{
 	 * @param objects The ArrayList of gameObjects in the game
 	 */
 	public void render(Graphics g, ArrayList<gameObject> objects){
-		
 		g.drawImage(images.get("game3sand"), 0, 0, null);
 		
 		for(gameObject o: objects){
 			Animal a = (Animal)(o);
 			if(a.name == "HorseShoe"){
-				g.drawImage(images.get("horseshoe_crab_"+a.getDir().toString()), scaleW(a.getX()-50), scaleH(a.getY()-50), null);
+				g.drawImage(images.get("horseshoe_crab_"+a.getDir().toString()), scaleW(a.getX()-150), scaleH(a.getY()-150), null);
+				//System.out.println(images.get("horseshoe_crab_"+a.getDir().toString()).getWidth() +" "+images.get("horseshoe_crab_"+a.getDir().toString()).getHeight());
 			}else if(a.name == "mittencrab_1"){
-				g.drawImage(images.get("mittencrab_1"), scaleW(a.getX()), scaleH(a.getY()), null);
+				g.drawImage(images.get("mittencrab_1"), scaleW(a.getX()-150), scaleH(a.getY()-150), null);
 			}else if(a.name == "bluecrab_0"){
-				g.drawImage(images.get("bluecrab_0"), scaleW(a.getX()), scaleH(a.getY()), null);
+				g.drawImage(images.get("bluecrab_0"), scaleW(a.getX()-150), scaleH(a.getY()-150), null);
 			}else if(a.name == "EndGame"){
 				//g.setColor(Color.gray);
 				//g.fillRect((int)((Window.WIDTH/2-200)*Window.SCALE), (int) (((Window.HEIGHT/2)-200)*Window.SCALE), (int)(400*Window.SCALE), (int)(200*Window.SCALE));

@@ -5,9 +5,6 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Random;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-
 import OverallGame.Controller;
 import OverallGame.STATE;
 import OverallGame.Window;
@@ -25,7 +22,9 @@ public class Menu extends MouseAdapter {
 	int counter= 0;
 	int timer=0;
 	public boolean updatedScore = true;
-	public boolean returning = true;
+	boolean ftInit = false;
+	int ftTemp;
+	public boolean init;
 	public long initTime;
 	public MenuView menuView;
 	public boolean running = false;
@@ -59,33 +58,101 @@ public class Menu extends MouseAdapter {
 		int my = e.getY();
 		if(updatedScore && mouseOver(mx,my,scaleW(150), scaleH(150),scaleW(250),scaleH(275))){	
 			Controller.gameState = STATE.Game1i;
-			running = false;
-			returning = false;
-			objects.clear();
+			resetMenu();
 			System.out.println("game1i");
 		}else if(updatedScore && mouseOver(mx,my,scaleW(900), scaleH(250),scaleW(275),scaleH(250))){	
 			Controller.gameState = STATE.Game2i;
-			running = false;
-			returning = false;
-			objects.clear();
+			resetMenu();
 			System.out.println("game2i");
 		}else if(updatedScore && mouseOver(mx,my,scaleW(150), scaleH(480),scaleW(275),scaleH(250))){	
 			Controller.gameState = STATE.Game3i;
-			running = false;
-			returning = false;
-			objects.clear();
+			resetMenu();
 			System.out.println("game3i");
 		}else if(updatedScore && mouseOver(mx,my,scaleW(900), scaleH(480),scaleW(275),scaleH(250))){	
 			Controller.gameState = STATE.Game4i;
-			running = false;
-			returning = false;
-			objects.clear();
+			resetMenu();
 			System.out.println("game4i");
 		}
 		if(mouseOver(mx,my,scaleW(5),scaleH(5),scaleW(80),scaleH(44))){
 			System.exit(0);
 		}
 	}
+	
+	private void resetMenu(){
+		running = false;
+		objects.clear();
+		updatedScore = false;
+		ftInit = false;
+	}
+
+    /**
+     * Creates 'trash' game objects that are used for the main menu
+     * 
+     * @param amount amount of new objects to make
+     */
+	private void createTrash(int amount){
+		for(int i = 0;i < amount;i++){
+			switch (rand.nextInt(4)){
+				case 0:
+					objects.add(new gameObject("apple",rand.nextInt(125)+515,rand.nextInt(30)+200,0,rand.nextInt(2)+1));
+					break;
+				case 1:
+					objects.add(new gameObject("can",rand.nextInt(125)+515,rand.nextInt(30)+200,0,rand.nextInt(2)+1));
+					break;
+				case 2:
+					objects.add(new gameObject("box",rand.nextInt(125)+515,rand.nextInt(30)+200,0,rand.nextInt(2)+1));
+					break;
+				case 3:
+					objects.add(new gameObject("chipBag",rand.nextInt(125)+515,rand.nextInt(30)+200,0,rand.nextInt(2)+1));
+					break;
+			}
+		}
+	}
+		
+	/**
+	 * Moves the 'trash' on the main screen to make them look like they are being thrown away
+	 */
+	private void moveTrash(){
+		gameObject o;
+		for(int i=0;i<objects.size();i++){
+			o = objects.get(i);
+			if(o.y>400){
+				o.name = "";//sets it so menuView doesn't draw object if in can
+			}else if(o.name != ""){
+				o.y +=o.getVely();
+			}
+		}	
+	}
+	
+    /**
+     * Makes the amount of trash fall equal to the amount your score changed
+     */
+	public void fallingTrash(){
+		if(!ftInit){
+			ftTemp = SCORE-menuView.oldScore;
+			ftInit = true;
+		}
+		if(objects.size() < ftTemp){
+			if(counter++%10 == 0)
+				createTrash(rand.nextInt(4));
+		}
+		if(objects.size()*4 >= ftTemp){ //shows new score after 1/4 trash falls
+			if(!updatedScore){
+				menuView.oldScore = SCORE;
+				updatedScore = true;
+			}
+		}
+	}
+    
+
+    /**
+     * Handles the methods that are called every tick.
+     */
+	public void tick() {
+		fallingTrash();
+		moveTrash();
+	}
+	
 	
     /**
      * Takes the width of an image and scales it to the appropriate size for the current screen
@@ -128,64 +195,6 @@ public class Menu extends MouseAdapter {
             } else return false;
         } else return false;
     }
-
-    /**
-     * Creates 'trash' game objects that are used for the main menu
-     * 
-     * @param amount amount of new objects to make
-     */
-	private void createTrash(int amount){
-		for(int i = 0;i < amount;i++){
-			switch (rand.nextInt(4)){
-				case 0:
-					objects.add(new gameObject("apple",rand.nextInt(125)+515,rand.nextInt(30)+200,0,rand.nextInt(2)+1));
-					break;
-				case 1:
-					objects.add(new gameObject("can",rand.nextInt(125)+515,rand.nextInt(30)+200,0,rand.nextInt(2)+1));
-					break;
-				case 2:
-					objects.add(new gameObject("box",rand.nextInt(125)+515,rand.nextInt(30)+200,0,rand.nextInt(2)+1));
-					break;
-				case 3:
-					objects.add(new gameObject("chipBag",rand.nextInt(125)+515,rand.nextInt(30)+200,0,rand.nextInt(2)+1));
-					break;
-			}
-		}
-	}
-		
-	/**
-	 * Moves the 'trash' on the main screen to make them look like they are being thrown away
-	 */
-	private void moveTrash(){
-		gameObject o;
-		for(int i=0;i<objects.size();i++){
-			o = objects.get(i);
-			if(o.y>400){
-				o.name = "";
-			}else if(o.name != ""){
-				o.y +=o.getVely();
-			}
-		}	
-	}
-    
-
-    /**
-     * Handles the methods that are called every tick.
-     */
-	public void tick() {
-		if(returning){
-			if(System.currentTimeMillis()<initTime){
-				updatedScore = false;
-				if(counter++%10 ==0)
-					createTrash(rand.nextInt(3));
-			}else if(updatedScore == false){
-				menuView.oldScore = SCORE;
-				updatedScore = true;
-			}
-		}
-
-		moveTrash();
-	}
 	
 	
 	public ArrayList<gameObject> getObjects(){

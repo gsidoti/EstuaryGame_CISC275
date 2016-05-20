@@ -137,7 +137,6 @@ public class Controller extends Canvas{
 	 * call the game's tick method.
 	 */
 	private void tick(){
-		
 		switch(gameState){
 		case Menu:
 			if(menu.running == false){
@@ -145,10 +144,6 @@ public class Controller extends Canvas{
 				this.addMouseListener(menu);
 				System.out.println("setting menu to running");
 				menu.running = true;
-				if(Menu.SCORE>menu.menuView.oldScore){
-					menu.initTime = System.currentTimeMillis()+7000;
-					menu.returning = true;
-				}
 			}else{
 				menu.tick();
 			}
@@ -197,8 +192,8 @@ public class Controller extends Canvas{
 			if(game3.running == false){
 				clearML();
 				this.addMouseListener(game3);
-				System.out.println("setting game4 to running");
-				game3.running = true;
+				System.out.println("setting game3 to running");
+				game3.initialize();
 			}else{
 				game3.tick();
 			}
@@ -243,25 +238,12 @@ public class Controller extends Canvas{
 	 * Checks the gameState and depending on what it is, calls the appropriate game's render method.
 	 */
 	private void render(){
-		//System.out.println("Render");
 		BufferStrategy bs = this.getBufferStrategy();
 		if(bs == null){
 			this.createBufferStrategy(3);
 			return;
 		}
 		Graphics g = bs.getDrawGraphics();
-		if(!init){
-			Map<?, ?> desktopHints = 
-				    (Map<?, ?>) Toolkit.getDefaultToolkit().getDesktopProperty("awt.font.desktophints");
-
-				Graphics2D g2d = (Graphics2D) g;
-				if (desktopHints != null) {
-				    g2d.setRenderingHints(desktopHints);
-				}
-				init = true;
-		}
-		
-		
 		switch(gameState){
 		case Menu:
 			menu.menuView.render(g, menu.getObjects());
