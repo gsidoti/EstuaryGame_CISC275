@@ -27,6 +27,7 @@ public class Game3 extends MouseAdapter {
 	ArrayList<gameObject> objects = new ArrayList<gameObject>();
 	
 	public Game3View view;
+	static boolean inst;
 	long timer1;
 	long timer2;
 	int mx,my;
@@ -52,8 +53,13 @@ public class Game3 extends MouseAdapter {
 	public void mousePressed(MouseEvent e){
 		mx = e.getX();
 		my = e.getY();
-		if(!endGameScreen)
-			clickNumCrab++;
+		
+		if(inst && mouseOver(mx,my,scaleW(570),scaleH(520),scaleW(111),scaleH(52)))
+				inst = false;
+		else{
+			if(!endGameScreen)
+				clickNumCrab++;	
+		}
 		if(mouseOver(mx,my,scaleW(5),scaleH(5),scaleW(80),scaleH(44))){
 			endGame();
 			if(endGameScreen)
@@ -207,6 +213,7 @@ public class Game3 extends MouseAdapter {
 	
 	public void initialize(){
 		timer1 = System.currentTimeMillis();
+		inst = true;
 		init = false;
 		spawn = true;
 		endGameScreen = false;
@@ -240,11 +247,13 @@ public class Game3 extends MouseAdapter {
 	 * If start is not true, add a new animal and set start to true, otherwise call checkEndGame and updateAnimal
 	 */
 	public void tick() {
-		checkEndGame();
-		if(tick%20 == 0 && spawn)
-			randSpawn(rand.nextInt(2));
-		updateAnimal();
-		tick++;
+		if(!inst){
+			checkEndGame();
+			if(tick%20 == 0 && spawn)
+				randSpawn(rand.nextInt(2));
+			updateAnimal();
+			tick++;
+		}
 	}
 	
     /**

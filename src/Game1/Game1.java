@@ -36,6 +36,7 @@ public class Game1 extends MouseAdapter {
     //private FrameRate frameRate;
     //private BufferStrategy bs;
     public boolean running = false;
+    static boolean inst = true;
     public boolean mousedown = false;
     int mx, my;
     int counter = 0;
@@ -84,12 +85,17 @@ public class Game1 extends MouseAdapter {
      */
 	public void mousePressed(MouseEvent e){
 		mousedown = true;
-		Player p = (Player) (objects.get(0));
 		mx = e.getX();
 		my = e.getY();
-		if(mx<Window.WIDTH*Window.SCALE*0.95)p.SetDest(mx, my);
-		if(mouseOver(mx,my,scaleW(Window.WIDTH-85),scaleH(5),scaleW(80),scaleH(44)))
-			resetGame();
+		if(inst && mouseOver(mx,my,scaleW(570),scaleH(520),scaleW(111),scaleH(52)))
+			inst = false;
+		else{
+			Player p = (Player) (objects.get(0));
+			if(mx<Window.WIDTH*Window.SCALE*0.95)p.SetDest(mx, my);
+			if(mouseOver(mx,my,scaleW(Window.WIDTH-85),scaleH(5),scaleW(80),scaleH(44)))
+				resetGame();
+		}
+
 	}
 	
 
@@ -159,52 +165,53 @@ public class Game1 extends MouseAdapter {
 	 * Updates player, trash, and score objects.
 	 */
 	public void tick() {
-		if(SkipTick)
-		{
-			SkipTick=false;
-			return;
-		}
-		else
-		{
-			SkipTick=true;
-		}
-        Random rand = new Random();
-		counter++;
-		if (counter%10 == 0) {
-			counter=0;
-			if(trashcount<maxtrash)
+		if(!inst){
+			if(SkipTick)
 			{
-				Trash temp = new Trash("Trash", (int)(0 * Window.SCALE),
-	        			(int)(150+rand.nextInt((int)((Window.HEIGHT-180)))*Window.SCALE),
-	        			1+maxvel*rand.nextInt((int)(Score/10)+1), 0);
-				temp.setActive(true);
-				objects.add(temp);
-				trashcount++;
+				SkipTick=false;
+				return;
+			}
+			else
+			{
+				SkipTick=true;
+			}
+	        Random rand = new Random();
+			counter++;
+			if (counter%10 == 0) {
+				counter=0;
+				if(trashcount<maxtrash)
+				{
+					Trash temp = new Trash("Trash", (int)(0 * Window.SCALE),
+		        			(int)(150+rand.nextInt((int)((Window.HEIGHT-180)))*Window.SCALE),
+		        			1+maxvel*rand.nextInt((int)(Score/10)+1), 0);
+					temp.setActive(true);
+					objects.add(temp);
+					trashcount++;
+				}
+			}
+			updatePlayer();
+			// Clear dead trash
+			for (int i = objects.size()-1;i>1; i--) {
+				gameObject o=objects.get(i);
+				if (o.name=="Trash")
+				{
+					if(!(((Trash)objects.get(i)).getActive()))objects.remove(i);
+				}
+			}
+			for (int i = 2;i<objects.size(); i++) {
+				gameObject o=objects.get(i);
+				if (o.name=="Trash")
+				{
+					updateTrash(i);
+					updateLives(i);
+				}
+		    	Scoreboard sb=(Scoreboard)objects.get(1);
+		    	sb.setScore((int)Score);
+		    	sb.setLives((int)Lives);
+		    	sb.setHi((int)HiScore);
+	
 			}
 		}
-		updatePlayer();
-		// Clear dead trash
-		for (int i = objects.size()-1;i>1; i--) {
-			gameObject o=objects.get(i);
-			if (o.name=="Trash")
-			{
-				if(!(((Trash)objects.get(i)).getActive()))objects.remove(i);
-			}
-		}
-		for (int i = 2;i<objects.size(); i++) {
-			gameObject o=objects.get(i);
-			if (o.name=="Trash")
-			{
-				updateTrash(i);
-				updateLives(i);
-			}
-	    	Scoreboard sb=(Scoreboard)objects.get(1);
-	    	sb.setScore((int)Score);
-	    	sb.setLives((int)Lives);
-	    	sb.setHi((int)HiScore);
-
-		}
-		//System.out.println("Trash: " + objects.size() + " Lives: " + Lives);
 
 	}
 
@@ -227,6 +234,7 @@ public class Game1 extends MouseAdapter {
     	SB.setHi((int)HiScore);
     	objects.add(SB);
 		Menu.SCORE += Score*2;
+		inst = true;
         maxvel=2;
         maxtrash=10;
         trashcount=0;

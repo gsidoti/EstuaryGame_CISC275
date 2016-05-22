@@ -38,7 +38,7 @@ public class Game2 extends MouseAdapter {
     private int boatspeed = 170;
     private boolean spawnBoats = true;
     private int counter = 0;
-    private long endTime;
+    static boolean inst = true;
     private int mx, my;
 	public boolean running = false;
 	public int[] docks = new int[6];
@@ -48,7 +48,6 @@ public class Game2 extends MouseAdapter {
 	
 	public Game2View view;
 	Random rand = new Random();
-	boolean mousedown = false;//dont need
     private int Lives = 3;
    
     /**
@@ -63,19 +62,12 @@ public class Game2 extends MouseAdapter {
      * If the mouse was over the quit button when pressed, reset the game.
      */
 	public void mousePressed(MouseEvent e){
-		mousedown = true;//dont need
 		mx = e.getX();
 		my = e.getY();
-		System.out.println("X: "+mx+" Y: "+my);
+		if(inst && mouseOver(mx,my,scaleW(570),scaleH(520),scaleW(111),scaleH(52)))
+			inst = false;
 		if(mouseOver(mx,my,scaleW(5),scaleH(5),scaleW(80),scaleH(44)))
 			resetGame();
-	}
-
-	/**
-	 * When the mouse button is released, sets mousedown to false.
-	 */
-	public void mouseReleased(MouseEvent e){//dont need
-		mousedown = false;
 	}
 	
 	/**
@@ -175,7 +167,6 @@ public class Game2 extends MouseAdapter {
 		if(boatsLeft <= 0){
 			if(spawnBoats == true){
 				spawnBoats = false;
-				endTime = System.currentTimeMillis();
 			}else{
 				Menu.Menu.SCORE += 100;
 				resetGame();
@@ -189,19 +180,22 @@ public class Game2 extends MouseAdapter {
 	 * depending on the value of the counter.
 	 */
 	public void tick() {
-		counter++;
-		if (counter%boatspeed == 0) {
-			addBoat();
+		
+		if(!inst){
+			counter++;
+			if (counter%boatspeed == 0) {
+				addBoat();
+			}
+			if(counter%1000 == 0){
+				speed++;
+			}
+			if(counter%50 == 0){
+				boatspeed--;
+				mx = 0;
+				my = 0;
+			}
+				updateBoats();
 		}
-		if(counter%1000 == 0){
-			speed++;
-		}
-		if(counter%50 == 0){
-			boatspeed--;
-			mx = 0;
-			my = 0;
-		}
-			updateBoats();
 	}
 	
 	public ArrayList<gameObject> getObjects(){
@@ -233,6 +227,7 @@ public class Game2 extends MouseAdapter {
     void resetGame() {
     	boatsLeft=36;
     	spawnBoats =true;
+    	inst = true;
     	Lives = 10;
     	counter = 0;
         speed = 1;
@@ -301,13 +296,5 @@ public class Game2 extends MouseAdapter {
     
     public void setRunning(boolean value) {
     	running = value;
-    }
-    
-    public boolean getMousedown() {
-    	return mousedown;
-    }
-    
-    public void setMousedown(boolean value) {
-    	mousedown = value;
     }
 }

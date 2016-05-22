@@ -3,22 +3,14 @@ package OverallGame;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Toolkit;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
-import java.util.Map;
-
 import Game2.Game2;
-import Game2.Game2i;
 import Game3.Game3;
-import Game3.Game3i;
 import Game4.Game4;
-import Game4.Game4i;
 import Menu.Menu;
 //import Game1.GameOne;
 import Game1.Game1;
-import Game1.Game1i;
 
 /**
  * Controller handles everything that goes on in the game and minigames. It knows what is currently being run and printed on-screen,
@@ -34,34 +26,25 @@ public class Controller extends Canvas{
 
 	private Thread thread;
 	public boolean running = false;
-	private boolean init = false;
 	private Menu menu;
 	private Game1 game1;
-	private Game1i game1i;
 	private Game2 game2;
-	private Game2i game2i;
 	private Game3 game3;
-	private Game3i game3i;
 	private Game4 game4;
-	private Game4i game4i;
 	private Window window;
 
 	public static STATE gameState = STATE.Menu;
 
 	/**
-	 * Contructor for Controller objects
+	 * Constructor for Controller objects
 	 */
 	public Controller(){
 		window = new Window("Estuary Game",this);
 		menu = new Menu();
 		game1 = new Game1();
-		game1i = new Game1i();
 		game2 = new Game2();
-		game2i = new Game2i();
 		game3 = new Game3();
-		game3i = new Game3i();
 		game4 = new Game4();
-		game4i = new Game4i();
 		this.start();
 		this.run();
 	}
@@ -95,8 +78,6 @@ public class Controller extends Canvas{
 		long lastTime = System.nanoTime();
 		double amountOfTicks = 60.0;
 		double ns = 1000000000 / amountOfTicks;
-		int frames = 0;
-		int updates = 0;
 		double delta = 0;
 		long timer = System.currentTimeMillis();
 		while(running){
@@ -106,15 +87,10 @@ public class Controller extends Canvas{
 			while(delta >= 1){
 				tick();
 				render();
-				updates++;
-				frames++;
 				delta--;
 			}					
 			if(System.currentTimeMillis() - timer > 1000){
 				timer += 1000;
-				//System.out.println("FPS: " + frames + " TICKS: " + updates);
-				frames = 0;
-				updates = 0;
 			}
 		}
 		stop();
@@ -158,16 +134,6 @@ public class Controller extends Canvas{
 				game1.tick();
 			}
 			break;
-		case Game1i:
-			if (game1i.running == false) {
-				clearML();
-				this.addMouseListener(game1i);
-				System.out.println("setting game1i to running");
-				game1i.running = true;
-			}else{
-				game1i.tick();
-			}
-			break;
 		case Game2:
 			if(game2.running == false){
 				clearML();
@@ -176,16 +142,6 @@ public class Controller extends Canvas{
 				game2.running = true;
 			}else{
 				game2.tick();
-			}
-			break;
-		case Game2i:
-			if (game2i.running == false) {
-				clearML();
-				this.addMouseListener(game2i);
-				System.out.println("setting game2i to running");
-				game2i.running = true;
-			}else{
-				game2i.tick();
 			}
 			break;
 		case Game3:
@@ -198,16 +154,6 @@ public class Controller extends Canvas{
 				game3.tick();
 			}
 			break;
-		case Game3i:
-			if (game3i.running == false) {
-				clearML();
-				this.addMouseListener(game3i);
-				System.out.println("setting game3i to running");
-				game3i.running = true;
-			}else{
-				game3i.tick();
-			}
-			break;
 		case Game4:
 			if(game4.running == false){
 				clearML();
@@ -216,16 +162,6 @@ public class Controller extends Canvas{
 				game4.running = true;
 			}else{
 				game4.tick();
-			}
-			break;
-		case Game4i:
-			if (game4i.running == false) {
-				clearML();
-				this.addMouseListener(game4i);
-				System.out.println("setting game4i to running");
-				game4i.running = true;
-			}else{
-				game4i.tick();
 			}
 			break;
 		default:
@@ -251,29 +187,17 @@ public class Controller extends Canvas{
 		case Game1:
 			game1.view.render(g, game1.getObjects());
 			break;
-		case Game1i:
-			game1i.game1iView.render(g);
-			break;
 		case Game2:
 			game2.view.render(g, game2.getObjects());
-			break;
-		case Game2i:
-			game2i.game2iView.render(g);
 			break;
 		case Game3:
 			game3.view.render(g, game3.getObjects());
 			break;
-		case Game3i:
-			game3i.game3iView.render(g);
-			break;
 		case Game4:
 			game4.view.render(g,game4.getObjects());
 			break;
-		case Game4i:
-			game4i.game4iView.render(g);
+		default:
 			break;
-			default:
-				break;
 		}
 		g.setColor(Color.black);
 		g.fillRect(0,(int)(Window.HEIGHT*Window.SCALE),window.screenDimension.width,window.screenDimension.height-(int)(Window.HEIGHT*Window.SCALE));

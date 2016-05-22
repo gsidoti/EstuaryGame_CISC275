@@ -51,27 +51,27 @@ public class Menu extends MouseAdapter {
 	 * When mouse is clicked, sets mx/my to mouse x- and y-positions.
 	 * If the mouse was clicked over the button areas of any of the game buttons, set running to false, clear the ArrayList,
 	 * and change the gameState to the corresponding game's instruction screen.
-	 * If the mosue was clicked over the exit button, quit the game.
+	 * If the mouse was clicked over the exit button, quit the game.
 	 */
 	public void mousePressed(MouseEvent e){
 		int mx = e.getX();
 		int my = e.getY();
 		if(updatedScore && mouseOver(mx,my,scaleW(150), scaleH(150),scaleW(250),scaleH(275))){	
-			Controller.gameState = STATE.Game1i;
+			Controller.gameState = STATE.Game1;
 			resetMenu();
-			System.out.println("game1i");
+			System.out.println("game1");
 		}else if(updatedScore && mouseOver(mx,my,scaleW(900), scaleH(250),scaleW(275),scaleH(250))){	
-			Controller.gameState = STATE.Game2i;
+			Controller.gameState = STATE.Game2;
 			resetMenu();
-			System.out.println("game2i");
+			System.out.println("game2");
 		}else if(updatedScore && mouseOver(mx,my,scaleW(150), scaleH(480),scaleW(275),scaleH(250))){	
-			Controller.gameState = STATE.Game3i;
+			Controller.gameState = STATE.Game3;
 			resetMenu();
-			System.out.println("game3i");
+			System.out.println("game3");
 		}else if(updatedScore && mouseOver(mx,my,scaleW(900), scaleH(480),scaleW(275),scaleH(250))){	
-			Controller.gameState = STATE.Game4i;
+			Controller.gameState = STATE.Game4;
 			resetMenu();
-			System.out.println("game4i");
+			System.out.println("game4");
 		}
 		if(mouseOver(mx,my,scaleW(5),scaleH(5),scaleW(80),scaleH(44))){
 			System.exit(0);

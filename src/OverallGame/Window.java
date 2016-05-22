@@ -17,8 +17,6 @@ import javax.swing.JPanel;
  */
 
 public class Window{
-
-	//private static final long serialVersionUID = 1L;
 	public static JFrame frame;
 	public static final int WIDTH = 1280;
 	public static final int HEIGHT = 720;
@@ -48,7 +46,6 @@ public class Window{
 			frame.getRootPane().putClientProperty("apple.awt.fullscreenable", Boolean.valueOf(true));
 		}	
 		SCALE = scaledDimension.getWidth()/1280.0;
-		//Window.SCALE = 0.4;
 		frame.setPreferredSize(scaledDimension);
 		frame.setMaximumSize(scaledDimension);
 		frame.setMinimumSize(scaledDimension);
