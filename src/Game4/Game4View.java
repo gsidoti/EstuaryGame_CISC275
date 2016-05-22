@@ -67,22 +67,16 @@ public class Game4View extends gameView{
 		//System.out.println(objects.get(3).x);
 		objects.get(3).x = Game4.tick%288;
 		g.drawImage(images.get("g4_sand"), scaleW(0), scaleH(Window.HEIGHT-82), null);
-		if(!Game4.inst){
-			
 		//get player location
 		player = (G4Player) objects.get(0);
-		//draw images
-		//System.out.println(waterTop.length);
-		//System.out.println(objects.get(3).x);
 		g.drawImage(images.get("vessel"), scaleW(398), waterTop[scaleW(287-((Game4.tick+30)%288))]-scaleH(110), null);
-		//System.out.println(waterTop[objects.get(3).x]);
 		//draw rope
 		g.setColor(Color.black);
 		g.fillRect(scaleW(Window.WIDTH/2-1),waterTop[scaleW(287-((Game4.tick+30)%288))]-scaleH(68),scaleW(2),scaleH(68)+scaleH(player.y)-waterTop[scaleW(287-((Game4.tick+30)%288))]);
 		
 		//draw watertester
 		g.drawImage(images.get("watertester"), scaleW(Window.WIDTH/2-10), scaleH(player.y-30), null);
-		}else
+		if(Game4.inst)
 			g.drawImage(images.get("game4i"), 0, 0, null);
 		//draw score bar
 		g.setColor(Color.green);
