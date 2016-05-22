@@ -36,7 +36,7 @@ public abstract class gameView {
     	BufferedImage bufferedImage;
     	try {
     		bufferedImage = ImageIO.read(new File("images/"+imgName+".png"));
-    		images.put(imgName,resizeImg(bufferedImage,(int)(bufferedImage.getWidth()*Window.SCALE),(int)(bufferedImage.getHeight()*Window.SCALE)));
+    		images.put(imgName,resizeImg(bufferedImage,(int)Math.ceil((bufferedImage.getWidth()*Window.SCALE)),(int)Math.ceil((bufferedImage.getHeight()*Window.SCALE))));
     		return true; 
     	} catch (IOException e) {
     		System.out.println("Error at Image: "+imgName);

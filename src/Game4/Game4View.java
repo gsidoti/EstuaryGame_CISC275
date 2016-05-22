@@ -42,7 +42,7 @@ public class Game4View extends gameView{
 		images.put("underwater2",resizeImg(images.get("underwater2"),scaleW(Window.WIDTH),scaleH(Window.HEIGHT)));
 		createImage("exit");
 		BufferedImage img = images.get("game4_bgTile");
-		waterTop = new int[scaleW(288)];
+		waterTop = new int[images.get("game4_bgTile").getWidth()];
 		for(int i = 0; i<waterTop.length;i++){
 			int y = 0;
 			while((img.getRGB(i,y)>>24) == 0x00){

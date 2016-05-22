@@ -107,9 +107,9 @@ public class Game4 extends MouseAdapter {
 		gameObject r = objects.get(2);
 		int top = view.waterTop[scaleW(287-((Game4.tick+220)%288))]+scaleH(220);
 		int bot = view.waterTop[scaleW(287-((Game4.tick+220)%288))]+scaleH(348);
-		System.out.println("Bot:"+bot);
-		System.out.println("Top:"+top);
-		System.out.println("Act:"+scaleH(player.getY()));
+		//System.out.println("Bot:"+bot);
+		//System.out.println("Top:"+top);
+		//System.out.println("Act:"+scaleH(player.getY()));
 		if(scaleH(player.getY()+27)<bot && scaleH(player.getY()-27)>top){
 			g.setY(greenScore--);
 			if(greenScore <= 0){
