@@ -34,7 +34,7 @@ public class Game4 extends MouseAdapter {
 	 * Constructor for Game4 objects
 	 */
 	public Game4(){
-		objects.add( new G4Player("Player",(int)((Window.WIDTH/2)*Window.SCALE),(int)((Window.HEIGHT/2)*Window.SCALE),2,5));
+		objects.add( new G4Player("Player",(int)((Window.WIDTH/2)*Window.SCALE),(int)((Window.HEIGHT/2)*Window.SCALE),2,3));
 		objects.add(new gameObject("greenScore",0,greenScore,0,-1));
 		objects.add(new gameObject("redScore",0,redScore,0,-1));
 		view = new Game4View();
@@ -98,7 +98,7 @@ public class Game4 extends MouseAdapter {
 		gameObject player = objects.get(0);
 		gameObject g = objects.get(1);
 		gameObject r = objects.get(2);
-		if(scaleH(player.getY()+10)>scaleH(Window.HEIGHT/2-50) && scaleH(player.getY()+40)<scaleH(Window.HEIGHT/2+50)){
+		if(scaleH(player.getY())>scaleH(Window.HEIGHT/2-50) && scaleH(player.getY()+40)<scaleH(Window.HEIGHT/2+50)){
 			g.setY(greenScore--);
 			if(greenScore <= 0){
 				Menu.Menu.SCORE += 100;
