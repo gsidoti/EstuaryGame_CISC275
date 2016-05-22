@@ -38,6 +38,7 @@ public class Game4View extends gameView{
 		createImage("watertester");
 		createImage("game4_bgTile");
 		createImage("g4_sand");
+		createImage("game4i");
 		images.put("underwater2",resizeImg(images.get("underwater2"),scaleW(Window.WIDTH),scaleH(Window.HEIGHT)));
 		createImage("exit");
 		BufferedImage img = images.get("game4_bgTile");
@@ -49,7 +50,6 @@ public class Game4View extends gameView{
 			}
 			waterTop[i] = y;
 		}
-		System.out.println(Arrays.toString(waterTop));
 	}
 	
 	/**
@@ -64,11 +64,11 @@ public class Game4View extends gameView{
 		for(int i=-1;i<10;i++){
 			g.drawImage(images.get("game4_bgTile"), scaleW(objects.get(3).x+(i*288)), scaleH(0), null);
 		}
-		System.out.println(objects.get(3).x);
+		//System.out.println(objects.get(3).x);
 		objects.get(3).x = Game4.tick%288;
 		g.drawImage(images.get("g4_sand"), scaleW(0), scaleH(Window.HEIGHT-82), null);
-
-		
+		if(!Game4.inst){
+			
 		//get player location
 		player = (G4Player) objects.get(0);
 		//draw images
@@ -82,7 +82,8 @@ public class Game4View extends gameView{
 		
 		//draw watertester
 		g.drawImage(images.get("watertester"), scaleW(Window.WIDTH/2-10), scaleH(player.y-30), null);
-		
+		}else
+			g.drawImage(images.get("game4i"), 0, 0, null);
 		//draw score bar
 		g.setColor(Color.green);
 		g.fillRect((int)((Window.WIDTH-150)*Window.SCALE),(int)(50*Window.SCALE),(int) (50*Window.SCALE),(int) (150*Window.SCALE));

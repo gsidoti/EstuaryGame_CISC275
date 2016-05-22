@@ -25,6 +25,7 @@ public class Game4 extends MouseAdapter {
 	ArrayList<gameObject> objects = new ArrayList<gameObject>();
 	
 	public Game4View view;
+    static boolean inst = true;
 	static int tick=0;
 	boolean mousedown = false;
 	int mx,my;
@@ -50,6 +51,8 @@ public class Game4 extends MouseAdapter {
 		mousedown = true;
 		mx = e.getX();
 		my = e.getY();
+		if(inst && mouseOver(mx,my,scaleW(570),scaleH(520),scaleW(111),scaleH(52)))
+			inst = false;
 		if(mouseOver(mx,my,scaleW(5),scaleH(5),scaleW(80),scaleH(44)))
 			resetGame();
 	}
@@ -85,6 +88,7 @@ public class Game4 extends MouseAdapter {
 		greenScore = 1500;
 		redScore = 1500;
 		tick = 0;
+		inst = true;
 		g.setY(greenScore);
 		r.setY(redScore);
 		player.setY(Window.HEIGHT/2);
@@ -106,7 +110,7 @@ public class Game4 extends MouseAdapter {
 		System.out.println("Bot:"+bot);
 		System.out.println("Top:"+top);
 		System.out.println("Act:"+scaleH(player.getY()));
-		if(scaleH(player.getY())<bot && scaleH(player.getY())>top){
+		if(scaleH(player.getY()+27)<bot && scaleH(player.getY()-27)>top){
 			g.setY(greenScore--);
 			if(greenScore <= 0){
 				Menu.Menu.SCORE += 100;
@@ -125,9 +129,11 @@ public class Game4 extends MouseAdapter {
 	 * Updates player and score, then prints out score values.
 	 */
 	public void tick() {
-		updatePlayer();
-		updateScore();
-		tick++;
+		if(!inst){
+			updatePlayer();
+			updateScore();
+		}
+		tick++;	
 	}
 	
     /**

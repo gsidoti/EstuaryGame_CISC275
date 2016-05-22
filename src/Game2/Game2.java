@@ -34,8 +34,8 @@ public class Game2 extends MouseAdapter {
 	 * 					  - mousedown is used to check whether the mouse button is down or not
 	 * 					  - Lives holds the amount of lives the player has left, 0 means game over
 	 */
-    private int speed = 1;
-    private int boatspeed = 170;
+    private int speed = 3;
+    private int madeIt = 0;
     private boolean spawnBoats = true;
     private int counter = 0;
     static boolean inst = true;
@@ -68,6 +68,12 @@ public class Game2 extends MouseAdapter {
 			inst = false;
 		if(mouseOver(mx,my,scaleW(5),scaleH(5),scaleW(80),scaleH(44)))
 			resetGame();
+		for (int i = 0; i < objects.size(); i++) {
+			Boat b = (Boat) objects.get(i);
+			if (mouseOver(mx,my,scaleW(b.getX()-5),scaleH(b.getY()-5),scaleW(130),scaleH(65))&&b.getActive()) {
+				b.setInfested(false);
+			}
+		}	
 	}
 	
 	/**
@@ -99,8 +105,9 @@ public class Game2 extends MouseAdapter {
 		for (int i = 0; i < objects.size(); i++) {
 			b = (Boat) objects.get(i);
 			if (b.MadeIt(scaleW(90+(b.getVely()*30)))&&b.getActive()) {
-				System.out.println(b.getVely());
+				System.out.println("VEl: "+ b.getVely());
 				b.setActive(false);
+				madeIt++;
 				if (b.getInfested()) {
 					Lives--;
 					if (Lives <= 0) {
@@ -123,11 +130,11 @@ public class Game2 extends MouseAdapter {
 	 * If objects is equal to 35, call the resetGame method
 	 */
 	public void addBoat(){
-		int r = rand.nextInt(6),y = 0;
+		int r,y = 0;
 		if(boatsLeft > 0){
 			do {
 				r = rand.nextInt(6);
-				//System.out.println("R: "+r);
+				System.out.println("R: "+r);
 			}while(docks[r]>7);
 			switch(r){
 			case 0:
@@ -155,19 +162,21 @@ public class Game2 extends MouseAdapter {
 				docks[5]++;
 				break;
 			}
-			boolean bool = rand.nextBoolean();
-			if(bool == false){
-				bool = rand.nextBoolean();
+			int odds = rand.nextInt(7);
+			boolean bool = true;
+			if(odds == 0){
+				bool = false;
 			}	
-			Boat b = new Boat("Boat",Window.WIDTH,y,speed,docks[r]-1,bool);
+			Boat b = new Boat("Boat",Window.WIDTH,y,rand.nextInt(speed)+2,docks[r]-1,bool);
 			objects.add(b);
 			boatsLeft--;
 			//System.out.println(boatcount++);
 		}
+		System.out.println(madeIt);
 		if(boatsLeft <= 0){
 			if(spawnBoats == true){
 				spawnBoats = false;
-			}else{
+			}else if(madeIt == 36){
 				Menu.Menu.SCORE += 100;
 				resetGame();
 			}
@@ -180,21 +189,18 @@ public class Game2 extends MouseAdapter {
 	 * depending on the value of the counter.
 	 */
 	public void tick() {
-		
 		if(!inst){
 			counter++;
-			if (counter%boatspeed == 0) {
-				addBoat();
+			if (counter%40 == 0) {
+				mx = 0;
+				my = 0;
+				if(rand.nextBoolean())
+					addBoat();
 			}
 			if(counter%1000 == 0){
 				speed++;
 			}
-			if(counter%50 == 0){
-				boatspeed--;
-				mx = 0;
-				my = 0;
-			}
-				updateBoats();
+			updateBoats();
 		}
 	}
 	
@@ -231,7 +237,7 @@ public class Game2 extends MouseAdapter {
     	Lives = 10;
     	counter = 0;
         speed = 1;
-        boatspeed = 200;
+        madeIt= 0;
     	objects.clear();
     	Arrays.fill(docks, 0);
     	running = false;

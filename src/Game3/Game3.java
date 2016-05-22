@@ -249,7 +249,7 @@ public class Game3 extends MouseAdapter {
 	public void tick() {
 		if(!inst){
 			checkEndGame();
-			if(tick%20 == 0 && spawn)
+			if(tick%30 == 0 && spawn)
 				randSpawn(rand.nextInt(2));
 			updateAnimal();
 			tick++;
