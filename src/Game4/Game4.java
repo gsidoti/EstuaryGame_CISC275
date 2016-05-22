@@ -25,6 +25,7 @@ public class Game4 extends MouseAdapter {
 	ArrayList<gameObject> objects = new ArrayList<gameObject>();
 	
 	public Game4View view;
+	static int tick=0;
 	boolean mousedown = false;
 	int mx,my;
 	public int greenScore = 1500;
@@ -37,6 +38,7 @@ public class Game4 extends MouseAdapter {
 		objects.add( new G4Player("Player",(int)((Window.WIDTH/2)*Window.SCALE),(int)((Window.HEIGHT/2)*Window.SCALE),2,3));
 		objects.add(new gameObject("greenScore",0,greenScore,0,-1));
 		objects.add(new gameObject("redScore",0,redScore,0,-1));
+		objects.add(new gameObject("bgTile",0,0,0,0));
 		view = new Game4View();
 	}
 	
@@ -82,6 +84,7 @@ public class Game4 extends MouseAdapter {
 		gameObject r = objects.get(2);
 		greenScore = 1500;
 		redScore = 1500;
+		tick = 0;
 		g.setY(greenScore);
 		r.setY(redScore);
 		player.setY(Window.HEIGHT/2);
@@ -119,7 +122,7 @@ public class Game4 extends MouseAdapter {
 	public void tick() {
 		updatePlayer();
 		updateScore();
-		//System.out.println("Green: "+greenScore+" Red: "+redScore);
+		tick++;
 	}
 	
     /**
