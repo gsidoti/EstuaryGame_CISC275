@@ -39,24 +39,21 @@ public class Game4View extends gameView{
 		createImage("g4_sand");
 		images.put("underwater2",resizeImg(images.get("underwater2"),scaleW(Window.WIDTH),scaleH(Window.HEIGHT)));
 		createImage("exit");
-		//BufferedImage img = images.get("game4_bgTile");
+		BufferedImage img = images.get("game4_bgTile");
 		int w = images.get("game4_bgTile").getWidth();
 		System.out.println(w);
-		int x = 1;
-		int y =1;
-		int pixel = images.get("game4_bgTile").getRGB(x,y);
-		if((pixel>>24) == 0x00){
-			System.out.println("X: "+x+" Y: "+y+" are bueno");
+		waterTop = new int[scaleW(288)];
+		for(int i = 0; i<scaleW(288);i++){
+			int y = 0;
+			while((img.getRGB(i,y)>>24) == 0x00){
+				y++;
+				System.out.println("y++");
+			}
+			waterTop[i] = y;
 		}
-		waterTop = new int[w];
-		//for(int i = 0; i<img.getWidth();i++){
-		//	int y = 0;
-		//	while((img.getRGB(i,y)>>24) != 0x00){
-		//		y++;
-		//	}
-		//	waterTop[i] = y;
-		//}
-		waterTop.toString();
+		for(int i = 0; i<scaleW(288);i++){
+			System.out.print(waterTop[i]/Window.SCALE+", ");
+		}
 	}
 	
 	/**
