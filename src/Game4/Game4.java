@@ -35,7 +35,7 @@ public class Game4 extends MouseAdapter {
 	 * Constructor for Game4 objects
 	 */
 	public Game4(){
-		objects.add( new G4Player("Player",(int)((Window.WIDTH/2)*Window.SCALE),(int)((Window.HEIGHT/2)*Window.SCALE),2,3));
+		objects.add( new G4Player("Player",Window.WIDTH/2,Window.HEIGHT/2,2,3));
 		objects.add(new gameObject("greenScore",0,greenScore,0,-1));
 		objects.add(new gameObject("redScore",0,redScore,0,-1));
 		objects.add(new gameObject("bgTile",0,0,0,0));
@@ -70,7 +70,7 @@ public class Game4 extends MouseAdapter {
 			if(scaleH(p.getY())>scaleH(150.0))
 				p.moveUp();
 		}else{
-			if(scaleH(objects.get(0).getY())<scaleH(Window.HEIGHT-100))
+			if(scaleH(objects.get(0).getY())<scaleH(Window.HEIGHT-65))
 				p.moveDown();
 		}
 	}
@@ -101,7 +101,12 @@ public class Game4 extends MouseAdapter {
 		gameObject player = objects.get(0);
 		gameObject g = objects.get(1);
 		gameObject r = objects.get(2);
-		if(scaleH(player.getY())>scaleH(Window.HEIGHT/2-50) && scaleH(player.getY()+40)<scaleH(Window.HEIGHT/2+50)){
+		int top = view.waterTop[scaleW(287-((Game4.tick+220)%288))]+scaleH(220);
+		int bot = view.waterTop[scaleW(287-((Game4.tick+220)%288))]+scaleH(348);
+		System.out.println("Bot:"+bot);
+		System.out.println("Top:"+top);
+		System.out.println("Act:"+scaleH(player.getY()));
+		if(scaleH(player.getY())<bot && scaleH(player.getY())>top){
 			g.setY(greenScore--);
 			if(greenScore <= 0){
 				Menu.Menu.SCORE += 100;

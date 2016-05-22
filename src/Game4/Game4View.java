@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import OverallGame.Window;
 import OverallGame.gameObject;
@@ -40,20 +41,15 @@ public class Game4View extends gameView{
 		images.put("underwater2",resizeImg(images.get("underwater2"),scaleW(Window.WIDTH),scaleH(Window.HEIGHT)));
 		createImage("exit");
 		BufferedImage img = images.get("game4_bgTile");
-		int w = images.get("game4_bgTile").getWidth();
-		System.out.println(w);
 		waterTop = new int[scaleW(288)];
-		for(int i = 0; i<scaleW(288);i++){
+		for(int i = 0; i<waterTop.length;i++){
 			int y = 0;
 			while((img.getRGB(i,y)>>24) == 0x00){
 				y++;
-				System.out.println("y++");
 			}
 			waterTop[i] = y;
 		}
-		for(int i = 0; i<scaleW(288);i++){
-			System.out.print(waterTop[i]/Window.SCALE+", ");
-		}
+		System.out.println(Arrays.toString(waterTop));
 	}
 	
 	/**
@@ -68,21 +64,24 @@ public class Game4View extends gameView{
 		for(int i=-1;i<10;i++){
 			g.drawImage(images.get("game4_bgTile"), scaleW(objects.get(3).x+(i*288)), scaleH(0), null);
 		}
-		objects.get(3).x = (objects.get(3).x+1)%288;
+		System.out.println(objects.get(3).x);
+		objects.get(3).x = Game4.tick%288;
 		g.drawImage(images.get("g4_sand"), scaleW(0), scaleH(Window.HEIGHT-82), null);
 
 		
 		//get player location
 		player = (G4Player) objects.get(0);
 		//draw images
-		g.drawImage(images.get("vessel"), scaleW(380), scaleH(13+objects.get(3).x/10), null);
-	
+		//System.out.println(waterTop.length);
+		//System.out.println(objects.get(3).x);
+		g.drawImage(images.get("vessel"), scaleW(398), waterTop[scaleW(287-((Game4.tick+30)%288))]-scaleH(110), null);
+		//System.out.println(waterTop[objects.get(3).x]);
 		//draw rope
 		g.setColor(Color.black);
-		g.fillRect(scaleW(618),scaleH(53),scaleW(2),scaleH(player.y-20));
+		g.fillRect(scaleW(Window.WIDTH/2-1),waterTop[scaleW(287-((Game4.tick+30)%288))]-scaleH(68),scaleW(2),scaleH(68)+scaleH(player.y)-waterTop[scaleW(287-((Game4.tick+30)%288))]);
 		
 		//draw watertester
-		g.drawImage(images.get("watertester"), scaleW(Window.WIDTH/2-30), scaleH(player.y-10), null);
+		g.drawImage(images.get("watertester"), scaleW(Window.WIDTH/2-10), scaleH(player.y-30), null);
 		
 		//draw score bar
 		g.setColor(Color.green);
