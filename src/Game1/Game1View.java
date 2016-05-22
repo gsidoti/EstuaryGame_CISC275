@@ -145,8 +145,8 @@ public class Game1View extends gameView{
 						o.getY()-(int)(15*Window.SCALE),(int)(30*Window.SCALE),
 						(int)(30*Window.SCALE),null); 
 			}
-			g.drawImage(images.get("exit"), scaleW(Window.WIDTH-85), scaleH(5), null);
 		}
+		g.drawImage(images.get("exit"), scaleW(Window.WIDTH-85), scaleH(5), null);
 		// Now Player
 
 		Player p = (Player)(objects.get(0));

@@ -64,24 +64,17 @@ public class Game1 extends MouseAdapter {
 	 * Sets game variables to starting values
 	 */
     public Game1() {
-    	int i;
         Lives=10;
         maxvel=2;
         maxtrash=10;
         trashcount=0;
         Score=0;
         HiScore=0;
-        Random rand = new Random();
 		objects.add( new Player("Player",(int)((Window.WIDTH/2)*Window.SCALE),(int)((Window.HEIGHT/2)*Window.SCALE),20,0));
     	objects.add( new Scoreboard("Score",10,10,0,0));
     	Scoreboard sb=(Scoreboard)objects.get(1);
     	sb.setScore((int)Score);
     	sb.setLives((int)Lives);
-
-       //for(i=1;i<100;i++)
-        	//objects.add(i, new Trash(("Trash"), (int)(0 * Window.SCALE),
-        		//	(rand.nextInt((int)(Window.HEIGHT*Window.SCALE))),
-        			//1+maxvel*rand.nextInt((int)(Score)+1), 0));
         view = new Game1View();
     }
 
@@ -98,6 +91,7 @@ public class Game1 extends MouseAdapter {
 		if(mouseOver(mx,my,scaleW(Window.WIDTH-85),scaleH(5),scaleW(80),scaleH(44)))
 			resetGame();
 	}
+	
 
 	/**
 	 * When mouse button is released, sets mousedown to false
@@ -155,7 +149,6 @@ public class Game1 extends MouseAdapter {
 			Lives--;
 			trashcount--;
 			if ((Lives <= 0)) {
-				Menu.SCORE += Score*2;
 				resetGame();
 			}
 		}
@@ -182,7 +175,7 @@ public class Game1 extends MouseAdapter {
 			if(trashcount<maxtrash)
 			{
 				Trash temp = new Trash("Trash", (int)(0 * Window.SCALE),
-	        			(int)(150+rand.nextInt((int)((Window.HEIGHT-150)))*Window.SCALE),
+	        			(int)(150+rand.nextInt((int)((Window.HEIGHT-180)))*Window.SCALE),
 	        			1+maxvel*rand.nextInt((int)(Score/10)+1), 0);
 				temp.setActive(true);
 				objects.add(temp);
@@ -228,12 +221,12 @@ public class Game1 extends MouseAdapter {
 	 * Resets Game1 by setting game values back to starting values, clearing the ArrayList, and setting gameState back to Menu.
 	 */
     private void resetGame() {
-
-    	Random rand = new Random();
-    	objects.set(0, new Player("Player",(int)((Window.WIDTH/2)*Window.SCALE),(int)((Window.HEIGHT/2)*Window.SCALE),20,0));
+    	objects.clear();
+    	objects.add(new Player("Player",(int)((Window.WIDTH/2)*Window.SCALE),(int)((Window.HEIGHT/2)*Window.SCALE),20,0));
     	Scoreboard SB=new Scoreboard("Score",10,10,0,0);
     	SB.setHi((int)HiScore);
-    	objects.set(1, SB);
+    	objects.add(SB);
+		Menu.SCORE += Score*2;
         maxvel=2;
         maxtrash=10;
         trashcount=0;
@@ -241,10 +234,6 @@ public class Game1 extends MouseAdapter {
     	Lives = 10;
     	counter = 0;
     	running = false;
-		for (int i = objects.size()-1;i>1; i--) {
-			objects.remove(i);
-		}
-
     	Controller.gameState = STATE.Menu;
     }
     
