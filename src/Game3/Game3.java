@@ -28,7 +28,7 @@ public class Game3 extends MouseAdapter {
 	
 	public Game3View view;
 	static boolean inst;
-	long timer1;
+	long startTime;
 	long timer2;
 	int mx,my;
 	boolean endGameScreen;
@@ -192,7 +192,7 @@ public class Game3 extends MouseAdapter {
 	 * the player count of horseshoe crabs was to the actual count. Adds horseshoe crabs if the game isn't over.
 	 */
 	private void checkEndGame(){
-		if(System.currentTimeMillis() > timer1+15000.0){
+		if(System.currentTimeMillis() > startTime+15000.0){
 			spawn = false;
 			if(endGameScreen){
 				if (System.currentTimeMillis() > timer2+2500){
@@ -212,7 +212,7 @@ public class Game3 extends MouseAdapter {
 	 */
 	
 	public void initialize(){
-		timer1 = System.currentTimeMillis();
+		startTime = System.currentTimeMillis();
 		inst = true;
 		init = false;
 		spawn = true;
@@ -253,6 +253,8 @@ public class Game3 extends MouseAdapter {
 				randSpawn(rand.nextInt(2));
 			updateAnimal();
 			tick++;
+		}else{
+			startTime = System.currentTimeMillis();
 		}
 	}
 	
