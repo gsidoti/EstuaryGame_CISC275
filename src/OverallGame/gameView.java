@@ -1,7 +1,6 @@
 package OverallGame;
 
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -35,7 +34,10 @@ public abstract class gameView {
     protected boolean createImage(String imgName){ 	
     	BufferedImage bufferedImage;
     	try {
-    		bufferedImage = ImageIO.read(new File("images/"+imgName+".png"));
+    		if(new File("images/"+imgName+".png").exists())
+        		bufferedImage = ImageIO.read(new File("images/"+imgName+".png"));
+    		else	//this file path is used when a .jar is created
+        		bufferedImage = ImageIO.read(new File(imgName+".png"));
     		images.put(imgName,resizeImg(bufferedImage,(int)Math.ceil((bufferedImage.getWidth()*Window.SCALE)),(int)Math.ceil((bufferedImage.getHeight()*Window.SCALE))));
     		return true; 
     	} catch (IOException e) {

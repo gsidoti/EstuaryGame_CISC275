@@ -18,8 +18,7 @@ public class Game2Test {
 	public void testGame2() {
 		Window.SCALE = 1;
 		Game2 game = new Game2();
-		assertEquals(10, game.getLives());
-		assertEquals(1, game.getMaxVel());
+		assertEquals(3, game.getLives());
 		assertEquals("Boat 36", game.getObjects().get(36).name);
 		Boat temp = new Boat("test boat", 40, 40, 1, 0, true);
 		temp.setActive(true);
@@ -33,7 +32,7 @@ public class Game2Test {
 		game.getObjects().set(1, temp);
 		game.setLives(1);
 		game.tick();
-		assertEquals(10, game.getLives());
+		assertEquals(1, game.getLives());
 		assertEquals(0, game.getCounter());
 		for (int i = 0; i < 10; i++) 
 			game.tick();
@@ -44,20 +43,14 @@ public class Game2Test {
 	public void testGetterSetter() {
 		Window.SCALE = 1;
 		Game2 game = new Game2();
-		game.setMaxVel(5);
-		assertEquals(5, game.getMaxVel());
 		game.setCounter(10);
 		assertEquals(10, game.getCounter());
-		game.setLastBoat(20);
-		assertEquals(20, game.getLastBoat());
 		game.setMX(5);
 		game.setMY(5);
 		assertEquals(5, game.getMX());
 		assertEquals(5, game.getMY());
 		game.setRunning(true);
-		game.setMousedown(false);
 		assertTrue(game.getRunning());
-		assertFalse(game.getMousedown());
 	}
 	/*
 	@Test

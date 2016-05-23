@@ -234,7 +234,7 @@ public class Game2 extends MouseAdapter {
     	boatsLeft=36;
     	spawnBoats =true;
     	inst = true;
-    	Lives = 10;
+    	Lives = 3;
     	counter = 0;
         speed = 1;
         madeIt= 0;
