@@ -96,33 +96,36 @@ public class MenuView extends gameView{
 		createImage("game2_NS");
 		createImage("game3_NS");
 		createImage("game4_NS");
-		images.put("game1_NS",resizeImg(images.get("game1_NS"),(int)(images.get("game1_NS").getWidth()*1.1),(int)(images.get("game1_NS").getHeight()*1.1)));
-		images.put("game2_NS",resizeImg(images.get("game2_NS"),(int)(images.get("game2_NS").getWidth()*1.35),(int)(images.get("game2_NS").getHeight()*1.35)));
-		images.put("game3_NS",resizeImg(images.get("game3_NS"),(int)(images.get("game3_NS").getWidth()*1.35),(int)(images.get("game3_NS").getHeight()*1.35)));
-		images.put("game4_NS",resizeImg(images.get("game4_NS"),(int)(images.get("game4_NS").getWidth()*1.35),(int)(images.get("game4_NS").getHeight()*1.35)));
-		
 		createImage("game1_S");
 		createImage("game2_S");
 		createImage("game3_S");
 		createImage("game4_S");
-		images.put("game1_S",resizeImg(images.get("game1_S"),(int)(images.get("game1_S").getWidth()*1.1),(int)(images.get("game1_S").getHeight()*1.1)));
-		images.put("game2_S",resizeImg(images.get("game2_S"),(int)(images.get("game2_S").getWidth()*1.35),(int)(images.get("game2_S").getHeight()*1.35)));
-		images.put("game3_S",resizeImg(images.get("game3_S"),(int)(images.get("game3_S").getWidth()*1.35),(int)(images.get("game3_S").getHeight()*1.35)));
-		images.put("game4_S",resizeImg(images.get("game4_S"),(int)(images.get("game4_S").getWidth()*1.35),(int)(images.get("game4_S").getHeight()*1.35)));
-		
 		createImage("apple");
 		createImage("can");
 		createImage("box");
 		createImage("chipBag");
-		images.put("apple",resizeImg(images.get("apple"),(int)(images.get("apple").getWidth()*0.4),(int)(images.get("game1_S").getHeight()*0.4)));
-		images.put("can",resizeImg(images.get("can"),(int)(images.get("can").getWidth()*0.4),(int)(images.get("game2_S").getHeight()*0.4)));
-		images.put("box",resizeImg(images.get("box"),(int)(images.get("box").getWidth()*0.4),(int)(images.get("game3_S").getHeight()*0.4)));
-		images.put("chipBag",resizeImg(images.get("chipBag"),(int)(images.get("chipBag").getWidth()*0.3),(int)(images.get("game4_S").getHeight()*0.3)));
-		
-		createImage("trash-43");
-		images.put("trash-43",resizeImg(images.get("trash-43"),(int)(images.get("trash-43").getWidth()*1.3),(int)(images.get("trash-43").getHeight()*1.3)));
 		createImage("menubg2");
-		//images.put("menuBG",resizeImg(images.get("menuBG"),scaleW(Window.WIDTH),scaleH(Window.HEIGHT)));
+		createImage("trash-43");	
+		try{
+			images.put("game1_NS",resizeImg(images.get("game1_NS"),(int)(images.get("game1_NS").getWidth()*1.1),(int)(images.get("game1_NS").getHeight()*1.1)));
+			images.put("game2_NS",resizeImg(images.get("game2_NS"),(int)(images.get("game2_NS").getWidth()*1.35),(int)(images.get("game2_NS").getHeight()*1.35)));
+			images.put("game3_NS",resizeImg(images.get("game3_NS"),(int)(images.get("game3_NS").getWidth()*1.35),(int)(images.get("game3_NS").getHeight()*1.35)));
+			images.put("game4_NS",resizeImg(images.get("game4_NS"),(int)(images.get("game4_NS").getWidth()*1.35),(int)(images.get("game4_NS").getHeight()*1.35)));
+			images.put("game1_S",resizeImg(images.get("game1_S"),(int)(images.get("game1_S").getWidth()*1.1),(int)(images.get("game1_S").getHeight()*1.1)));
+			images.put("game2_S",resizeImg(images.get("game2_S"),(int)(images.get("game2_S").getWidth()*1.35),(int)(images.get("game2_S").getHeight()*1.35)));
+			images.put("game3_S",resizeImg(images.get("game3_S"),(int)(images.get("game3_S").getWidth()*1.35),(int)(images.get("game3_S").getHeight()*1.35)));
+			images.put("game4_S",resizeImg(images.get("game4_S"),(int)(images.get("game4_S").getWidth()*1.35),(int)(images.get("game4_S").getHeight()*1.35)));
+			images.put("apple",resizeImg(images.get("apple"),(int)(images.get("apple").getWidth()*0.4),(int)(images.get("game1_S").getHeight()*0.4)));
+			images.put("can",resizeImg(images.get("can"),(int)(images.get("can").getWidth()*0.4),(int)(images.get("game2_S").getHeight()*0.4)));
+			images.put("box",resizeImg(images.get("box"),(int)(images.get("box").getWidth()*0.4),(int)(images.get("game3_S").getHeight()*0.4)));
+			images.put("chipBag",resizeImg(images.get("chipBag"),(int)(images.get("chipBag").getWidth()*0.3),(int)(images.get("game4_S").getHeight()*0.3)));
+			images.put("trash-43",resizeImg(images.get("trash-43"),(int)(images.get("trash-43").getWidth()*1.3),(int)(images.get("trash-43").getHeight()*1.3)));	
+		}catch(NullPointerException e){
+			System.out.println("ERROR: Can't find images in menu.");
+			e.printStackTrace();
+			System.exit(0);
+		}
+
 	}
 	
 	

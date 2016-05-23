@@ -72,10 +72,16 @@ public class Game2View extends gameView{
 		createImage("dirtyvessel");
 		createImage("game2background");
 		createImage("exit");
-		BufferedImage temp = images.get("cleanvessel");
-		images.put("cleanvessel",resizeImg(temp,temp.getWidth()/2,temp.getHeight()/2));
-		temp = images.get("dirtyvessel");
-		images.put("dirtyvessel",resizeImg(temp,temp.getWidth()/2,temp.getHeight()/2));
-		createImage("game2i");
+		try{
+			BufferedImage temp = images.get("cleanvessel");
+			images.put("cleanvessel",resizeImg(temp,temp.getWidth()/2,temp.getHeight()/2));
+			temp = images.get("dirtyvessel");
+			images.put("dirtyvessel",resizeImg(temp,temp.getWidth()/2,temp.getHeight()/2));
+			createImage("game2i");
+		}catch(NullPointerException e){
+			System.out.println("ERROR: Can't find images in Game2.");
+			e.printStackTrace();
+			System.exit(0);
+		}
 	}
 }

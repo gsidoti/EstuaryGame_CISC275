@@ -34,21 +34,25 @@ public class Game4View extends gameView{
 	public void loadImages(){
 		createImage("vessel");
 		createImage("sky");
-		createImage("underwater2");
 		createImage("watertester");
 		createImage("game4_bgTile");
 		createImage("g4_sand");
 		createImage("game4i");
-		images.put("underwater2",resizeImg(images.get("underwater2"),scaleW(Window.WIDTH),scaleH(Window.HEIGHT)));
 		createImage("exit");
-		BufferedImage img = images.get("game4_bgTile");
-		waterTop = new int[images.get("game4_bgTile").getWidth()];
-		for(int i = 0; i<waterTop.length;i++){
-			int y = 0;
-			while((img.getRGB(i,y)>>24) == 0x00){
-				y++;
+		try{
+			BufferedImage img = images.get("game4_bgTile");
+			waterTop = new int[images.get("game4_bgTile").getWidth()];
+			for(int i = 0; i<waterTop.length;i++){
+				int y = 0;
+				while((img.getRGB(i,y)>>24) == 0x00){
+					y++;
+				}
+				waterTop[i] = y;
 			}
-			waterTop[i] = y;
+		}catch(NullPointerException e){
+			System.out.println("ERROR: Can't find images in Game2.");
+			e.printStackTrace();
+			System.exit(0);
 		}
 	}
 	
