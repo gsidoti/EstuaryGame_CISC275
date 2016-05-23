@@ -3,8 +3,6 @@ package Game4;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-
-import OverallGame.Controller;
 import OverallGame.Window;
 
 public class Game4Test {

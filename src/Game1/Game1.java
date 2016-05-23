@@ -1,16 +1,8 @@
 package Game1;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.*;
 import java.util.*;
-import util.*;
-import javax.swing.*;
-
 import Game1.Player;
 import Game1.Trash;
-import Game2.Boat;
-import Game4.G4Player;
 import Menu.Menu;
 import OverallGame.gameObject;
 

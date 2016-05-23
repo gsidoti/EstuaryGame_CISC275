@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.util.ArrayList;
-import java.util.Random;
-
 import OverallGame.Window;
 import OverallGame.gameObject;
 import OverallGame.gameView;

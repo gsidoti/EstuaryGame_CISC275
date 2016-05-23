@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Arrays;
-
 import OverallGame.Window;
 import OverallGame.gameObject;
 import OverallGame.gameView;

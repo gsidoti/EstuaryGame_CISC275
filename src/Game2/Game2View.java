@@ -5,9 +5,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-
-import Game3.Game3;
-import OverallGame.Controller;
 import OverallGame.Window;
 import OverallGame.gameObject;
 import OverallGame.gameView;

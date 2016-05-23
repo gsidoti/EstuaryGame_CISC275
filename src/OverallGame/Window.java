@@ -3,11 +3,8 @@ package OverallGame;
 import java.awt.Dimension;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
-import java.awt.Insets;
 import java.awt.Toolkit;
-
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 /**
  * Window is the class that holds the frame and handles all the variables of the frame's window size

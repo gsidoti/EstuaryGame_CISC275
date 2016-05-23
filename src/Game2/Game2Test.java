@@ -1,13 +1,7 @@
 package Game2;
 
 import static org.junit.Assert.*;
-
-import java.awt.Component;
-import java.awt.event.MouseEvent;
-
 import org.junit.Test;
-
-import OverallGame.Controller;
 import OverallGame.Window;
 
 public class Game2Test {
