@@ -34,7 +34,11 @@ public abstract class gameView {
     protected boolean createImage(String imgName){ 	
     	BufferedImage bufferedImage;
     	try {
-        	bufferedImage = ImageIO.read(new File("images/"+imgName+".png"));
+    		//this file path is used when a .jar is created
+    		if(new File("images/"+imgName+".png").exists())
+        		bufferedImage = ImageIO.read(new File("images/"+imgName+".png"));
+    		else
+    			bufferedImage = ImageIO.read(this.getClass().getClassLoader().getResourceAsStream(imgName+".png"));
     		images.put(imgName,resizeImg(bufferedImage,(int)Math.ceil((bufferedImage.getWidth()*Window.SCALE)),(int)Math.ceil((bufferedImage.getHeight()*Window.SCALE))));
     		return true; 
     	} catch (IOException e) {
