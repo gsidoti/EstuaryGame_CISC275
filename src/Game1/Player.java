@@ -61,7 +61,7 @@ public class Player extends gameObject
     }
 
     /**
-     * Moves the player to the destinaton set by SetDest
+     * Moves the player to the destination set by SetDest
      */
     public void Move()
     {
