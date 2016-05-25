@@ -19,6 +19,7 @@ public class Game1View extends gameView{
 
 	private int BkgOffset=0;
 	private int dBkgOffset=1;
+	int tick;
 	double m;
 	int tx;
 	int ty;
@@ -53,7 +54,8 @@ public class Game1View extends gameView{
 	 * @param objects The ArrayList of gameObjects in the game
 	 */
 	public void render(Graphics g, ArrayList<gameObject> objects){
-		BkgOffset+=dBkgOffset;
+		if(tick++%3 == 0)
+			BkgOffset+=dBkgOffset;
 		if(BkgOffset>10)
 		{
 			BkgOffset=10;

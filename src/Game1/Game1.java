@@ -122,7 +122,7 @@ public class Game1 extends MiniGame {
 		Trash temp = (Trash) objects.get(i);
 		if (temp.MadeIt(scaleW(Window.WIDTH-20))&&temp.getActive()) {
 			temp.setActive(false);
-			objects.add(new Beached("Beached",scaleW(temp.getX()-25),temp.getY(),0,0));
+			objects.add(new Beached("Beached",temp.getX()+scaleW(3),temp.getY(),0,0));
 			Lives--;
 			trashcount--;
 			if ((Lives <= 0)) {

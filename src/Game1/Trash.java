@@ -66,7 +66,7 @@ public class Trash extends gameObject
      */
     public void Move()
     {
-        x+=velx;
+        x+=(int)(Math.ceil(velx*Window.SCALE));
         return;
     }
 

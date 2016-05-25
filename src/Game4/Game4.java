@@ -1,7 +1,6 @@
 package Game4;
 
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import OverallGame.Controller;
 import OverallGame.MiniGame;
 import OverallGame.STATE;
