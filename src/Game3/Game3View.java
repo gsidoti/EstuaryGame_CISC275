@@ -55,14 +55,11 @@ public class Game3View extends gameView{
 				Animal a = (Animal)(o);
 				if(a.name == "HorseShoe"){
 					g.drawImage(images.get("horseshoe_crab_"+a.getDir().toString()), scaleW(a.getX()-150), scaleH(a.getY()-150), null);
-					//System.out.println(images.get("horseshoe_crab_"+a.getDir().toString()).getWidth() +" "+images.get("horseshoe_crab_"+a.getDir().toString()).getHeight());
 				}else if(a.name == "mittencrab_1"){
 					g.drawImage(images.get("mittencrab_1"), scaleW(a.getX()-150), scaleH(a.getY()-150), null);
 				}else if(a.name == "bluecrab_0"){
 					g.drawImage(images.get("bluecrab_0"), scaleW(a.getX()-150), scaleH(a.getY()-150), null);
 				}else if(a.name == "EndGame"){
-					//g.setColor(Color.gray);
-					//g.fillRect((int)((Window.WIDTH/2-200)*Window.SCALE), (int) (((Window.HEIGHT/2)-200)*Window.SCALE), (int)(400*Window.SCALE), (int)(200*Window.SCALE));
 					g.drawImage(images.get("dialogue2"), scaleW((Window.WIDTH/2)-200), scaleH((Window.HEIGHT/2)-200), null);
 					g.setFont(new Font("TimesRoman", Font.PLAIN, scaleW(50)));
 					g.setColor(Color.black);
@@ -80,14 +77,6 @@ public class Game3View extends gameView{
 		g.drawString("Count: "+ count,scaleW(Window.WIDTH-275), scaleH(60));
 		
 		g.drawImage(images.get("exit"), scaleW(5), scaleH(5), null);
-
-		
-		
-		//draw score bar
-		//g.setColor(Color.gray);
-		//g.fillRect((int)((Window.WIDTH-150)*Window.SCALE),(int) (50*Window.SCALE),(int) (50*Window.SCALE),(int)((objects.get(1).getY()/10)*Window.SCALE));
-		//g.fillRect((int)((Window.WIDTH-75)*Window.SCALE),(int)(50*Window.SCALE),(int) (50*Window.SCALE),(int)(objects.get(2).getY()/10*Window.SCALE));
-		//g.fillRect((int)((Window.WIDTH-75)*Window.SCALE),(int)(50*Window.SCALE),(int) (50*Window.SCALE), (int)(150*Window.SCALE));
 	}
 
 }

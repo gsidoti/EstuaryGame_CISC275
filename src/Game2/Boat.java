@@ -44,27 +44,19 @@ public class Boat extends gameObject
     public boolean MadeIt(int to)
     {
         if(x<=to)
-        {
-            return true;
-        }
+        	return true;
         else
-        {
-            return false;
-        }
+        	return false;
     }
     
+    
     /**
-     * Checks to see if a boat has been clicked on
-     * 
-     * @param px the mouse x-position
-     * @param py the mouse y-position
-     * @return Returns true if the boat was clicked on, false otherwise
+     * Moves the boat towards the left side of the screen
      */
-    public boolean IsClicked(int px,int py)
-    {
-        if((Math.abs(px-getX())+Math.abs(py-getY()))<10)return true;
-        return false;
-    }
+    void Move(){
+		this.setX(this.getX()-this.getVelx());
+	}
+    
     
     public boolean getInfested() {
     	return isInfested;
@@ -81,14 +73,6 @@ public class Boat extends gameObject
     public void setActive(boolean value) {
     	isActive = value;
     }
-    
-    /**
-     * Moves the boat towards the left side of the screen
-     */
-    void Move(){
-		this.setX(this.getX()-this.getVelx());
-	//	System.out.println("left "+ x + " " + velx);
-	}
     
     public String toString() {
     	return "Name: " + name + " X " + x + " Y " + y + " velX " + velx + " velY " + vely + " Active " + isActive + " Infested " + isInfested;

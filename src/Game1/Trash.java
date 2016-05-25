@@ -14,8 +14,6 @@ import OverallGame.Window;
 public class Trash extends gameObject
 {
 	boolean isActive = false;
-    // instance variables - replace the example below with your own
- // pixels per tick
 
 	/**
      * Constructor for Trash objects
@@ -79,19 +77,4 @@ public class Trash extends gameObject
     public void setActive(boolean value) {
     	isActive = value;
     }
-//
-//    public void Draw(Graphics g)
-//    {
-//        Color temp=g.getColor();
-//        int tx;
-//        int ty;
-//
-//        tx=x;
-//        ty=y;
-//        g.setColor(Color.RED);
-//        g.drawLine(tx-3,ty-3,tx+4,ty+4);
-//        g.drawLine(tx+4,ty-3,tx-3,ty+4);
-//        g.setColor(temp);
-//        return;
-//    }
 }

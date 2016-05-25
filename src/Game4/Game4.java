@@ -1,10 +1,9 @@
 package Game4;
 
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-
 import OverallGame.Controller;
+import OverallGame.MiniGame;
 import OverallGame.STATE;
 import OverallGame.Window;
 import OverallGame.gameObject;
@@ -20,17 +19,14 @@ import OverallGame.gameObject;
  * @version 5/17
  */
 
-public class Game4 extends MouseAdapter {
-	public boolean running = false;
-	ArrayList<gameObject> objects = new ArrayList<gameObject>();
-	
+public class Game4 extends MiniGame {
 	public Game4View view;
     static boolean inst = true;
 	static int tick=0;
 	boolean mousedown = false;
 	int mx,my;
-	public int greenScore = 1500;
-	public int redScore = 1500;
+	int greenScore = 1500;
+	int redScore = 1500;
 	
 	/**
 	 * Constructor for Game4 objects
@@ -39,7 +35,6 @@ public class Game4 extends MouseAdapter {
 		objects.add( new G4Player("Player",Window.WIDTH/2,Window.HEIGHT/2,2,3));
 		objects.add(new gameObject("greenScore",0,greenScore,0,-1));
 		objects.add(new gameObject("redScore",0,redScore,0,-1));
-		objects.add(new gameObject("bgTile",0,0,0,0));
 		view = new Game4View();
 	}
 	
@@ -107,9 +102,6 @@ public class Game4 extends MouseAdapter {
 		gameObject r = objects.get(2);
 		int top = view.waterTop[scaleW(287-((Game4.tick+220)%288))]+scaleH(220);
 		int bot = view.waterTop[scaleW(287-((Game4.tick+220)%288))]+scaleH(348);
-		//System.out.println("Bot:"+bot);
-		//System.out.println("Top:"+top);
-		//System.out.println("Act:"+scaleH(player.getY()));
 		if(scaleH(player.getY()+27)<bot && scaleH(player.getY()-27)>top){
 			g.setY(greenScore--);
 			if(greenScore <= 0){
@@ -135,85 +127,68 @@ public class Game4 extends MouseAdapter {
 		}
 		tick++;	
 	}
-	
-    /**
-     * Checks to see if the mouse is over given coordinates on the screen.
-     * 
-     * @param mx Mouse x-position
-     * @param my Mouse y-position
-     * @param x x-position of image being checked against mouse x-position
-     * @param y y-position of image being checked against mouse y-position
-     * @param width Width of image being checked for mouse over
-     * @param height Height of image being checked for mouse over 
-     * @return Returns true if mouse is over given image position, false if otherwise
-     */
-    boolean mouseOver(int mx, int my, int x, int y, int width, int height) {
-        if (mx > x && mx < x + width) {
-            if (my > y && my < y + height) {
-                return true;
-            } else return false;
-        } else return false;
-    }
-	
-    /**
-     * Takes the width of an image and scales it to the appropriate size for the current screen
-     * 
-     * @param x Width of image that needs to be scaled
-     * @return Returns scaled width for image
-     */
-	public int scaleW(double x){
-		return (int)(Window.SCALE*x);
-	}
-	
-	/**
-	 * Takes the height of an image and scales it to the appropriate size for the current screen
-	 * 
-	 * @param x Height of image that needs to be scaled
-	 * @return Returns scaled height for image
-	 */
-	public int scaleH(double x){
-		return (int)(Window.SCALE*x);
+
+	Game4View getView() {
+		return view;
 	}
 
-	public ArrayList<gameObject> getObjects(){
-		return this.objects;
+	void setView(Game4View view) {
+		this.view = view;
 	}
 
-	public boolean isRunning() {
-		return running;
+	static boolean isInst() {
+		return inst;
 	}
 
-	public void setRunning(boolean running) {
-		this.running = running;
+	static void setInst(boolean inst) {
+		Game4.inst = inst;
 	}
 
-	public boolean isMousedown() {
+	static int getTick() {
+		return tick;
+	}
+
+	static void setTick(int tick) {
+		Game4.tick = tick;
+	}
+
+	boolean isMousedown() {
 		return mousedown;
 	}
-	
-	public void setMousedown(boolean mousedown) {
+
+	void setMousedown(boolean mousedown) {
 		this.mousedown = mousedown;
 	}
 
-	public int getGreenScore() {
+	int getMx() {
+		return mx;
+	}
+
+	void setMx(int mx) {
+		this.mx = mx;
+	}
+
+	int getMy() {
+		return my;
+	}
+
+	void setMy(int my) {
+		this.my = my;
+	}
+
+	int getGreenScore() {
 		return greenScore;
 	}
 
-	public void setGreenScore(int greenScore) {
+	void setGreenScore(int greenScore) {
 		this.greenScore = greenScore;
 	}
 
-	public int getRedScore() {
+	int getRedScore() {
 		return redScore;
 	}
 
-	public void setRedScore(int redScore) {
+	void setRedScore(int redScore) {
 		this.redScore = redScore;
 	}
-
-	public void setObjects(ArrayList<gameObject> objects) {
-		this.objects = objects;
-	}
-	
-	
 }

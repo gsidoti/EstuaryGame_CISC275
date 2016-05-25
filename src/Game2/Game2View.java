@@ -77,7 +77,6 @@ public class Game2View extends gameView{
 			createImage("game2i");
 		}catch(NullPointerException e){
 			System.out.println("ERROR: Can't find images in Game2.");
-			e.printStackTrace();
 			System.exit(0);
 		}
 	}

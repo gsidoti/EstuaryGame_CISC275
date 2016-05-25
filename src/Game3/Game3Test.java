@@ -23,7 +23,6 @@ public class Game3Test {
 		game.randSpawn(1);
 		assertEquals(0, game.getObjects().get(1).getX());
 		assertEquals(1, game.getObjects().get(1).getVelx());
-		
 	}
 
 }

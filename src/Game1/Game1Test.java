@@ -13,7 +13,6 @@ public class Game1Test {
 		Game1 game = new Game1();
 		Window.SCALE = 1;
 		assertFalse(game.isRunning());
-		assertFalse(game.isMousedown());
 		assertEquals(0, game.getCounter());
 		assertEquals(1, game.getLastTrash());
 		assertTrue(game.isSkipTick());
@@ -69,8 +68,6 @@ public class Game1Test {
 		assertEquals(2, game.getObjects().size());
 		game.setRunning(false);
 		assertFalse(game.isRunning());
-		game.setMousedown(true);
-		assertTrue(game.isMousedown());
 		game.setMx(20);
 		game.setMy(20);
 		assertEquals(20, game.getMx());

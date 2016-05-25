@@ -44,7 +44,6 @@ public abstract class gameView {
     	} catch (IOException e) {
     		System.out.println("Error at Image: "+imgName);
     		return false;
-    		//e.printStackTrace();
     	}
     }
     

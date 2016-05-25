@@ -6,10 +6,10 @@ import Game1.Trash;
 import Menu.Menu;
 import OverallGame.gameObject;
 
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import OverallGame.Controller;
+import OverallGame.MiniGame;
 import OverallGame.STATE;
 import OverallGame.Window;
 
@@ -22,35 +22,19 @@ import OverallGame.Window;
  * @version 5/17
  */
 
-public class Game1 extends MouseAdapter {
-	boolean mlActive;
-	
-    //private FrameRate frameRate;
-    //private BufferStrategy bs;
-    public boolean running = false;
+public class Game1 extends MiniGame {
     static boolean inst = true;
-    public boolean mousedown = false;
     int mx, my;
     int counter = 0;
     int lastTrash = 1;
-    //private Thread gameThread;
-    //private SimpleMouseInput mouse;d
-    // KeyboardInput keyboard;
-    //private Player player;
-    //private Trash[] trash = new Trash[100];
-    //private boolean[] trashactive=new boolean[100];
     private int maxtrash;
     private int trashcount;
     private int maxvel;
     public Game1View view;
-
     private long Score;
     private long HiScore;
     private long Lives;
-
     private boolean SkipTick=true;
-
-	ArrayList<gameObject> objects = new ArrayList<gameObject>();
 
 	/**
 	 * Constructor for Game1 objects 
@@ -76,9 +60,12 @@ public class Game1 extends MouseAdapter {
      * exit button was pressed.
      */
 	public void mousePressed(MouseEvent e){
-		mousedown = true;
 		mx = e.getX();
 		my = e.getY();
+		if(mx>scaleW(Window.WIDTH))
+			mx = scaleW(Window.WIDTH);
+		if(my>scaleH(Window.HEIGHT))
+			my = scaleH(Window.HEIGHT);
 		if(inst && mouseOver(mx,my,scaleW(570),scaleH(520),scaleW(111),scaleH(52)))
 			inst = false;
 		else{
@@ -88,14 +75,6 @@ public class Game1 extends MouseAdapter {
 				resetGame();
 		}
 
-	}
-	
-
-	/**
-	 * When mouse button is released, sets mousedown to false
-	 */
-	public void mouseReleased(MouseEvent e){
-		mousedown = false;
 	}
 
 	/**
@@ -141,9 +120,9 @@ public class Game1 extends MouseAdapter {
 	 */
 	void updateLives(int i){
 		Trash temp = (Trash) objects.get(i);
-		if (temp.MadeIt((int)(Window.WIDTH*Window.SCALE))&&temp.getActive()) {
+		if (temp.MadeIt(scaleW(Window.WIDTH-20))&&temp.getActive()) {
 			temp.setActive(false);
-			objects.add(new Beached("Beached",temp.getX()-25,temp.getY(),0,0));
+			objects.add(new Beached("Beached",scaleW(temp.getX()-25),temp.getY(),0,0));
 			Lives--;
 			trashcount--;
 			if ((Lives <= 0)) {
@@ -173,8 +152,8 @@ public class Game1 extends MouseAdapter {
 				counter=0;
 				if(trashcount<maxtrash)
 				{
-					Trash temp = new Trash("Trash", (int)(0 * Window.SCALE),
-		        			(int)(150+rand.nextInt((int)((Window.HEIGHT-180)))*Window.SCALE),
+					Trash temp = new Trash("Trash", 0,
+							scaleH(150+rand.nextInt(Window.HEIGHT-180)),
 		        			1+maxvel*rand.nextInt((int)(Score/10)+1), 0);
 					temp.setActive(true);
 					objects.add(temp);
@@ -208,15 +187,6 @@ public class Game1 extends MouseAdapter {
 	}
 
 	/**
-	 * Returns ArrayList of gameObjects in Game1
-	 * 
-	 * @return Returns ArrayList of gameObjects
-	 */
-	public ArrayList<gameObject> getObjects(){
-		return this.objects;
-	}
-
-	/**
 	 * Resets Game1 by setting game values back to starting values, clearing the ArrayList, and setting gameState back to Menu.
 	 */
     private void resetGame() {
@@ -236,81 +206,6 @@ public class Game1 extends MouseAdapter {
     	running = false;
     	Controller.gameState = STATE.Menu;
     }
-    
-    /**
-     * Checks to see if the mouse is over given coordinates on the screen.
-     * 
-     * @param mx Mouse x-position
-     * @param my Mouse y-position
-     * @param x x-position of image being checked against mouse x-position
-     * @param y y-position of image being checked against mouse y-position
-     * @param width Width of image being checked for mouse over
-     * @param height Height of image being checked for mouse over 
-     * @return Returns true if mouse is over given image position, false if otherwise
-     */
-    boolean mouseOver(int mx, int my, int x, int y, int width, int height) {
-        if (mx > x && mx < x + width) {
-            if (my > y && my < y + height) {
-                return true;
-            } else return false;
-        } else return false;
-    }
-	
-    /**
-     * Takes the width of an image and scales it to the appropriate size for the current screen
-     * 
-     * @param x Width of image that needs to be scaled
-     * @return Returns scaled width for image
-     */
-	public int scaleW(double x){
-		return (int)(Window.SCALE*x);
-	}
-	
-	/**
-	 * Takes the height of an image and scales it to the appropriate size for the current screen
-	 * 
-	 * @param x Height of image that needs to be scaled
-	 * @return Returns scaled height for image
-	 */
-	public int scaleH(double x){
-		return (int)(Window.SCALE*x);
-	}
-
-	/**
-	 * Checks to see whether the game is running or not
-	 * 
-	 * @return Returns boolean value of running
-	 */
-	public boolean isRunning() {
-		return running;
-	}
-
-	/**
-	 * Sets running variable to given value
-	 * 
-	 * @param running New value for running
-	 */
-	public void setRunning(boolean running) {
-		this.running = running;
-	}
-
-	/**
-	 * Checks to see if the mouse is currently clicked or not
-	 * 
-	 * @return Returns boolean value of mousedown
-	 */
-	public boolean isMousedown() {
-		return mousedown;
-	}
-
-	/**
-	 * Sets mousedown to new boolean value
-	 * 
-	 * @param mousedown New boolean value for mousedown
-	 */
-	public void setMousedown(boolean mousedown) {
-		this.mousedown = mousedown;
-	}
 
 	/**
 	 * Gets mouse x-position on screen from last click
@@ -405,12 +300,20 @@ public class Game1 extends MouseAdapter {
 		SkipTick = skipTick;
 	}
 
-	public void setObjects(ArrayList<gameObject> objects) {
-		this.objects = objects;
+
+	static boolean isInst() {
+		return inst;
 	}
-	public void stopMouseListener(){
-		mlActive = false;
+
+	static void setInst(boolean inst) {
+		Game1.inst = inst;
 	}
-    
-    
+
+	Game1View getView() {
+		return view;
+	}
+
+	void setView(Game1View view) {
+		this.view = view;
+	}
 }

@@ -76,11 +76,9 @@ public class MenuView extends gameView{
 		}
 		
 		g.drawImage(images.get("trash-43"), scaleW(500), scaleH(400), null);
-		//Font tallerFont = tallerFont.deriveFont(AffineTransform.getScaleInstance(1.0, 2.0));
-		g.setFont(new Font("Verdana", Font.BOLD, scaleW(50)));//.deriveFont(AffineTransform.getScaleInstance(1, Window.SCALE)));
+		g.setFont(new Font("Verdana", Font.BOLD, scaleW(50)));
 		g.setColor(Color.cyan);
 		g.drawString("Score:",scaleW(540),scaleH(500));
-		//g.drawString("Collected:",scaleW(555),scaleH(550));
 		g.setFont(new Font("Verdana", Font.BOLD, scaleW(70)));
 		g.drawString(String.valueOf(oldScore),scaleW(540),scaleH(575));
 		g.drawImage(images.get("exit"), scaleW(5), scaleH(5), null);
@@ -122,7 +120,6 @@ public class MenuView extends gameView{
 			images.put("trash-43",resizeImg(images.get("trash-43"),(int)(images.get("trash-43").getWidth()*1.3),(int)(images.get("trash-43").getHeight()*1.3)));	
 		}catch(NullPointerException e){
 			System.out.println("ERROR: Can't find images in menu.");
-			e.printStackTrace();
 			System.exit(0);
 		}
 

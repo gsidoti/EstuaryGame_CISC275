@@ -114,54 +114,49 @@ public class Controller extends Canvas{
 	private void tick(){
 		switch(gameState){
 		case Menu:
-			if(menu.running == false){
+			if(!menu.isRunning()){
 				clearML();
 				this.addMouseListener(menu);
 				System.out.println("setting menu to running");
 				menu.running = true;
-			}else{
+			}else
 				menu.tick();
-			}
 			break;
 		case Game1:
-			if(game1.running == false) {
+			if(!game1.isRunning()) {
 				clearML();
 				this.addMouseListener(game1);
 				System.out.println("setting game1 to running");
-				game1.running = true;
-			}else{
+				game1.setRunning(true);
+			}else
 				game1.tick();
-			}
 			break;
 		case Game2:
-			if(game2.running == false){
+			if(!game2.isRunning()){
 				clearML();
 				this.addMouseListener(game2);
 				System.out.println("setting game2 to running");
-				game2.running = true;
-			}else{
+				game2.setRunning(true);
+			}else
 				game2.tick();
-			}
 			break;
 		case Game3:
-			if(game3.running == false){
+			if(!game3.isRunning()){
 				clearML();
 				this.addMouseListener(game3);
 				System.out.println("setting game3 to running");
 				game3.initialize();
-			}else{
+			}else
 				game3.tick();
-			}
 			break;
 		case Game4:
-			if(game4.running == false){
+			if(!game4.isRunning()){
 				clearML();
 				this.addMouseListener(game4);
 				System.out.println("setting game4 to running");
-				game4.running = true;
-			}else{
+				game4.setRunning(true);
+			}else
 				game4.tick();
-			}
 			break;
 		default:
 			break;
@@ -199,18 +194,13 @@ public class Controller extends Canvas{
 			break;
 		}
 		g.setColor(Color.black);
+		g.fillRect((int)(Window.WIDTH*Window.SCALE),0,window.screenDimension.width-(int)(Window.HEIGHT*Window.SCALE),window.screenDimension.height);
 		g.fillRect(0,(int)(Window.HEIGHT*Window.SCALE),window.screenDimension.width,window.screenDimension.height-(int)(Window.HEIGHT*Window.SCALE));
 		g.dispose();
 		bs.show();
 	}
 
-	
 	public static void main(String[] args) {
 		new Controller(); 
 	}
-
-}
-
-class scale{
-
 }

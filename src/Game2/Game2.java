@@ -4,15 +4,11 @@ import java.util.*;
 
 import Game2.Boat;
 import Game2.Game2View;
-
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-
 import OverallGame.Controller;
+import OverallGame.MiniGame;
 import OverallGame.STATE;
 import OverallGame.Window;
-import OverallGame.gameObject;
 
 /**
  * Game2 is a game where the goal is to clean the shipping boats before they reach the docks,
@@ -22,7 +18,7 @@ import OverallGame.gameObject;
  * @author Team 7
  * @version 5/17
  */
-public class Game2 extends MouseAdapter {
+public class Game2 extends MiniGame {
 
 	/* 
 	 * Instance variables - speed holds the X-velocity the boats will be created with
@@ -40,11 +36,8 @@ public class Game2 extends MouseAdapter {
     private int counter = 0;
     static boolean inst = true;
     private int mx, my;
-	public boolean running = false;
-	public int[] docks = new int[6];
-	public static int boatsLeft = 36;
-	
-	ArrayList<gameObject> objects = new ArrayList<gameObject>();
+	int[] docks = new int[6];
+	static int boatsLeft = 36;
 	
 	public Game2View view;
 	Random rand = new Random();
@@ -170,7 +163,6 @@ public class Game2 extends MouseAdapter {
 			Boat b = new Boat("Boat",Window.WIDTH,y,rand.nextInt(speed)+2,docks[r]-1,bool);
 			objects.add(b);
 			boatsLeft--;
-			//System.out.println(boatcount++);
 		}
 		System.out.println(madeIt);
 		if(boatsLeft <= 0){
@@ -203,29 +195,6 @@ public class Game2 extends MouseAdapter {
 			updateBoats();
 		}
 	}
-	
-	public ArrayList<gameObject> getObjects(){
-		return this.objects;
-	}
-	
-    /**
-     * Checks to see if the mouse is over given coordinates on the screen.
-     * 
-     * @param mx Mouse x-position
-     * @param my Mouse y-position
-     * @param x x-position of image being checked against mouse x-position
-     * @param y y-position of image being checked against mouse y-position
-     * @param width Width of image being checked for mouse over
-     * @param height Height of image being checked for mouse over 
-     * @return Returns true if mouse is over given image position, false if otherwise
-     */
-    boolean mouseOver(int mx, int my, int x, int y, int width, int height) {
-        if (mx > x && mx < x + width) {
-            if (my > y && my < y + height) {
-                return true;
-            } else return false;
-        } else return false;
-    }
     
 	/**
 	 * Resets Game2 by setting game values back to starting values, clearing the ArrayList, and setting gameState back to Menu.
@@ -244,26 +213,7 @@ public class Game2 extends MouseAdapter {
     	Controller.gameState = STATE.Menu;
     }
     
-    /**
-     * Takes the width of an image and scales it to the appropriate size for the current screen
-     * 
-     * @param x Width of image that needs to be scaled
-     * @return Returns scaled width for image
-     */
-	public int scaleW(double x){
-		return (int)(Window.SCALE*x);
-	}
-	
-	/**
-	 * Takes the height of an image and scales it to the appropriate size for the current screen
-	 * 
-	 * @param x Height of image that needs to be scaled
-	 * @return Returns scaled height for image
-	 */
-	public int scaleH(double x){
-		return (int)(Window.SCALE*x);
-	}
-    
+
     public int getLives() {
     	return Lives;
     }
@@ -303,4 +253,84 @@ public class Game2 extends MouseAdapter {
     public void setRunning(boolean value) {
     	running = value;
     }
+
+	int getSpeed() {
+		return speed;
+	}
+
+	void setSpeed(int speed) {
+		this.speed = speed;
+	}
+
+	int getMadeIt() {
+		return madeIt;
+	}
+
+	void setMadeIt(int madeIt) {
+		this.madeIt = madeIt;
+	}
+
+	boolean isSpawnBoats() {
+		return spawnBoats;
+	}
+
+	void setSpawnBoats(boolean spawnBoats) {
+		this.spawnBoats = spawnBoats;
+	}
+
+	static boolean isInst() {
+		return inst;
+	}
+
+	static void setInst(boolean inst) {
+		Game2.inst = inst;
+	}
+
+	int getMx() {
+		return mx;
+	}
+
+	void setMx(int mx) {
+		this.mx = mx;
+	}
+
+	int getMy() {
+		return my;
+	}
+
+	void setMy(int my) {
+		this.my = my;
+	}
+
+	int[] getDocks() {
+		return docks;
+	}
+
+	void setDocks(int[] docks) {
+		this.docks = docks;
+	}
+
+	static int getBoatsLeft() {
+		return boatsLeft;
+	}
+
+	static void setBoatsLeft(int boatsLeft) {
+		Game2.boatsLeft = boatsLeft;
+	}
+
+	Game2View getView() {
+		return view;
+	}
+
+	void setView(Game2View view) {
+		this.view = view;
+	}
+
+	Random getRand() {
+		return rand;
+	}
+
+	void setRand(Random rand) {
+		this.rand = rand;
+	}
 }

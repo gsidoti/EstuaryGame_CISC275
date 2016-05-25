@@ -1,13 +1,10 @@
 package Menu;
 
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.Random;
-
 import OverallGame.Controller;
+import OverallGame.MiniGame;
 import OverallGame.STATE;
-import OverallGame.Window;
 import OverallGame.gameObject;
 
 /**
@@ -18,33 +15,21 @@ import OverallGame.gameObject;
  * @version 5/17
  */
 
-public class Menu extends MouseAdapter {
+public class Menu extends MiniGame {
 	int counter= 0;
 	int timer=0;
-	public boolean updatedScore = true;
+	boolean updatedScore = true;
 	boolean ftInit = false;
 	int ftTemp;
-	public boolean init;
-	public long initTime;
 	public MenuView menuView;
-	public boolean running = false;
-	boolean mlActive;
 	public static int SCORE = 0;
 	Random rand = new Random();
-	ArrayList<gameObject> objects = new ArrayList<gameObject>();
 	
 	/**
 	 * Constructor for Menu objects
 	 */
 	public Menu(){
 		menuView = new MenuView();
-	}
-	
-	/**
-	 * Stops the mouse listener for the instruction screen
-	 */
-	public void stopMouseListener(){
-		mlActive = false;
 	}
 	
 	/**
@@ -116,8 +101,8 @@ public class Menu extends MouseAdapter {
 		gameObject o;
 		for(int i=0;i<objects.size();i++){
 			o = objects.get(i);
-			if(o.y>400){
-				o.name = "";//sets it so menuView doesn't draw object if in can
+			if(o.y>430){
+				o.name = "";//sets it so view doesn't draw object if in can
 			}else if(o.name != ""){
 				o.y +=o.getVely();
 			}
@@ -152,53 +137,69 @@ public class Menu extends MouseAdapter {
 		fallingTrash();
 		moveTrash();
 	}
-	
-	
-    /**
-     * Takes the width of an image and scales it to the appropriate size for the current screen
-     * 
-     * @param x Width of image that needs to be scaled
-     * @return Returns scaled width for image
-     */
-	public int scaleW(double x){
-		return (int)(Window.SCALE*x);
-	}
-	
-	/**
-	 * Takes the height of an image and scales it to the appropriate size for the current screen
-	 * 
-	 * @param x Height of image that needs to be scaled
-	 * @return Returns scaled height for image
-	 */
-	public int scaleH(double x){
-		return (int)(Window.SCALE*x);
+
+	int getCounter() {
+		return counter;
 	}
 
-	
-	
-    /**
-     * Checks to see if the mouse is over given coordinates on the screen.
-     * 
-     * @param mx Mouse x-position
-     * @param my Mouse y-position
-     * @param x x-position of image being checked against mouse x-position
-     * @param y y-position of image being checked against mouse y-position
-     * @param width Width of image being checked for mouse over
-     * @param height Height of image being checked for mouse over 
-     * @return Returns true if mouse is over given image position, false if otherwise
-     */
-	//not being used
-    private boolean mouseOver(int mx, int my, int x, int y, int width, int height) {
-        if (mx > x && mx < x + width) {
-            if (my > y && my < y + height) {
-                return true;
-            } else return false;
-        } else return false;
-    }
-	
-	
-	public ArrayList<gameObject> getObjects(){
-		return this.objects;
+	void setCounter(int counter) {
+		this.counter = counter;
+	}
+
+	int getTimer() {
+		return timer;
+	}
+
+	void setTimer(int timer) {
+		this.timer = timer;
+	}
+
+	boolean isUpdatedScore() {
+		return updatedScore;
+	}
+
+	void setUpdatedScore(boolean updatedScore) {
+		this.updatedScore = updatedScore;
+	}
+
+	boolean isFtInit() {
+		return ftInit;
+	}
+
+	void setFtInit(boolean ftInit) {
+		this.ftInit = ftInit;
+	}
+
+	int getFtTemp() {
+		return ftTemp;
+	}
+
+	void setFtTemp(int ftTemp) {
+		this.ftTemp = ftTemp;
+	}
+
+	MenuView getMenuView() {
+		return menuView;
+	}
+
+	void setMenuView(MenuView menuView) {
+		this.menuView = menuView;
+	}
+
+	static int getSCORE() {
+		return SCORE;
+	}
+
+	static void setSCORE(int score) {
+		SCORE = score;
+	}
+
+	Random getRand() {
+		return rand;
+	}
+
+	void setRand(Random rand) {
+		this.rand = rand;
 	}
 
 }

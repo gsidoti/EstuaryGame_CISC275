@@ -1,11 +1,9 @@
 package Game3;
 
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.Random;
-
 import OverallGame.Controller;
+import OverallGame.MiniGame;
 import OverallGame.STATE;
 import OverallGame.Window;
 import OverallGame.gameObject;
@@ -20,12 +18,8 @@ import OverallGame.gameObject;
  * @version 5/17
  */
 
-public class Game3 extends MouseAdapter {
-	public boolean running = false;
-	boolean init = false;
+public class Game3 extends MiniGame {
 	Random rand = new Random();
-	ArrayList<gameObject> objects = new ArrayList<gameObject>();
-	
 	public Game3View view;
 	static boolean inst;
 	long startTime;
@@ -35,9 +29,9 @@ public class Game3 extends MouseAdapter {
 	boolean spawn;
 	boolean start;
 	int tick;
-	public int animals;
-	public int actNumCrab;
-	public int clickNumCrab;
+	int animals;
+	int actNumCrab;
+	int clickNumCrab;
 	
 	/**
 	 * Constructor for Game3 objects
@@ -214,7 +208,6 @@ public class Game3 extends MouseAdapter {
 	public void initialize(){
 		startTime = System.currentTimeMillis();
 		inst = true;
-		init = false;
 		spawn = true;
 		endGameScreen = false;
 		start = false;
@@ -257,57 +250,6 @@ public class Game3 extends MouseAdapter {
 			startTime = System.currentTimeMillis();
 		}
 	}
-	
-    /**
-     * Checks to see if the mouse is over given coordinates on the screen.
-     * 
-     * @param mx Mouse x-position
-     * @param my Mouse y-position
-     * @param x x-position of image being checked against mouse x-position
-     * @param y y-position of image being checked against mouse y-position
-     * @param width Width of image being checked for mouse over
-     * @param height Height of image being checked for mouse over 
-     * @return Returns true if mouse is over given image position, false if otherwise
-     */
-    boolean mouseOver(int mx, int my, int x, int y, int width, int height) {
-        if (mx > x && mx < x + width) {
-            if (my > y && my < y + height) {
-                return true;
-            } else return false;
-        } else return false;
-    }
-	
-    /**
-     * Takes the width of an image and scales it to the appropriate size for the current screen
-     * 
-     * @param x Width of image that needs to be scaled
-     * @return Returns scaled width for image
-     */
-	public int scaleW(double x){
-		return (int)(Window.SCALE*x);
-	}
-	
-	/**
-	 * Takes the height of an image and scales it to the appropriate size for the current screen
-	 * 
-	 * @param x Height of image that needs to be scaled
-	 * @return Returns scaled height for image
-	 */
-	public int scaleH(double x){
-		return (int)(Window.SCALE*x);
-	}
-
-	public ArrayList<gameObject> getObjects(){
-		return this.objects;
-	}
-
-	public boolean isRunning() {
-		return running;
-	}
-
-	public void setRunning(boolean running) {
-		this.running = running;
-	}
 
 	public boolean isStart() {
 		return start;
@@ -347,6 +289,78 @@ public class Game3 extends MouseAdapter {
 
 	public void setClickNumCrab(int clickNumCrab) {
 		this.clickNumCrab = clickNumCrab;
+	}
+
+	Random getRand() {
+		return rand;
+	}
+
+	void setRand(Random rand) {
+		this.rand = rand;
+	}
+
+	Game3View getView() {
+		return view;
+	}
+
+	void setView(Game3View view) {
+		this.view = view;
+	}
+
+	static boolean isInst() {
+		return inst;
+	}
+
+	static void setInst(boolean inst) {
+		Game3.inst = inst;
+	}
+
+	long getStartTime() {
+		return startTime;
+	}
+
+	void setStartTime(long startTime) {
+		this.startTime = startTime;
+	}
+
+	long getTimer2() {
+		return timer2;
+	}
+
+	void setTimer2(long timer2) {
+		this.timer2 = timer2;
+	}
+
+	int getMx() {
+		return mx;
+	}
+
+	void setMx(int mx) {
+		this.mx = mx;
+	}
+
+	int getMy() {
+		return my;
+	}
+
+	void setMy(int my) {
+		this.my = my;
+	}
+
+	boolean isEndGameScreen() {
+		return endGameScreen;
+	}
+
+	void setEndGameScreen(boolean endGameScreen) {
+		this.endGameScreen = endGameScreen;
+	}
+
+	boolean isSpawn() {
+		return spawn;
+	}
+
+	void setSpawn(boolean spawn) {
+		this.spawn = spawn;
 	}
 	
 	

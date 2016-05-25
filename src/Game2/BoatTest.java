@@ -9,12 +9,6 @@ public class BoatTest {
 	@Test
 	public void testBoat() {
 		Boat boat = new Boat("test boat", 2, 2, 1, 1, true);
-		int testX = 2;
-		int testY = 2;
-		assertTrue(boat.IsClicked(testX, testY));
-		testX = 20;
-		testY = 20;
-		assertFalse(boat.IsClicked(testX, testY));
 		boat.Move();
 		assertEquals(1, boat.getX());
 		assertEquals(2, boat.getY());

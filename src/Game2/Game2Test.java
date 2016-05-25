@@ -5,9 +5,6 @@ import org.junit.Test;
 import OverallGame.Window;
 
 public class Game2Test {
-// Need to figure out how to create an instance of the game
-// without it actually running the game or make the game close
-// and print out its values or something
 	@Test
 	public void testGame2() {
 		Window.SCALE = 1;
@@ -46,19 +43,5 @@ public class Game2Test {
 		game.setRunning(true);
 		assertTrue(game.getRunning());
 	}
-	/*
-	@Test
-	public  void testMouse() {
-		Window.SCALE = 1;
-		Game2 game = new Game2();
-		MouseEvent e = new MouseEvent(null, 1, 1, 1, 1, 1, 1, false);
-		game.mousePressed(e);
-		assertEquals(1, game.getMX());
-		assertEquals(1, game.getMY());
-		assertTrue(game.getMousedown());
-		game.mouseReleased(e);
-		assertFalse(game.getMousedown());
-	}
-	*/
 
 }

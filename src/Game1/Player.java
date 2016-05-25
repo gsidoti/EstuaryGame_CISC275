@@ -1,5 +1,6 @@
 package Game1;
 
+import OverallGame.Window;
 import OverallGame.gameObject;
 
 /**
@@ -48,7 +49,7 @@ public class Player extends gameObject
         yd=yn;
         setVelx(xd-x);
         setVely(yd-y);
-        StepsNeeded=Math.sqrt((getVelx()*getVelx()+getVely()*getVely()))/velocity;
+        StepsNeeded=Math.sqrt((getVelx()*getVelx()+getVely()*getVely()))/(velocity*Window.SCALE);
         if(StepsNeeded<0.5)
         {
             setVelx(0);
@@ -76,26 +77,11 @@ public class Player extends gameObject
         }
         else
         {
-            x+=getVelx();
+        	x+=getVelx();
             y+=getVely();
         }
         return;
     }
-
-//    public void Draw(Graphics g)
-//    {
-//        Color temp=g.getColor();
-//        int tx;
-//        int ty;
-//
-//        tx=(int)x;
-//        ty=(int)y;
-//        g.setColor(Color.YELLOW);
-//        g.drawLine(tx-5,ty-5,tx+5,ty+5);
-//        g.drawLine(tx+5,ty-5,tx-5,ty+5);
-//        g.setColor(temp);
-//        return;
-//    }
 
     public boolean getChangeDestination() {
     	return ChangeDestination;
